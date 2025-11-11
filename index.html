@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Restaurante — Carta Digital</title>
-  <meta name="description" content="Carta digital del restaurante: comida, bebestibles y opciones de delivery." />
-  <meta property="og:title" content="Restaurante — Carta Digital" />
+  <title>NIKKEI 419 — Carta Digital</title>
+  <meta name="description" content="Carta digital del restaurante NIKKEI 419: comida, bebestibles y delivery." />
+  <meta property="og:title" content="NIKKEI 419 — Carta Digital" />
   <meta property="og:description" content="Explora la carta de comida, bebestibles y nuestras opciones de delivery." />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="/logo.png" />
@@ -16,332 +16,101 @@
       --radius:18px; --shadow:0 8px 30px rgba(0,0,0,.4);
     }
     html{scroll-behavior:smooth}
-    body{margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji"; background:var(--bg); color:var(--text);}
+    body{margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, "Noto Sans"; background:var(--bg); color:var(--text);}
     a{color:inherit; text-decoration:none}
     img{max-width:100%; height:auto; display:block}
-    
-    /* Header */
+
+    header.hero-header{
+      position:relative;
+      background:url('logo.png') center/cover no-repeat;
+      height:280px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:white;
+      text-align:center;
+      box-shadow:inset 0 0 0 2000px rgba(0,0,0,0.55);
+    }
+    header.hero-header h1{font-size:42px; margin:0; letter-spacing:2px;}
+    header.hero-header p{font-style:italic; color:#f5f5f5; margin-top:10px;}
+
     .nav{position:sticky; top:0; z-index:50; backdrop-filter:saturate(140%) blur(8px); background:rgba(10,10,10,.6); border-bottom:1px solid #1c1c1c}
     .nav-wrap{max-width:1100px; margin:0 auto; padding:14px 20px; display:flex; align-items:center; gap:16px}
     .brand{display:flex; align-items:center; gap:10px}
     .brand img{width:40px; height:40px; border-radius:12px}
-    .brand h1{font-size:18px; margin:0; letter-spacing:.5px; font-weight:700}
+    .brand h2{font-size:18px; margin:0; font-weight:700}
     .spacer{flex:1}
     .menu{display:flex; gap:14px}
     .menu a{padding:8px 12px; border-radius:12px; transition:background .2s ease}
     .menu a:hover{background:#1a1a1a}
     .cta{background:var(--accent); color:#0a0a0a; padding:8px 12px; border-radius:12px; font-weight:700}
-    .burger{display:none; border:1px solid #242424; border-radius:12px; padding:8px 10px; background:#0f0f0f}
-    
-    /* Mobile nav */
-    @media (max-width: 780px){
-      .menu{display:none}
-      .burger{display:block}
-    }
-    .drawer{display:none}
-    .drawer.open{display:block}
-    .drawer .sheet{border-top:1px solid #1c1c1c; background:#0e0e0e}
-    .drawer a{display:block; padding:14px 20px; border-bottom:1px solid #161616}
 
-    /* Hero */
-    .hero{max-width:1100px; margin:0 auto; padding:56px 20px 22px}
-    .hero-card{background:radial-gradient(1200px 500px at 80% -10%, rgba(240,185,11,.08), transparent),
-               linear-gradient(180deg, #0c0c0c 0%, #0a0a0a 100%); border:1px solid #1a1a1a; border-radius:28px; box-shadow:var(--shadow);
-               padding:36px}
-    .hero-grid{display:grid; grid-template-columns:1.1fr .9fr; gap:26px}
-    .hero h2{font-size:40px; margin:0 0 8px}
-    .hero p{margin:0 0 18px; color:var(--soft)}
-    .pill{display:inline-flex; align-items:center; gap:8px; padding:8px 12px; background:#121212; border:1px solid #1e1e1e; border-radius:999px; font-size:13px; color:#d9d9d9}
-    .actions{display:flex; gap:10px; flex-wrap:wrap}
-    .btn{display:inline-flex; align-items:center; gap:8px; padding:12px 16px; border-radius:14px; border:1px solid #232323; background:#121212; color:#fff; font-weight:600}
-    .btn:hover{background:#181818}
-    .btn.primary{background:var(--accent); color:#111; border-color:#d1a308}
-
-    /* Sections */
     section{max-width:1100px; margin:0 auto; padding:28px 20px}
-    .section-title{display:flex; align-items:flex-end; justify-content:space-between; margin:18px 0 10px}
+    .section-title{display:flex; justify-content:space-between; align-items:flex-end; margin:18px 0 10px}
     .section-title h3{font-size:28px; margin:0}
-    .cards{display:grid; grid-template-columns:repeat(3,1fr); gap:16px}
-    @media (max-width: 980px){.hero-grid{grid-template-columns:1fr}.cards{grid-template-columns:repeat(2,1fr)}}
-    @media (max-width: 620px){.cards{grid-template-columns:1fr}}
+    .cards{display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:16px}
     .card{background:var(--card); border:1px solid #1b1b1b; border-radius:18px; overflow:hidden; box-shadow:var(--shadow)}
     .card .cover{height:130px; background:#151515; display:flex; align-items:center; justify-content:center}
-    .card .cover span{opacity:.6}
     .card .body{padding:14px}
     .card h4{margin:0 0 6px; font-size:18px}
-    .meta{display:flex; align-items:center; justify-content:space-between; color:#cfcfcf}
+    .meta{display:flex; justify-content:space-between; color:#cfcfcf}
     .price{font-weight:700; color:#fff}
     .desc{color:#bdbdbd; font-size:14px}
 
-    /* About */
-    .about{background:linear-gradient(180deg, #0a0a0a 0%, #0d0d0d 100%); border-top:1px solid #151515; border-bottom:1px solid #151515}
-    .about-wrap{max-width:900px; margin:0 auto; padding:40px 20px; text-align:center}
-    .about h3{font-size:26px; margin:4px 0 8px}
-    .about p{color:#d4d4d4; line-height:1.7}
-
-    /* Delivery */
-    .delivery-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px}
-    @media (max-width:880px){.delivery-grid{grid-template-columns:1fr 1fr}}
-    @media (max-width:560px){.delivery-grid{grid-template-columns:1fr}}
-    .chip{display:inline-flex; gap:8px; align-items:center; padding:10px 12px; border:1px solid #262626; border-radius:999px; background:#111}
-
-    /* Footer */
-    footer{border-top:1px solid #1b1b1b; background:#0a0a0a}
-    .footer{max-width:1100px; margin:0 auto; padding:24px 20px; display:grid; gap:14px}
-    .foot-row{display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px}
-    .foot-small{color:#9f9f9f; font-size:13px}
-    .ig{display:inline-flex; align-items:center; gap:10px; padding:10px 12px; border-radius:14px; border:1px solid #232323; background:#121212}
-    .addr{color:#d9d9d9}
-    .map{color:#9f9f9f; text-decoration:underline}
+    footer{border-top:1px solid #1b1b1b; background:#0a0a0a; padding:24px 20px; text-align:center; color:#aaa}
+    footer a{color:#f0b90b; text-decoration:none}
   </style>
 </head>
 <body>
-  <!-- Header / Navigation -->
-  <header class="nav" role="banner">
-    <div class="nav-wrap">
-      <a class="brand" href="#inicio" aria-label="Inicio">
-        <!-- Reemplaza /logo.png por tu logo (512x512 recomendado) -->
-        <img src="/logo.png" alt="Logo del restaurante" />
-        <h1 id="inicio">Nombre del Restaurant</h1>
-      </a>
-      <div class="spacer"></div>
-      <nav class="menu" aria-label="Principal">
-        <a href="#carta">Comida</a>
-        <a href="#bebestibles">Bebestibles</a>
-        <a href="#delivery" class="cta">Delivery</a>
-      </nav>
-      <button class="burger" aria-label="Abrir menú" id="burger">☰</button>
-    </div>
-    <div class="drawer" id="drawer" aria-hidden="true">
-      <div class="sheet">
-        <a href="#carta" onclick="toggleDrawer(false)">Comida</a>
-        <a href="#bebestibles" onclick="toggleDrawer(false)">Bebestibles</a>
-        <a href="#delivery" onclick="toggleDrawer(false)"><strong>Delivery</strong></a>
-      </div>
+  <header class="hero-header">
+    <div>
+      <h1>NIKKEI 419</h1>
+      <p>Experimenta una fusión de sabores</p>
     </div>
   </header>
 
-  <!-- Hero -->
-  <section class="hero" aria-labelledby="tit">
-    <div class="hero-card">
-      <div class="hero-grid">
-        <div>
-          <div class="pill" aria-label="abierto hoy">✨ Abierto hoy — 12:00 a 23:30</div>
-          <h2 id="tit">Sabores honestos, cocina de casa</h2>
-          <p>Explora nuestra carta minimalista: platos de temporada, coctelería de autor y delivery rápido en tu zona.</p>
-          <div class="actions">
-            <a class="btn primary" href="#carta">Ver comida</a>
-            <a class="btn" href="#bebestibles">Bebestibles</a>
-            <a class="btn" href="#delivery">Delivery</a>
-          </div>
-        </div>
-        <div>
-          <div class="card" aria-hidden="true">
-            <div class="cover"><span>Foto destacada / banner</span></div>
-            <div class="body">
-              <h4>Especial de la casa</h4>
-              <p class="desc">Breve descripción de un plato estrella. <em>(Reemplaza este texto y la imagen por los tuyos)</em>.</p>
-              <div class="meta"><span>Disponible hoy</span><span class="price">$8.900</span></div>
-            </div>
-          </div>
-        </div>
+  <nav class="nav">
+    <div class="nav-wrap">
+      <div class="brand">
+        <img src="logo.png" alt="Logo NIKKEI 419">
+        <h2>NIKKEI 419</h2>
       </div>
+      <div class="spacer"></div>
+      <div class="menu">
+        <a href="#carta">Comida</a>
+        <a href="#bebestibles">Bebestibles</a>
+        <a href="#delivery" class="cta">Delivery</a>
+      </div>
+    </div>
+  </nav>
+
+  <section id="carta">
+    <div class="section-title"><h3>Carta de comida</h3></div>
+    <div class="cards">
+      <div class="card"><div class="cover">Imagen</div><div class="body"><h4>Plato 1</h4><p class="desc">Descripción del plato.</p><div class="meta"><span>Veggie</span><span class="price">$8.900</span></div></div></div>
     </div>
   </section>
 
-  <!-- Carta: Comida -->
-  <section id="carta" aria-labelledby="title-carta">
-    <div class="section-title">
-      <h3 id="title-carta">Carta de comida</h3>
-      <span class="chip">🍽️ Porciones para compartir</span>
-    </div>
-    <div class="cards" role="list">
-      <!-- Item ejemplo -->
-      <article class="card" role="listitem">
-        <div class="cover"><span>Imagen plato 1</span></div>
-        <div class="body">
-          <h4>Plato 1 — Nombre</h4>
-          <p class="desc">Descripción corta del plato con ingredientes principales.</p>
-          <div class="meta"><span>Veggie</span><span class="price">$7.500</span></div>
-        </div>
-      </article>
-      <article class="card" role="listitem">
-        <div class="cover"><span>Imagen plato 2</span></div>
-        <div class="body">
-          <h4>Plato 2 — Nombre</h4>
-          <p class="desc">Descripción corta del plato con ingredientes principales.</p>
-          <div class="meta"><span>Picante</span><span class="price">$8.200</span></div>
-        </div>
-      </article>
-      <article class="card" role="listitem">
-        <div class="cover"><span>Imagen plato 3</span></div>
-        <div class="body">
-          <h4>Plato 3 — Nombre</h4>
-          <p class="desc">Descripción corta del plato con ingredientes principales.</p>
-          <div class="meta"><span>Sin gluten</span><span class="price">$9.400</span></div>
-        </div>
-      </article>
+  <section id="bebestibles">
+    <div class="section-title"><h3>Bebestibles</h3></div>
+    <div class="cards">
+      <div class="card"><div class="cover">Imagen</div><div class="body"><h4>Bebida 1</h4><p class="desc">Descripción.</p><div class="meta"><span>Recomendado</span><span class="price">$3.500</span></div></div></div>
     </div>
   </section>
 
-  <!-- Bebestibles -->
-  <section id="bebestibles" aria-labelledby="title-bebestibles">
-    <div class="section-title">
-      <h3 id="title-bebestibles">Bebestibles</h3>
-      <span class="chip">🥂 Mocktails y coctelería</span>
-    </div>
-    <div class="cards" role="list">
-      <article class="card" role="listitem">
-        <div class="cover"><span>Imagen bebida 1</span></div>
-        <div class="body">
-          <h4>Bebida 1 — Nombre</h4>
-          <p class="desc">Descripción breve (ej.: jugo natural / cóctel).</p>
-          <div class="meta"><span>Sin azúcar añadida</span><span class="price">$3.200</span></div>
-        </div>
-      </article>
-      <article class="card" role="listitem">
-        <div class="cover"><span>Imagen bebida 2</span></div>
-        <div class="body">
-          <h4>Bebida 2 — Nombre</h4>
-          <p class="desc">Descripción breve (ej.: cerveza shop  schop 330 ml).</p>
-          <div class="meta"><span>Con alcohol</span><span class="price">$3.800</span></div>
-        </div>
-      </article>
-      <article class="card" role="listitem">
-        <div class="cover"><span>Imagen bebida 3</span></div>
-        <div class="body">
-          <h4>Bebida 3 — Nombre</h4>
-          <p class="desc">Descripción breve (ej.: spritz / mocktail).</p>
-          <div class="meta"><span>Recomendado</span><span class="price">$4.500</span></div>
-        </div>
-      </article>
-    </div>
+  <section id="delivery">
+    <div class="section-title"><h3>Delivery</h3></div>
+    <p>Haz tu pedido directo por <a href="https://wa.me/56912345678">WhatsApp</a> o visita nuestras apps de reparto.</p>
   </section>
 
-  <!-- Delivery -->
-  <section id="delivery" aria-labelledby="title-delivery">
-    <div class="section-title">
-      <h3 id="title-delivery">Delivery</h3>
-      <span class="chip">🚚 Revisa tu cobertura</span>
-    </div>
-    <div class="delivery-grid">
-      <div class="card">
-        <div class="body">
-          <h4>Pedido por WhatsApp</h4>
-          <p class="desc">Haz tu pedido directo por WhatsApp. <em>(Reemplaza el número)</em></p>
-          <div class="actions">
-            <a class="btn primary" href="https://wa.me/56912345678" target="_blank" rel="noopener">Abrir WhatsApp</a>
-          </div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="body">
-          <h4>Pedido telefónico</h4>
-          <p class="desc">Prefieres llamar? <em>(Reemplaza el número)</em></p>
-          <div class="actions">
-            <a class="btn" href="tel:+56912345678">Llamar ahora</a>
-          </div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="body">
-          <h4>Apps de reparto</h4>
-          <p class="desc">Si usas apps, aquí te dejamos los enlaces directos.</p>
-          <div class="actions">
-            <a class="btn" href="#" target="_blank" rel="noopener">Rappi</a>
-            <a class="btn" href="#" target="_blank" rel="noopener">PedidosYa</a>
-            <a class="btn" href="#" target="_blank" rel="noopener">Uber Eats</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- About / Historia -->
-  <section class="about" aria-labelledby="title-historia">
-    <div class="about-wrap">
-      <span class="pill">Nuestra historia</span>
-      <h3 id="title-historia">Hecho con cariño desde 2014</h3>
-      <p>
-        Escribe aquí un párrafo corto sobre el origen del restaurante, su propuesta gastronómica y el equipo detrás. Puedes mencionar el barrio, los ingredientes de temporada y
-        algún hito (por ejemplo, “partimos como foodtruck y hoy recibimos a más de 300 comensales cada semana”). Mantén el tono cercano, minimalista y honesto.
-      </p>
-    </div>
-  </section>
-
-  <!-- Footer: Instagram + Dirección -->
-  <footer role="contentinfo">
-    <div class="footer">
-      <div class="foot-row">
-        <a class="ig" href="https://instagram.com/tu_instagram" target="_blank" rel="noopener" aria-label="Ir a Instagram">
-          <span>📸 Instagram</span>
-          <strong>@tu_instagram</strong>
-        </a>
-        <div class="addr">
-          <strong>Dirección:</strong>
-          <a class="map" href="https://maps.google.com/?q=Tu+Dirección+123,+Ciudad" target="_blank" rel="noopener">Tu Dirección 123, Ciudad</a>
-        </div>
-      </div>
-      <div class="foot-row">
-        <span class="foot-small">© <span id="year"></span> Nombre del Restaurant. Todos los derechos reservados.</span>
-        <span class="foot-small">Sitio minimalista con fondo negro y accesible.</span>
-      </div>
-    </div>
+  <footer>
+    <p>📍 <a href="https://maps.google.com/?q=NIKKEI+419,+Ciudad" target="_blank">NIKKEI 419, Ciudad</a></p>
+    <p>📸 <a href="https://instagram.com/nikkei419" target="_blank">@nikkei419</a></p>
+    <p>© <span id="year"></span> NIKKEI 419. Todos los derechos reservados.</p>
   </footer>
 
   <script>
-    // Año dinámico
     document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Mobile drawer
-    const burger = document.getElementById('burger');
-    const drawer = document.getElementById('drawer');
-    function toggleDrawer(force){
-      const open = typeof force === 'boolean' ? force : !drawer.classList.contains('open');
-      drawer.classList.toggle('open', open);
-      drawer.setAttribute('aria-hidden', String(!open));
-    }
-    burger.addEventListener('click', () => toggleDrawer());
-
-    // Cierra el drawer al navegar por anclas (por si quedan abiertas)
-    window.addEventListener('hashchange', ()=> toggleDrawer(false));
   </script>
-
-  <!-- SEO / Datos estructurados (opcional, rellena con tus datos) -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Restaurant",
-    "name": "Nombre del Restaurant",
-    "url": "https://tudominio.com",
-    "image": "https://tudominio.com/logo.png",
-    "servesCuisine": ["Casera", "De temporada"],
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Tu Dirección 123",
-      "addressLocality": "Ciudad",
-      "addressRegion": "Región",
-      "postalCode": "000000",
-      "addressCountry": "CL"
-    },
-    "telephone": "+56 9 1234 5678",
-    "sameAs": [
-      "https://www.instagram.com/tu_instagram"
-    ]
-  }
-  </script>
-
-  <!--
-  ▸ Cómo usar con código QR
-    1) Sube este archivo como https://tudominio.com/index.html (o usa GitHub Pages / Netlify / Vercel).
-    2) Genera un QR con esa URL (sitios como qrcode-monkey.com o tu impresora QR).
-    3) Imprímelo y pégalo en mesas / cartas físicas.
-
-  ▸ Personaliza rápido
-    - Reemplaza /logo.png por tu archivo real.
-    - Cambia textos, precios e imágenes dentro de cada .card.
-    - Ajusta enlaces de WhatsApp, teléfono y apps de delivery.
-    - En el footer, pon tu @ de Instagram y la dirección real.
-  -->
 </body>
 </html>
