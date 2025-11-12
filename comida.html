@@ -9,6 +9,19 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
+  /* Slider dentro del panel (sheet) */
+.sheet-slider{position:relative;margin-bottom:12px}
+.sheet-slides{position:relative;overflow:hidden;border-radius:18px}
+.sheet-slide{display:none}
+.sheet-slide.active{display:block}
+.sheet-nav{position:absolute;top:50%;transform:translateY(-50%);background:#00000080;
+  border:1px solid #333;border-radius:50%;width:36px;height:36px;cursor:pointer}
+.sheet-nav.left{left:8px}
+.sheet-nav.right{right:8px}
+.sheet-dots{display:flex;gap:6px;justify-content:center;margin-top:8px}
+.sheet-dots button{width:8px;height:8px;border-radius:50%;border:none;background:#888;opacity:.5;cursor:pointer}
+.sheet-dots button.active{opacity:1;background:#fff}
+
 /* Panel expandido (estilo tarjeta grande) */
 .sheet-backdrop{display:none;position:fixed;inset:0;z-index:120;
   background:rgba(0,0,0,.55);backdrop-filter:blur(4px);
@@ -193,16 +206,26 @@ body {
   <a href="#combinaciones">Combinaciones / Tablas</a>
   <a href="#postres">Postres</a>
 </nav>
-<!-- Panel expandido para platos -->
+
+<!-- Panel expandido con slider -->
 <div id="sheet" class="sheet-backdrop" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
   <div class="sheet">
     <button class="sheet-close" id="sheetClose" aria-label="Cerrar">×</button>
-    <img id="sheetImg" src="" alt="">
+
+    <!-- Slider -->
+    <div class="sheet-slider" data-slider="sheet">
+      <div class="sheet-slides" id="sheetSlides"></div>
+      <button class="sheet-nav left"  id="sheetPrev" aria-label="Anterior">‹</button>
+      <button class="sheet-nav right" id="sheetNext" aria-label="Siguiente">›</button>
+    </div>
+    <div class="sheet-dots" id="sheetDots"></div>
+
     <h3 id="sheetTitle">Título</h3>
     <p id="sheetDesc">Descripción del plato.</p>
     <div class="price" id="sheetPrice"></div>
   </div>
 </div>
+
 
 <!-- APPETIZER SECTION -->
 <section id="appetizer" class="section active">
@@ -2854,6 +2877,146 @@ sheet.addEventListener('touchend',   e => {
     }, true); // <- CAPTURA: este handler corre antes que los demás
   }
 })();
+</script>
+<script>
+// ===== Datos opcionales por plato (para múltiples fotos) =====
+// Clave = data-id de la card. Si no está definido, se usa la imagen de la card.
+const MENU_DATA = {
+  // Ejemplos: copia y ajusta.
+  "nigiri-trufado": {
+    images: ["nigiri-trufado.jpg","nigiri-trufado-2.jpg","nigiri-trufado-3.jpg"],
+    desc:   "Atún rojo, trufa negra y toque de yuzu. Aroma intenso y elegante.",
+    price:  "$5.900"
+  },
+  "arroz-nikkei": {
+    images: ["arroz-nikkei.jpg","arroz-nikkei-2.jpg"],
+    desc:   "Arroz frito con camarón, huevo y cebollín al estilo de la casa.",
+    price:  "$10.900"
+  }
+  // ➕ agrega aquí más platos con arrays de imágenes
+};
+
+// ===== Referencias del panel
+const sheet       = document.getElementById('sheet');
+const sheetClose  = document.getElementById('sheetClose');
+const sheetTitle  = document.getElementById('sheetTitle');
+const sheetDesc   = document.getElementById('sheetDesc');
+const sheetPrice  = document.getElementById('sheetPrice');
+const sheetSlides = document.getElementById('sheetSlides');
+const sheetDots   = document.getElementById('sheetDots');
+const sheetPrev   = document.getElementById('sheetPrev');
+const sheetNext   = document.getElementById('sheetNext');
+
+let sheetIndex = 0;       // índice actual
+let sheetImgs  = [];      // imágenes actuales
+
+// ===== Helpers slider
+function renderSheetSlides(imgs){
+  sheetSlides.innerHTML = '';
+  sheetDots.innerHTML   = '';
+  sheetImgs = imgs && imgs.length ? imgs : [];
+
+  // si no hay imágenes, mostramos un placeholder
+  if (sheetImgs.length === 0){
+    const s = document.createElement('div');
+    s.className = 'sheet-slide active';
+    s.innerHTML = '<div style="height:220px;background:#151515;border-radius:18px;display:flex;align-items:center;justify-content:center;opacity:.6">Sin imágenes</div>';
+    sheetSlides.appendChild(s);
+    sheetPrev.style.display='none';
+    sheetNext.style.display='none';
+    sheetDots.style.display='none';
+    sheetIndex = 0;
+    return;
+  }
+
+  sheetImgs.forEach((src, i)=>{
+    const slide = document.createElement('div');
+    slide.className = 'sheet-slide' + (i===0 ? ' active' : '');
+    slide.innerHTML = `<img src="${src}" alt="Imagen ${i+1}" style="width:100%;border-radius:18px">`;
+    sheetSlides.appendChild(slide);
+
+    const dot = document.createElement('button');
+    dot.type='button';
+    dot.className = i===0 ? 'active' : '';
+    dot.addEventListener('click', ()=> sheetGo(i));
+    sheetDots.appendChild(dot);
+  });
+
+  sheetIndex = 0;
+  const many = sheetImgs.length > 1;
+  sheetPrev.style.display = many ? '' : 'none';
+  sheetNext.style.display = many ? '' : 'none';
+  sheetDots.style.display = many ? 'flex' : 'none';
+}
+function sheetGo(i){
+  const slides = sheetSlides.querySelectorAll('.sheet-slide');
+  if(!slides.length) return;
+  slides[sheetIndex]?.classList.remove('active');
+  sheetIndex = (i + slides.length) % slides.length;
+  slides[sheetIndex]?.classList.add('active');
+  sheetDots.querySelectorAll('button').forEach((b,idx)=> b.classList.toggle('active', idx===sheetIndex));
+}
+function sheetNextFn(){ sheetGo(sheetIndex + 1); }
+function sheetPrevFn(){ sheetGo(sheetIndex - 1); }
+
+// ===== Abrir / Cerrar
+function openSheetFromCard(card){
+  // datos básicos de la card
+  const id    = card.getAttribute('data-id') || '';
+  const img   = card.querySelector('img')?.getAttribute('src') || '';
+  const title = card.querySelector('h3')?.innerText || '';
+  const desc  = card.querySelector('p')?.innerText || '';
+  const price = card.querySelector('.price')?.innerText || '';
+
+  // si hay datos en MENU_DATA, los usamos (para múltiples fotos, mejor desc/price)
+  const extra = MENU_DATA[id] || {};
+  const imgs  = (extra.images && extra.images.length) ? extra.images
+              : (img ? [img] : []); // fallback a la foto de la card
+
+  sheetTitle.textContent = title;
+  sheetDesc.textContent  = extra.desc  || desc  || '';
+  sheetPrice.textContent = extra.price || price || '';
+
+  renderSheetSlides(imgs);
+
+  sheet.style.display = 'flex';
+}
+function closeSheet(){ sheet.style.display = 'none'; }
+
+// ===== Listeners
+// Abre al tocar cualquier .card
+document.addEventListener('click', (e)=>{
+  const card = e.target.closest('.card');
+  const inside = e.target.closest('#sheet');
+  if(card && !inside){ openSheetFromCard(card); }
+});
+
+// Cerrar
+sheetClose.addEventListener('click', closeSheet);
+sheet.addEventListener('click', (e)=>{ if(e.target === sheet) closeSheet(); });
+
+// Flechas
+sheetPrev.addEventListener('click', sheetPrevFn);
+sheetNext.addEventListener('click', sheetNextFn);
+
+// Teclado
+document.addEventListener('keydown', (e)=>{
+  if(sheet.style.display === 'flex'){
+    if(e.key === 'Escape') closeSheet();
+    if(e.key === 'ArrowLeft')  sheetPrevFn();
+    if(e.key === 'ArrowRight') sheetNextFn();
+  }
+});
+
+// Swipe móvil (izquierda/derecha)
+let startX = 0;
+sheet.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, {passive:true});
+sheet.addEventListener('touchend',   e => {
+  const delta = e.changedTouches[0].clientX - startX;
+  if(Math.abs(delta) > 60){
+    delta > 0 ? sheetPrevFn() : sheetNextFn();
+  }
+}, {passive:true});
 </script>
 
 </body>
