@@ -270,24 +270,44 @@
   </section>
 
   <!-- Footer: Instagram + Dirección -->
+    <!-- Footer: Instagram + Dirección -->
   <footer role="contentinfo">
     <div class="footer">
       <div class="foot-row">
-        <a class="ig" href="https://instagram.com/tu_instagram" target="_blank" rel="noopener" aria-label="Ir a Instagram">
+        <a class="ig" href="https://instagram.com/nikkei419" target="_blank" rel="noopener" aria-label="Ir a Instagram">
           <span>📸 Instagram</span>
-          <strong>@tu_instagram</strong>
+          <strong>@nikkei419</strong>
         </a>
         <div class="addr">
           <strong>Dirección:</strong>
-          <a class="map" href="https://maps.google.com/?q=Tu+Dirección+123,+Ciudad" target="_blank" rel="noopener">Tu Dirección 123, Ciudad</a>
+          <a class="map" href="https://maps.google.com/?q=San+Martin+421,+Viña+del+Mar,+Chile" target="_blank" rel="noopener">
+            San Martín 421, Viña del Mar, Chile
+          </a>
         </div>
       </div>
       <div class="foot-row">
         <span class="foot-small">© <span id="year"></span> NIKKEI 419. Todos los derechos reservados.</span>
-        <span class="foot-small">Sitio minimalista con fondo negro y accesible.</span>
+        <span class="foot-small">Restaurante Nikkei en Viña del Mar, Chile.</span>
       </div>
     </div>
   </footer>
+
+  <script>
+    // Año dinámico
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Mobile drawer
+    const burger = document.getElementById('burger');
+    const drawer = document.getElementById('drawer');
+    function toggleDrawer(force){
+      const open = typeof force === 'boolean' ? force : !drawer.classList.contains('open');
+      drawer.classList.toggle('open', open);
+      drawer.setAttribute('aria-hidden', String(!open));
+    }
+    burger.addEventListener('click', () => toggleDrawer());
+    window.addEventListener('hashchange', ()=> toggleDrawer(false));
+  </script>
+
 
   <script>
     // Año dinámico
@@ -345,6 +365,7 @@
   -->
 </body>
 </html>
+
 
 
 
