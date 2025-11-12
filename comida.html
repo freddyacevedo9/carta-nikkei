@@ -89,24 +89,50 @@ img{max-width:100%;display:block;border-radius:var(--radius);}
 .card p { margin:4px 0 0; color:var(--muted); font-size:14px; }
 .price { color:var(--accent); font-weight:700; margin-top:6px; }
 
-/* --- MODAL --- */
+/* --- MODAL CON CARRUSEL --- */
 .modal {
   display:none; position:fixed; inset:0;
   background:rgba(0,0,0,.7); backdrop-filter:blur(6px);
-  justify-content:center; align-items:center;
-  z-index:100;
+  justify-content:center; align-items:center; z-index:100;
 }
+.modal.open { display:flex; }
 .modal-content {
   background:#111; border:1px solid var(--line); border-radius:18px;
-  max-width:480px; width:90%; padding:18px; color:var(--text);
+  max-width:560px; width:92%; padding:16px 16px 8px; color:var(--text);
+  box-shadow:0 8px 30px rgba(0,0,0,.45); position:relative;
 }
-.modal-content img { width:100%; height:220px; object-fit:cover; border-radius:12px; }
-.modal-content h3 { margin:10px 0 4px; font-family:'Cinzel',serif; }
-.modal-content p { color:var(--muted); }
 .close {
   background:none; border:none; color:var(--accent);
-  font-size:20px; float:right; cursor:pointer;
+  font-size:24px; position:absolute; top:8px; right:12px; cursor:pointer;
 }
+.modal-content h3 { margin:10px 0 6px; font-family:'Cinzel',serif; }
+.modal-content p { color:var(--muted); margin:6px 0 10px; }
+
+/* Carrusel */
+.slider { position:relative; width:100%; height:260px; margin-bottom:10px; overflow:hidden; border-radius:12px; }
+.slides { width:100%; height:100%; position:relative; }
+.slide { position:absolute; inset:0; opacity:0; transition:opacity .25s ease-in-out; }
+.slide.active { opacity:1; }
+.slide img { width:100%; height:100%; object-fit:cover; border-radius:12px; }
+
+/* Navegación */
+.nav-btn {
+  position:absolute; top:50%; transform:translateY(-50%);
+  background:rgba(0,0,0,.45); border:1px solid #333;
+  width:36px; height:36px; border-radius:50%;
+  display:grid; place-items:center; color:#fff; cursor:pointer;
+}
+.nav-btn.left  { left:10px; }
+.nav-btn.right { right:10px; }
+.nav-btn:hover { background:rgba(0,0,0,.6); border-color:var(--accent); color:var(--accent); }
+
+/* Dots */
+.dots { display:flex; gap:6px; justify-content:center; margin:6px 0 2px; }
+.dot { width:8px; height:8px; border-radius:50%; background:#444; cursor:pointer; }
+.dot.active { background:var(--accent); }
+
+/* Evitar scroll del fondo cuando modal está abierto */
+body.noscroll { overflow:hidden; }
 </style>
 </head>
 
@@ -121,7 +147,7 @@ img{max-width:100%;display:block;border-radius:var(--radius);}
     </div>
     <div class="search-bar">
       <i>🔍</i>
-      <input type="text" placeholder="Buscar plato...">
+      <input id="search" type="text" placeholder="Buscar plato...">
     </div>
   </div>
 </header>
@@ -238,34 +264,314 @@ img{max-width:100%;display:block;border-radius:var(--radius);}
   </div>
 </section>
 
-<!-- MODALES -->
-<!-- Solo ejemplo: puedes duplicar y cambiar nombres -->
-<div id="modal-gyoza-pollo" class="modal">
-  <div class="modal-content">
-    <button class="close" onclick="closeModal('gyoza-pollo')">&times;</button>
-    <img src="gyoza-pollo.jpg" alt="Gyozas de Pollo">
-    <h3>Gyozas de Pollo</h3>
+<!-- MODALES (con carrusel) -->
+<!-- Gyoza Pollo -->
+<div id="modal-gyoza-pollo" class="modal" role="dialog" aria-modal="true" aria-labelledby="tit-gyoza-pollo">
+  <div class="modal-content" data-modal="gyoza-pollo">
+    <button class="close" aria-label="Cerrar" onclick="closeModal('gyoza-pollo')">&times;</button>
+
+    <div class="slider" data-slider="gyoza-pollo">
+      <div class="slides">
+        <div class="slide active"><img src="gyoza-pollo-1.jpg" alt="Gyozas de Pollo - 1"></div>
+        <div class="slide"><img src="gyoza-pollo-2.jpg" alt="Gyozas de Pollo - 2"></div>
+        <div class="slide"><img src="gyoza-pollo-3.jpg" alt="Gyozas de Pollo - 3"></div>
+      </div>
+      <button class="nav-btn left"  onclick="prevSlide('gyoza-pollo')" aria-label="Anterior">‹</button>
+      <button class="nav-btn right" onclick="nextSlide('gyoza-pollo')" aria-label="Siguiente">›</button>
+    </div>
+    <div class="dots" id="dots-gyoza-pollo"></div>
+
+    <h3 id="tit-gyoza-pollo">Gyozas de Pollo</h3>
     <p>Gyozas elaboradas artesanalmente, rellenas con pollo marinado en jengibre y cebollín, servidas con salsa cítrica nikkei.</p>
-    <div class="price">$7.900</div>
+    <div class="price">$5.900</div>
   </div>
 </div>
 
-<div id="modal-gunkan-crab" class="modal">
-  <div class="modal-content">
-    <button class="close" onclick="closeModal('gunkan-crab')">&times;</button>
-    <img src="gunkan-crab.jpg" alt="Gunkan Crab">
-    <h3>Gunkan Crab</h3>
-    <p>Delicado gunkan con cangrejo real, coronado con mayonesa japonesa y cebollín fresco. Una explosión de sabor suave y equilibrado.</p>
-    <div class="price">$4.500</div>
+<!-- Gyoza Cerdo -->
+<div id="modal-gyoza-cerdo" class="modal" role="dialog" aria-modal="true" aria-labelledby="tit-gyoza-cerdo">
+  <div class="modal-content" data-modal="gyoza-cerdo">
+    <button class="close" aria-label="Cerrar" onclick="closeModal('gyoza-cerdo')">&times;</button>
+
+    <div class="slider" data-slider="gyoza-cerdo">
+      <div class="slides">
+        <div class="slide active"><img src="gyoza-cerdo-1.jpg" alt="Gyozas de Cerdo - 1"></div>
+        <div class="slide"><img src="gyoza-cerdo-2.jpg" alt="Gyozas de Cerdo - 2"></div>
+        <div class="slide"><img src="gyoza-cerdo-3.jpg" alt="Gyozas de Cerdo - 3"></div>
+      </div>
+      <button class="nav-btn left"  onclick="prevSlide('gyoza-cerdo')" aria-label="Anterior">‹</button>
+      <button class="nav-btn right" onclick="nextSlide('gyoza-cerdo')" aria-label="Siguiente">›</button>
+    </div>
+    <div class="dots" id="dots-gyoza-cerdo"></div>
+
+    <h3 id="tit-gyoza-cerdo">Gyozas de Cerdo</h3>
+    <p>Gyozas de cerdo selladas en plancha, con cebollín y reducción cítrica.</p>
+    <div class="price">$5.900</div>
+  </div>
+</div>
+
+<!-- Gyoza Camarón -->
+<div id="modal-gyoza-camaron" class="modal" role="dialog" aria-modal="true" aria-labelledby="tit-gyoza-camaron">
+  <div class="modal-content" data-modal="gyoza-camaron">
+    <button class="close" aria-label="Cerrar" onclick="closeModal('gyoza-camaron')">&times;</button>
+
+    <div class="slider" data-slider="gyoza-camaron">
+      <div class="slides">
+        <div class="slide active"><img src="gyoza-camaron-1.jpg" alt="Gyozas de Camarón - 1"></div>
+        <div class="slide"><img src="gyoza-camaron-2.jpg" alt="Gyozas de Camarón - 2"></div>
+        <div class="slide"><img src="gyoza-camaron-3.jpg" alt="Gyozas de Camarón - 3"></div>
+      </div>
+      <button class="nav-btn left"  onclick="prevSlide('gyoza-camaron')" aria-label="Anterior">‹</button>
+      <button class="nav-btn right" onclick="nextSlide('gyoza-camaron')" aria-label="Siguiente">›</button>
+    </div>
+    <div class="dots" id="dots-gyoza-camaron"></div>
+
+    <h3 id="tit-gyoza-camaron">Gyozas de Camarón</h3>
+    <p>Masa fina y relleno de camarón con vegetales orientales, selladas y servidas con salsa ponzu.</p>
+    <div class="price">$5.900</div>
+  </div>
+</div>
+
+<!-- Camarones Tempura -->
+<div id="modal-camarones-tempura" class="modal" role="dialog" aria-modal="true" aria-labelledby="tit-camarones-tempura">
+  <div class="modal-content" data-modal="camarones-tempura">
+    <button class="close" aria-label="Cerrar" onclick="closeModal('camarones-tempura')">&times;</button>
+
+    <div class="slider" data-slider="camarones-tempura">
+      <div class="slides">
+        <div class="slide active"><img src="camarones-tempura-1.jpg" alt="Camarones Tempura - 1"></div>
+        <div class="slide"><img src="camarones-tempura-2.jpg" alt="Camarones Tempura - 2"></div>
+        <div class="slide"><img src="camarones-tempura-3.jpg" alt="Camarones Tempura - 3"></div>
+      </div>
+      <button class="nav-btn left"  onclick="prevSlide('camarones-tempura')" aria-label="Anterior">‹</button>
+      <button class="nav-btn right" onclick="nextSlide('camarones-tempura')" aria-label="Siguiente">›</button>
+    </div>
+    <div class="dots" id="dots-camarones-tempura"></div>
+
+    <h3 id="tit-camarones-tempura">Camarones Tempura</h3>
+    <p>Crocantes y ligeros, acompañados de salsa tentsuyu y rallado de daikon.</p>
+    <div class="price">$11.900</div>
+  </div>
+</div>
+
+<!-- Rollos Vietnamita -->
+<div id="modal-rollos-vietnamita" class="modal" role="dialog" aria-modal="true" aria-labelledby="tit-rollos-vietnamita">
+  <div class="modal-content" data-modal="rollos-vietnamita">
+    <button class="close" aria-label="Cerrar" onclick="closeModal('rollos-vietnamita')">&times;</button>
+
+    <div class="slider" data-slider="rollos-vietnamita">
+      <div class="slides">
+        <div class="slide active"><img src="rollos-vietnamita-1.jpg" alt="Rollos Vietnamita - 1"></div>
+        <div class="slide"><img src="rollos-vietnamita-2.jpg" alt="Rollos Vietnamita - 2"></div>
+        <div class="slide"><img src="rollos-vietnamita-3.jpg" alt="Rollos Vietnamita - 3"></div>
+      </div>
+      <button class="nav-btn left"  onclick="prevSlide('rollos-vietnamita')" aria-label="Anterior">‹</button>
+      <button class="nav-btn right" onclick="nextSlide('rollos-vietnamita')" aria-label="Siguiente">›</button>
+    </div>
+    <div class="dots" id="dots-rollos-vietnamita"></div>
+
+    <h3 id="tit-rollos-vietnamita">Rollos Vietnamita</h3>
+    <p>Papel de arroz, hierbas frescas y camarón; acompañados de salsa de maní y toque de lima.</p>
+    <div class="price">$9.900</div>
+  </div>
+</div>
+
+<!-- Nigiri Nikkei -->
+<div id="modal-nigiri-nikkei" class="modal" role="dialog" aria-modal="true" aria-labelledby="tit-nigiri-nikkei">
+  <div class="modal-content" data-modal="nigiri-nikkei">
+    <button class="close" aria-label="Cerrar" onclick="closeModal('nigiri-nikkei')">&times;</button>
+
+    <div class="slider" data-slider="nigiri-nikkei">
+      <div class="slides">
+        <div class="slide active"><img src="nigiri-nikkei-1.jpg" alt="Nigiri Nikkei - 1"></div>
+        <div class="slide"><img src="nigiri-nikkei-2.jpg" alt="Nigiri Nikkei - 2"></div>
+        <div class="slide"><img src="nigiri-nikkei-3.jpg" alt="Nigiri Nikkei - 3"></div>
+      </div>
+      <button class="nav-btn left"  onclick="prevSlide('nigiri-nikkei')" aria-label="Anterior">‹</button>
+      <button class="nav-btn right" onclick="nextSlide('nigiri-nikkei')" aria-label="Siguiente">›</button>
+    </div>
+    <div class="dots" id="dots-nigiri-nikkei"></div>
+
+    <h3 id="tit-nigiri-nikkei">Nigiri Nikkei</h3>
+    <p>Salmón flameado, salsa nikkei y cebollín: balance entre umami y frescor.</p>
+    <div class="price">$5.900</div>
+  </div>
+</div>
+
+<!-- Nigiri Trufado -->
+<div id="modal-nigiri-trufado" class="modal" role="dialog" aria-modal="true" aria-labelledby="tit-nigiri-trufado">
+  <div class="modal-content" data-modal="nigiri-trufado">
+    <button class="close" aria-label="Cerrar" onclick="closeModal('nigiri-trufado')">&times;</button>
+
+    <div class="slider" data-slider="nigiri-trufado">
+      <div class="slides">
+        <div class="slide active"><img src="nigiri-trufado-1.jpg" alt="Nigiri Trufado - 1"></div>
+        <div class="slide"><img src="nigiri-trufado-2.jpg" alt="Nigiri Trufado - 2"></div>
+        <div class="slide"><img src="nigiri-trufado-3.jpg" alt="Nigiri Trufado - 3"></div>
+      </div>
+      <button class="nav-btn left"  onclick="prevSlide('nigiri-trufado')" aria-label="Anterior">‹</button>
+      <button class="nav-btn right" onclick="nextSlide('nigiri-trufado')" aria-label="Siguiente">›</button>
+    </div>
+    <div class="dots" id="dots-nigiri-trufado"></div>
+
+    <h3 id="tit-nigiri-trufado">Nigiri Trufado</h3>
+    <p>Atún rojo con lámina de trufa negra y toque de yuzu, aromático y elegante.</p>
+    <div class="price">$5.900</div>
+  </div>
+</div>
+
+<!-- Nigiri Batayaki -->
+<div id="modal-nigiri-batayaki" class="modal" role="dialog" aria-modal="true" aria-labelledby="tit-nigiri-batayaki">
+  <div class="modal-content" data-modal="nigiri-batayaki">
+    <button class="close" aria-label="Cerrar" onclick="closeModal('nigiri-batayaki')">&times;</button>
+
+    <div class="slider" data-slider="nigiri-batayaki">
+      <div class="slides">
+        <div class="slide active"><img src="nigiri-batayaki-1.jpg" alt="Nigiri Batayaki - 1"></div>
+        <div class="slide"><img src="nigiri-batayaki-2.jpg" alt="Nigiri Batayaki - 2"></div>
+        <div class="slide"><img src="nigiri-batayaki-3.jpg" alt="Nigiri Batayaki - 3"></div>
+      </div>
+      <button class="nav-btn left"  onclick="prevSlide('nigiri-batayaki')" aria-label="Anterior">‹</button>
+      <button class="nav-btn right" onclick="nextSlide('nigiri-batayaki')" aria-label="Siguiente">›</button>
+    </div>
+    <div class="dots" id="dots-nigiri-batayaki"></div>
+
+    <h3 id="tit-nigiri-batayaki">Nigiri Batayaki</h3>
+    <p>Salmón flameado con mantequilla batayaki, notas lácteas y cebollín.</p>
+    <div class="price">$5.900</div>
+  </div>
+</div>
+
+<!-- Gunkan Tako -->
+<div id="modal-gunkan-tako" class="modal" role="dialog" aria-modal="true" aria-labelledby="tit-gunkan-tako">
+  <div class="modal-content" data-modal="gunkan-tako">
+    <button class="close" aria-label="Cerrar" onclick="closeModal('gunkan-tako')">&times;</button>
+
+    <div class="slider" data-slider="gunkan-tako">
+      <div class="slides">
+        <div class="slide active"><img src="gunkan-tako-1.jpg" alt="Gunkan Tako Tartar - 1"></div>
+        <div class="slide"><img src="gunkan-tako-2.jpg" alt="Gunkan Tako Tartar - 2"></div>
+        <div class="slide"><img src="gunkan-tako-3.jpg" alt="Gunkan Tako Tartar - 3"></div>
+      </div>
+      <button class="nav-btn left"  onclick="prevSlide('gunkan-tako')" aria-label="Anterior">‹</button>
+      <button class="nav-btn right" onclick="nextSlide('gunkan-tako')" aria-label="Siguiente">›</button>
+    </div>
+    <div class="dots" id="dots-gunkan-tako"></div>
+
+    <h3 id="tit-gunkan-tako">Gunkan Tako Tartar</h3>
+    <p>Arroz y alga nori coronados con tartar de pulpo, sésamo y notas cítricas.</p>
+    <div class="price">$5.900</div>
+  </div>
+</div>
+
+<!-- Gunkan Crab -->
+<div id="modal-gunkan-crab" class="modal" role="dialog" aria-modal="true" aria-labelledby="tit-gunkan-crab">
+  <div class="modal-content" data-modal="gunkan-crab">
+    <button class="close" aria-label="Cerrar" onclick="closeModal('gunkan-crab')">&times;</button>
+
+    <div class="slider" data-slider="gunkan-crab">
+      <div class="slides">
+        <div class="slide active"><img src="gunkan-crab-1.jpg" alt="Gunkan Crab - 1"></div>
+        <div class="slide"><img src="gunkan-crab-2.jpg" alt="Gunkan Crab - 2"></div>
+        <div class="slide"><img src="gunkan-crab-3.jpg" alt="Gunkan Crab - 3"></div>
+      </div>
+      <button class="nav-btn left"  onclick="prevSlide('gunkan-crab')" aria-label="Anterior">‹</button>
+      <button class="nav-btn right" onclick="nextSlide('gunkan-crab')" aria-label="Siguiente">›</button>
+    </div>
+    <div class="dots" id="dots-gunkan-crab"></div>
+
+    <h3 id="tit-gunkan-crab">Gunkan Crab</h3>
+    <p>Cangrejo real con mayo japonesa y cebollín, textura cremosa y fresca.</p>
+    <div class="price">$5.900</div>
   </div>
 </div>
 
 <script>
-function openModal(id){
-  document.getElementById('modal-'+id).style.display='flex';
+// ====== BUSCADOR SIMPLE (opcional, filtra cards) ======
+const search = document.getElementById('search');
+search?.addEventListener('input', () => {
+  const term = search.value.trim().toLowerCase();
+  document.querySelectorAll('.card').forEach(card => {
+    const text = card.innerText.toLowerCase();
+    card.style.display = text.includes(term) ? '' : 'none';
+  });
+});
+
+// ====== MODALES + CARRUSEL ======
+const sliders = {}; // estado por modal { id: { index:0 } }
+
+function setupDots(id){
+  const modal = document.getElementById(`modal-${id}`);
+  const slides = modal.querySelectorAll('.slide');
+  const dotsWrap = modal.querySelector(`#dots-${id}`);
+  if(!dotsWrap) return;
+  dotsWrap.innerHTML = '';
+  slides.forEach((_, i) => {
+    const d = document.createElement('span');
+    d.className = 'dot' + (i===0 ? ' active' : '');
+    d.addEventListener('click', () => goToSlide(id, i));
+    dotsWrap.appendChild(d);
+  });
 }
+
+function showSlide(id){
+  const modal = document.getElementById(`modal-${id}`);
+  const s = sliders[id] || { index:0 };
+  const slides = modal.querySelectorAll('.slide');
+  if(!slides.length) return;
+  s.index = (s.index + slides.length) % slides.length;
+  slides.forEach((el, i) => el.classList.toggle('active', i === s.index));
+  const dots = modal.querySelectorAll('.dot');
+  dots.forEach((el, i) => el.classList.toggle('active', i === s.index));
+  sliders[id] = s;
+}
+
+function nextSlide(id){ sliders[id].index++; showSlide(id); }
+function prevSlide(id){ sliders[id].index--; showSlide(id); }
+function goToSlide(id, n){ sliders[id].index = n; showSlide(id); }
+
+function openModal(id){
+  const modal = document.getElementById(`modal-${id}`);
+  if(!modal) return;
+  document.body.classList.add('noscroll');
+  modal.classList.add('open');
+  sliders[id] = { index:0 };
+  setupDots(id);
+  showSlide(id);
+
+  // cerrar al clicar el fondo
+  const onBgClick = (e)=>{ if(e.target === modal) closeModal(id); };
+  modal.addEventListener('click', onBgClick, { once:true });
+
+  // teclado
+  const onKey = (ev)=>{
+    if(ev.key === 'Escape') { closeModal(id); document.removeEventListener('keydown', onKey); }
+    if(ev.key === 'ArrowRight') nextSlide(id);
+    if(ev.key === 'ArrowLeft')  prevSlide(id);
+  };
+  document.addEventListener('keydown', onKey);
+
+  // swipe táctil
+  const slider = modal.querySelector('.slider');
+  let x0=null;
+  const ts=(e)=>{ x0 = (e.touches?e.touches[0].clientX:e.clientX); };
+  const tm=(e)=>{
+    if(x0===null) return;
+    const x1=(e.touches?e.touches[0].clientX:e.clientX);
+    const dx=x1-x0;
+    if(Math.abs(dx)>40){
+      dx<0 ? nextSlide(id) : prevSlide(id);
+      x0=null;
+    }
+  };
+  slider.addEventListener('touchstart', ts, {passive:true});
+  slider.addEventListener('touchmove', tm,  {passive:true});
+}
+
 function closeModal(id){
-  document.getElementById('modal-'+id).style.display='none';
+  const modal = document.getElementById(`modal-${id}`);
+  if(!modal) return;
+  modal.classList.remove('open');
+  document.body.classList.remove('noscroll');
 }
 </script>
 
