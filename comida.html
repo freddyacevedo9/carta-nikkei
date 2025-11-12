@@ -1020,6 +1020,110 @@ img{max-width:100%;display:block;border-radius:var(--radius);}
     <div class="price">$14.900</div>
   </div>
 </div>
+<!-- OMAKASE SECTION -->
+<section id="omakase" class="section">
+  <h2>Omakase</h2>
+  <div class="grid">
+
+    <!-- Glaciar -->
+    <div class="card" onclick="openModal('glaciar')">
+      <img src="glaciar.jpg" alt="Glaciar">
+      <div>
+        <h3>Glaciar</h3>
+        <p>Selección del chef con cortes clásicos y salsas suaves.</p>
+        <div class="price">$22.900</div>
+      </div>
+    </div>
+
+    <!-- Glaciar Premium -->
+    <div class="card" onclick="openModal('glaciar-premium')">
+      <img src="glaciar-premium.jpg" alt="Glaciar Premium">
+      <div>
+        <h3>Glaciar Premium</h3>
+        <p>Cortes premium, toques trufados y técnicas de autor.</p>
+        <div class="price">$29.900</div>
+      </div>
+    </div>
+
+    <!-- Mix Nigiri Nikkei -->
+    <div class="card" onclick="openModal('mix-nigiri-nikkei')">
+      <img src="mix-nigiri-nikkei.jpg" alt="Mix Nigiri Nikkei">
+      <div>
+        <h3>Mix Nigiri Nikkei</h3>
+        <p>Selección de nigiris flameados con salsas nikkei.</p>
+        <div class="price">$18.900</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+<!-- MODALES OMAKASE -->
+
+<!-- Glaciar -->
+<div id="modal-glaciar" class="modal" role="dialog" aria-modal="true" aria-labelledby="tit-glaciar">
+  <div class="modal-content" data-modal="glaciar">
+    <button class="close" aria-label="Cerrar" onclick="closeModal('glaciar')">&times;</button>
+
+    <div class="slider" data-slider="glaciar">
+      <div class="slides">
+        <div class="slide active"><img src="glaciar-1.jpg" alt="Glaciar - 1"></div>
+        <div class="slide"><img src="glaciar-2.jpg" alt="Glaciar - 2"></div>
+        <div class="slide"><img src="glaciar-3.jpg" alt="Glaciar - 3"></div>
+      </div>
+      <button class="nav-btn left"  onclick="prevSlide('glaciar')" aria-label="Anterior">‹</button>
+      <button class="nav-btn right" onclick="nextSlide('glaciar')" aria-label="Siguiente">›</button>
+    </div>
+    <div class="dots" id="dots-glaciar"></div>
+
+    <h3 id="tit-glaciar">Glaciar</h3>
+    <p>Recorrido del chef por cortes frescos del día: pescados blancos, salmón y preparaciones ligeras con cítricos y soja suave.</p>
+    <div class="price">$22.900</div>
+  </div>
+</div>
+
+<!-- Glaciar Premium -->
+<div id="modal-glaciar-premium" class="modal" role="dialog" aria-modal="true" aria-labelledby="tit-glaciar-premium">
+  <div class="modal-content" data-modal="glaciar-premium">
+    <button class="close" aria-label="Cerrar" onclick="closeModal('glaciar-premium')">&times;</button>
+
+    <div class="slider" data-slider="glaciar-premium">
+      <div class="slides">
+        <div class="slide active"><img src="glaciar-premium-1.jpg" alt="Glaciar Premium - 1"></div>
+        <div class="slide"><img src="glaciar-premium-2.jpg" alt="Glaciar Premium - 2"></div>
+        <div class="slide"><img src="glaciar-premium-3.jpg" alt="Glaciar Premium - 3"></div>
+      </div>
+      <button class="nav-btn left"  onclick="prevSlide('glaciar-premium')" aria-label="Anterior">‹</button>
+      <button class="nav-btn right" onclick="nextSlide('glaciar-premium')" aria-label="Siguiente">›</button>
+    </div>
+    <div class="dots" id="dots-glaciar-premium"></div>
+
+    <h3 id="tit-glaciar-premium">Glaciar Premium</h3>
+    <p>Cortes de mayor categoría con terminaciones de autor: trufa, yuzu, aceite caliente y hierbas. Experiencia elevada.</p>
+    <div class="price">$29.900</div>
+  </div>
+</div>
+
+<!-- Mix Nigiri Nikkei -->
+<div id="modal-mix-nigiri-nikkei" class="modal" role="dialog" aria-modal="true" aria-labelledby="tit-mix-nigiri-nikkei">
+  <div class="modal-content" data-modal="mix-nigiri-nikkei">
+    <button class="close" aria-label="Cerrar" onclick="closeModal('mix-nigiri-nikkei')">&times;</button>
+
+    <div class="slider" data-slider="mix-nigiri-nikkei">
+      <div class="slides">
+        <div class="slide active"><img src="mix-nigiri-nikkei-1.jpg" alt="Mix Nigiri Nikkei - 1"></div>
+        <div class="slide"><img src="mix-nigiri-nikkei-2.jpg" alt="Mix Nigiri Nikkei - 2"></div>
+        <div class="slide"><img src="mix-nigiri-nikkei-3.jpg" alt="Mix Nigiri Nikkei - 3"></div>
+      </div>
+      <button class="nav-btn left"  onclick="prevSlide('mix-nigiri-nikkei')" aria-label="Anterior">‹</button>
+      <button class="nav-btn right" onclick="nextSlide('mix-nigiri-nikkei')" aria-label="Siguiente">›</button>
+    </div>
+    <div class="dots" id="dots-mix-nigiri-nikkei"></div>
+
+    <h3 id="tit-mix-nigiri-nikkei">Mix Nigiri Nikkei</h3>
+    <p>Selección de nigiris flameados: nikkei clásico, trufado y batayaki, con salsas de la casa.</p>
+    <div class="price">$18.900</div>
+  </div>
+</div>
 
 
 <script>
