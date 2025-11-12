@@ -2600,6 +2600,91 @@ if (document.getElementById(initialCat)) {
   showCategory('appetizer');
 }
 </script>
+<script>
+// ---- MODALES ----
+function openModal(id){
+  const m = document.getElementById('modal-'+id);
+  if(!m) return;
+  m.style.display = 'flex';
+  // inicializa dots del carrusel de este modal (si existe)
+  initSlider(id);
+}
+function closeModal(id){
+  const m = document.getElementById('modal-'+id);
+  if(!m) return;
+  m.style.display = 'none';
+}
+
+// ---- CARRUSEL ----
+function initSlider(name){
+  const slider = document.querySelector('.slider[data-slider="'+name+'"]');
+  if(!slider) return; // hay modales simples sin slider
+
+  const dots = document.getElementById('dots-'+name);
+  if(dots && dots.childElementCount === 0){
+    const slides = slider.querySelectorAll('.slide');
+    slides.forEach((_, i) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.setAttribute('aria-label', 'Ir a foto ' + (i+1));
+      b.addEventListener('click', () => goToSlide(name, i));
+      dots.appendChild(b);
+    });
+  }
+  updateDots(name);
+}
+
+function currentIndex(name){
+  const slider = document.querySelector('.slider[data-slider="'+name+'"]');
+  const slides = slider ? slider.querySelectorAll('.slide') : [];
+  let i = 0;
+  slides.forEach((s, idx) => { if (s.classList.contains('active')) i = idx; });
+  return i;
+}
+
+function goToSlide(name, i){
+  const slider = document.querySelector('.slider[data-slider="'+name+'"]');
+  if(!slider) return;
+  const slides = slider.querySelectorAll('.slide');
+  slides.forEach(s => s.classList.remove('active'));
+  if (slides[i]) slides[i].classList.add('active');
+  updateDots(name);
+}
+
+function nextSlide(name){
+  const slider = document.querySelector('.slider[data-slider="'+name+'"]');
+  if(!slider) return;
+  const slides = slider.querySelectorAll('.slide');
+  const i = (currentIndex(name) + 1) % slides.length;
+  goToSlide(name, i);
+}
+
+function prevSlide(name){
+  const slider = document.querySelector('.slider[data-slider="'+name+'"]');
+  if(!slider) return;
+  const slides = slider.querySelectorAll('.slide');
+  const i = (currentIndex(name) - 1 + slides.length) % slides.length;
+  goToSlide(name, i);
+}
+
+function updateDots(name){
+  const dots = document.getElementById('dots-'+name);
+  if(!dots) return;
+  const i = currentIndex(name);
+  dots.querySelectorAll('button').forEach((b, idx) => {
+    b.classList.toggle('active', idx === i);
+    b.style.opacity = idx === i ? '1' : '.4';
+  });
+}
+
+// Inicializa sliders presentes al cargar (por si algunos modales están en el DOM con carrusel)
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.slider').forEach(sl => {
+    const name = sl.getAttribute('data-slider');
+    initSlider(name);
+  });
+});
+</script>
 
 </body>
 </html>
