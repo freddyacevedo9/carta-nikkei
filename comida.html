@@ -2231,6 +2231,166 @@ img{max-width:100%;display:block;border-radius:var(--radius);}
   <p>Vegetales salteados estilo asiático; umami y textura.</p>
   <div class="price">$10.900</div>
 </div></div>
+<!-- PLATOS CALIENTES -->
+<section id="calientes" class="section">
+  <h2>Platos calientes</h2>
+
+  <div class="grid">
+
+    <div class="card" onclick="openModal('pad-thai')">
+      <img src="pad-thai.jpg" alt="Pad Thai">
+      <div>
+        <h3>Pad Thai</h3>
+        <p>Salteado de fideos de arroz con camarones, tofu y salsa tamarindo.</p>
+        <div class="price">$11.900</div>
+      </div>
+    </div>
+
+    <div class="card" onclick="openModal('atun-rapanui')">
+      <img src="atun-rapanui.jpg" alt="Atún Rapa Nui">
+      <div>
+        <h3>Atún Rapa Nui</h3>
+        <p>Filete de atún grillado con costra de sésamo y salsa tropical nikkei.</p>
+        <div class="price">$13.900</div>
+      </div>
+    </div>
+
+    <div class="card" onclick="openModal('salmon-teriyaki')">
+      <img src="salmon-teriyaki.jpg" alt="Salmón Teriyaki">
+      <div>
+        <h3>Salmón Teriyaki</h3>
+        <p>Salmón sellado con glaseado teriyaki y vegetales salteados.</p>
+        <div class="price">$13.900</div>
+      </div>
+    </div>
+
+    <div class="card" onclick="openModal('wok-del-mar')">
+      <img src="wok-del-mar.jpg" alt="Wok del Mar">
+      <div>
+        <h3>Wok del Mar</h3>
+        <p>Salteado de mariscos, verduras y fideos con salsa de soya y jengibre.</p>
+        <div class="price">$12.900</div>
+      </div>
+    </div>
+
+    <div class="card" onclick="openModal('arroz-nikkei')">
+      <img src="arroz-nikkei.jpg" alt="Arroz Nikkei">
+      <div>
+        <h3>Arroz Nikkei</h3>
+        <p>Arroz frito con camarones, huevo, verduras y toques peruanos-japoneses.</p>
+        <div class="price">$10.900</div>
+      </div>
+    </div>
+
+    <div class="card" onclick="openModal('pulpo-parrilla')">
+      <img src="pulpo-parrilla.jpg" alt="Pulpo a la parrilla">
+      <div>
+        <h3>Pulpo a la Parrilla</h3>
+        <p>Pulpo grillado al carbón con mantequilla batayaki y puré de papas japonesas.</p>
+        <div class="price">$15.900</div>
+      </div>
+    </div>
+
+    <div class="card" onclick="openModal('ramen-shiitake')">
+      <img src="ramen-shiitake.jpg" alt="Ramen Shiitake">
+      <div>
+        <h3>Ramen Shiitake</h3>
+        <p>Caldo concentrado con fideos, hongos shiitake, huevo y cebollín.</p>
+        <div class="price">$11.900</div>
+      </div>
+    </div>
+
+    <div class="card" onclick="openModal('fish-chips')">
+      <img src="fish-chips.jpg" alt="Fish and Chips">
+      <div>
+        <h3>Fish and Chips</h3>
+        <p>Pescado blanco apanado en tempura acompañado de papas fritas caseras.</p>
+        <div class="price">$10.900</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+<!-- MODALES PLATOS CALIENTES -->
+<div id="modal-pad-thai" class="modal">
+  <div class="modal-content">
+    <button class="close" onclick="closeModal('pad-thai')">&times;</button>
+    <img src="pad-thai.jpg" alt="Pad Thai">
+    <h3>Pad Thai</h3>
+    <p>Fideos de arroz salteados con camarones, tofu, brotes de soya, maní tostado y salsa tamarindo. Un clásico tailandés con sello Nikkei.</p>
+    <div class="price">$11.900</div>
+  </div>
+</div>
+
+<div id="modal-atun-rapanui" class="modal">
+  <div class="modal-content">
+    <button class="close" onclick="closeModal('atun-rapanui')">&times;</button>
+    <img src="atun-rapanui.jpg" alt="Atún Rapa Nui">
+    <h3>Atún Rapa Nui</h3>
+    <p>Atún grillado con costra de sésamo, acompañado de puré de camote y salsa tropical de la casa. Inspirado en sabores isleños.</p>
+    <div class="price">$13.900</div>
+  </div>
+</div>
+
+<div id="modal-salmon-teriyaki" class="modal">
+  <div class="modal-content">
+    <button class="close" onclick="closeModal('salmon-teriyaki')">&times;</button>
+    <img src="salmon-teriyaki.jpg" alt="Salmón Teriyaki">
+    <h3>Salmón Teriyaki</h3>
+    <p>Salmón sellado en glaseado teriyaki con guarnición de arroz jazmín y vegetales salteados al wok.</p>
+    <div class="price">$13.900</div>
+  </div>
+</div>
+
+<div id="modal-wok-del-mar" class="modal">
+  <div class="modal-content">
+    <button class="close" onclick="closeModal('wok-del-mar')">&times;</button>
+    <img src="wok-del-mar.jpg" alt="Wok del Mar">
+    <h3>Wok del Mar</h3>
+    <p>Salteado de mariscos, verduras y fideos udon con salsa de soya, jengibre y aceite de sésamo. Intenso y sabroso.</p>
+    <div class="price">$12.900</div>
+  </div>
+</div>
+
+<div id="modal-arroz-nikkei" class="modal">
+  <div class="modal-content">
+    <button class="close" onclick="closeModal('arroz-nikkei')">&times;</button>
+    <img src="arroz-nikkei.jpg" alt="Arroz Nikkei">
+    <h3>Arroz Nikkei</h3>
+    <p>Arroz frito con camarones, huevo, cebollín y toques peruanos-japoneses. Un clásico de la fusión Nikkei.</p>
+    <div class="price">$10.900</div>
+  </div>
+</div>
+
+<div id="modal-pulpo-parrilla" class="modal">
+  <div class="modal-content">
+    <button class="close" onclick="closeModal('pulpo-parrilla')">&times;</button>
+    <img src="pulpo-parrilla.jpg" alt="Pulpo a la Parrilla">
+    <h3>Pulpo a la Parrilla</h3>
+    <p>Pulpo grillado al carbón con mantequilla batayaki, puré japonés y reducción cítrica. Textura perfecta y sabor intenso.</p>
+    <div class="price">$15.900</div>
+  </div>
+</div>
+
+<div id="modal-ramen-shiitake" class="modal">
+  <div class="modal-content">
+    <button class="close" onclick="closeModal('ramen-shiitake')">&times;</button>
+    <img src="ramen-shiitake.jpg" alt="Ramen Shiitake">
+    <h3>Ramen Shiitake</h3>
+    <p>Caldo de larga cocción con fideos, shiitake, huevo mollet y cebollín. Versión vegetariana disponible.</p>
+    <div class="price">$11.900</div>
+  </div>
+</div>
+
+<div id="modal-fish-chips" class="modal">
+  <div class="modal-content">
+    <button class="close" onclick="closeModal('fish-chips')">&times;</button>
+    <img src="fish-chips.jpg" alt="Fish and Chips">
+    <h3>Fish and Chips</h3>
+    <p>Pescado blanco apanado en tempura, acompañado de papas fritas caseras y salsa tártara. Estilo británico con toque Nikkei.</p>
+    <div class="price">$10.900</div>
+  </div>
+</div>
 
 <script>
 // ====== BUSCADOR (filtra SOLO la sección activa) ======
