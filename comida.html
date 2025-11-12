@@ -81,7 +81,7 @@ img{max-width:100%;display:block;border-radius:var(--radius);}
 .grid {
   display:grid; gap:14px;
 }
-.card {
+. {
   display:grid; grid-template-columns:120px 1fr; gap:12px;
   background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
   box-shadow:var(--shadow); padding:10px;
@@ -137,6 +137,31 @@ img{max-width:100%;display:block;border-radius:var(--radius);}
 
 /* Evitar scroll del fondo cuando modal está abierto */
 body.noscroll { overflow:hidden; }
+/* --- TOQUE MINIMALISTA VISUAL --- */
+.card {
+  background:#0f0f0f;
+  border:1px solid #191919;
+  box-shadow:none;
+}
+.section h2 {
+  border-left:none;
+  padding-left:0;
+  font-size:20px;
+  opacity:.9;
+}
+.categories {
+  background:#0a0a0a;
+  border-bottom:1px solid #151515;
+}
+.categories a {
+  border:1px solid #1a1a1a;
+  background:#0e0e0e;
+}
+.categories a.active {
+  border-color:var(--accent);
+  background:#111;
+}
+
 </style>
 </head>
 
