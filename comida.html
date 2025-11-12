@@ -2860,6 +2860,77 @@ sheet.addEventListener('touchend',   e => {
 })();
 </script>
 
+<script>
+// ===== soporte multi-imagen SIN cambiar tu HTML =====
+const sheet      = document.getElementById('sheet');
+const sheetClose = document.getElementById('sheetClose');
+const sheetImg   = document.getElementById('sheetImg');
+const sheetTitle = document.getElementById('sheetTitle');
+const sheetDesc  = document.getElementById('sheetDesc');
+const sheetPrice = document.getElementById('sheetPrice');
+
+let _imgs = [];      // array de rutas actuales
+let _idx  = 0;       // índice actual
+
+function setImage(i){
+  if(!_imgs.length) return;
+  _idx = (i + _imgs.length) % _imgs.length;
+  sheetImg.src = _imgs[_idx];
+}
+
+function openSheetFromCard(card){
+  const title = card.querySelector('h3')?.innerText || '';
+  const desc  = card.querySelector('p')?.innerText || '';
+  const price = card.querySelector('.price')?.innerText || '';
+  const cover = card.querySelector('img')?.getAttribute('src') || '';
+  // lee listas de imágenes separadas por coma: data-images="a.jpg,b.jpg,c.jpg"
+  const attr  = card.getAttribute('data-images');
+  _imgs = attr ? attr.split(',').map(s=>s.trim()).filter(Boolean) : (cover ? [cover] : []);
+  _idx = 0;
+
+  sheetTitle.textContent = title;
+  sheetDesc.textContent  = desc;
+  sheetPrice.textContent = price;
+  setImage(0);
+
+  sheet.style.display = 'flex';
+}
+
+function closeSheet(){ sheet.style.display = 'none'; }
+
+// ——— eventos globales (si ya los tienes, puedes quitar los duplicados) ———
+document.addEventListener('click', (e)=>{
+  const card = e.target.closest('.card');
+  const inside = e.target.closest('#sheet');
+  if(card && !inside){ openSheetFromCard(card); }
+});
+sheetClose?.addEventListener('click', closeSheet);
+sheet.addEventListener('click', (e)=>{ if(e.target===sheet) closeSheet(); });
+
+// ← → teclado
+document.addEventListener('keydown', (e)=>{
+  if(sheet.style.display==='flex'){
+    if(e.key==='Escape') closeSheet();
+    if(e.key==='ArrowLeft')  setImage(_idx-1);
+    if(e.key==='ArrowRight') setImage(_idx+1);
+  }
+});
+
+// tap en lados de la imagen: izquierda = anterior, derecha = siguiente
+sheetImg.addEventListener('click', (e)=>{
+  const rect = sheetImg.getBoundingClientRect();
+  const leftSide = (e.clientX - rect.left) < rect.width/2;
+  setImage(leftSide ? _idx-1 : _idx+1);
+});
+
+// swipe móvil (izq/der)
+let startX = 0;
+sheetImg.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, {passive:true});
+sheetImg.addEventListener('touchend',   e => {
+  const dx = e.changedTouches[0].clientX - startX;
+  if(Math.abs(dx) > 60){ dx>0 ? setImage(_idx-1) : setImage(_idx+1); }
+}, {passive:true});
+</script>
 
 </body>
 </html>
