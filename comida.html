@@ -101,6 +101,271 @@ img{max-width:100%;display:block;border-radius:var(--radius)}
   <a href="#postres">Postres</a>
 </nav>
 
+<!-- =========================================================
+     TU CONTENIDO DE SECCIONES VA AQUÍ (o deja los ejemplos)
+========================================================= -->
+
+<section id="appetizer" class="section">
+  <h2>Appetizer</h2>
+  <div class="grid">
+    <div class="card" data-id="gyoza-pollo">
+      <img src="gyoza-pollo.jpg" alt="Gyozas de Pollo">
+      <div><h3>Gyozas de Pollo</h3><p>Artesanales con jengibre y cebollín.</p><div class="price">$5.900</div></div>
+    </div>
+    <div class="card" data-id="camarones-tempura">
+      <img src="camarones-tempura.jpg" alt="Camarones Tempura">
+      <div><h3>Camarones Tempura</h3><p>Dorados y crocantes con tentsuyu.</p><div class="price">$11.900</div></div>
+    </div>
+    <div class="card" data-id="nigiri-trufado">
+      <img src="nigiri-trufado.jpg" alt="Nigiri Trufado">
+      <div><h3>Nigiri Trufado</h3><p>Atún rojo y trufa negra.</p><div class="price">$5.900</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="calientes" class="section">
+  <h2>Platos calientes</h2>
+  <div class="grid">
+    <div class="card" data-id="pad-thai">
+      <img src="pad-thai.jpg" alt="Pad Thai">
+      <div><h3>Pad Thai</h3><p>Fideos de arroz con tamarindo.</p><div class="price">$11.900</div></div>
+    </div>
+    <div class="card" data-id="salmon-teriyaki">
+      <img src="salmon-teriyaki.jpg" alt="Salmón Teriyaki">
+      <div><h3>Salmón Teriyaki</h3><p>Sellado con glaseado teriyaki.</p><div class="price">$13.900</div></div>
+    </div>
+    <div class="card" data-id="arroz-nikkei">
+      <img src="arroz-nikkei.jpg" alt="Arroz Nikkei">
+      <div><h3>Arroz Nikkei</h3><p>Frito con camarón y huevo.</p><div class="price">$10.900</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="combinaciones" class="section">
+  <h2>Combinaciones / Tablas</h2>
+  <div class="grid">
+    <div class="card" data-id="tabla-nikkei">
+      <img src="tabla-nikkei.jpg" alt="Tabla Nikkei">
+      <div><h3>Tabla Nikkei</h3><p>Selección del chef.</p><div class="price">$24.900</div></div>
+    </div>
+    <div class="card" data-id="combinacion-s">
+      <img src="combinacion-s.jpg" alt="Combinación S">
+      <div><h3>Combinación S</h3><p>12 piezas mixtas.</p><div class="price">$12.900</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="postres" class="section">
+  <h2>Postres</h2>
+  <div class="grid">
+    <div class="card" data-id="brownie-helado">
+      <img src="brownie-helado.jpg" alt="Brownie con Helado">
+      <div><h3>Brownie con Helado</h3><p>Tibio con vainilla artesanal.</p><div class="price">$6.900</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======= MODAL ÚNICO (GLOBAL) ======= -->
+<div id="modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal-content">
+    <button class="close" id="modal-close" aria-label="Cerrar">&times;</button>
+
+    <div class="slider" data-slider="dynamic">
+      <div class="slides" id="modal-slides"></div>
+      <button class="nav-btn left"  id="btn-prev" aria-label="Anterior">‹</button>
+      <button class="nav-btn right" id="btn-next" aria-label="Siguiente">›</button>
+    </div>
+    <div class="dots" id="modal-dots"></div>
+
+    <h3 id="modal-title" style="font-family:'Cinzel',serif;margin:10px 0 4px"></h3>
+    <p id="modal-desc" style="color:var(--muted)"></p>
+    <div class="price" id="modal-price"></div>
+  </div>
+</div>
+
+<script>
+/* ========= DICCIONARIO DE DATOS (GLOBAL) =========
+   Agrega aquí TODOS los platos que quieras abrir con carrusel.
+   Clave = data-id de la card.
+*/
+const MENU_DATA = {
+  /* Appetizer */
+  "gyoza-pollo": {
+    title:"Gyozas de Pollo", price:"$5.900",
+    desc:"Artesanales, rellenas de pollo marinado con jengibre y cebollín. Acompañadas de salsa cítrica.",
+    images:["gyoza-pollo.jpg","gyoza-pollo-2.jpg","gyoza-pollo-3.jpg"]
+  },
+  "camarones-tempura": {
+    title:"Camarones Tempura", price:"$11.900",
+    desc:"Crocantes, con salsa tentsuyu. Perfectos para compartir.",
+    images:["camarones-tempura.jpg","camarones-tempura-2.jpg","camarones-tempura-3.jpg"]
+  },
+  "nigiri-trufado": {
+    title:"Nigiri Trufado", price:"$5.900",
+    desc:"Atún rojo, trufa negra y toque de yuzu. Aroma intenso y elegante.",
+    images:["nigiri-trufado.jpg"]
+  },
+
+  /* Calientes */
+  "pad-thai": {
+    title:"Pad Thai", price:"$11.900",
+    desc:"Fideos de arroz salteados con tamarindo, camarones, tofu, maní y brotes.",
+    images:["pad-thai.jpg","pad-thai-2.jpg","pad-thai-3.jpg"]
+  },
+  "salmon-teriyaki": {
+    title:"Salmón Teriyaki", price:"$13.900",
+    desc:"Salmón sellado con glaseado teriyaki, arroz jazmín y vegetales al wok.",
+    images:["salmon-teriyaki.jpg"]
+  },
+  "arroz-nikkei": {
+    title:"Arroz Nikkei", price:"$10.900",
+    desc:"Arroz frito con camarones, huevo, cebollín y toques peruanos-japoneses.",
+    images:["arroz-nikkei.jpg"]
+  },
+
+  /* Combinaciones / Tablas */
+  "tabla-nikkei": {
+    title:"Tabla Nikkei", price:"$24.900",
+    desc:"Selección del chef con rolls tradicionales, nigiris y láminas de sashimi. Ideal 2–3 personas.",
+    images:["tabla-nikkei-1.jpg","tabla-nikkei-2.jpg","tabla-nikkei-3.jpg"]
+  },
+  "combinacion-s": {
+    title:"Combinación S", price:"$12.900",
+    desc:"12 piezas mixtas: roll clásico y nigiris. Incluye soya, jengibre y wasabi.",
+    images:["combinacion-s-1.jpg","combinacion-s-2.jpg","combinacion-s-3.jpg"]
+  },
+
+  /* Postres */
+  "brownie-helado": {
+    title:"Brownie con Helado", price:"$6.900",
+    desc:"Brownie tibio de chocolate intenso con helado de vainilla artesanal y salsa.",
+    images:["brownie-helado.jpg","brownie-helado-2.jpg"]
+  }
+
+  // ➕ Añade aquí el resto: ceviches, sashimi, omakase, makimono, gourmet, sin arroz,
+  // tradicionales (todas las subdivisiones), MÁS calientes, MÁS tablas, etc.
+  // Formato: "id-de-la-card": { title:"...", price:"$...", desc:"...", images:["a.jpg","b.jpg"] }
+};
+
+/* ========= REFERENCIAS AL MODAL ========= */
+const modal       = document.getElementById('modal');
+const modalClose  = document.getElementById('modal-close');
+const slidesWrap  = document.getElementById('modal-slides');
+const dotsWrap    = document.getElementById('modal-dots');
+const titleEl     = document.getElementById('modal-title');
+const descEl      = document.getElementById('modal-desc');
+const priceEl     = document.getElementById('modal-price');
+const btnPrev     = document.getElementById('btn-prev');
+const btnNext     = document.getElementById('btn-next');
+
+let currentIndex = 0;
+
+/* ========= RENDER DEL CARRUSEL ========= */
+function renderSlides(imgs){
+  slidesWrap.innerHTML = '';
+  dotsWrap.innerHTML = '';
+  if(!imgs || !imgs.length){
+    // fallback: slide vacío
+    const s = document.createElement('div');
+    s.className = 'slide active';
+    s.innerHTML = '<div style="height:220px;background:#151515;border-radius:12px;display:flex;align-items:center;justify-content:center;opacity:.6">Sin imágenes</div>';
+    slidesWrap.appendChild(s);
+    btnPrev.style.display='none';
+    btnNext.style.display='none';
+    dotsWrap.style.display='none';
+    currentIndex = 0;
+    return;
+  }
+  imgs.forEach((src,i)=>{
+    const slide = document.createElement('div');
+    slide.className = 'slide'+(i===0?' active':'');
+    slide.innerHTML = `<img src="${src}" alt="Imagen ${i+1}">`;
+    slidesWrap.appendChild(slide);
+
+    const dot = document.createElement('button');
+    dot.type='button';
+    dot.className = i===0 ? 'active' : '';
+    dot.addEventListener('click', ()=>goTo(i));
+    dotsWrap.appendChild(dot);
+  });
+  currentIndex = 0;
+  const many = imgs.length>1;
+  btnPrev.style.display = many ? '' : 'none';
+  btnNext.style.display = many ? '' : 'none';
+  dotsWrap.style.display = many ? 'flex' : 'none';
+}
+function goTo(i){
+  const slides = slidesWrap.querySelectorAll('.slide');
+  if(!slides.length) return;
+  slides[currentIndex]?.classList.remove('active');
+  currentIndex = (i + slides.length) % slides.length;
+  slides[currentIndex]?.classList.add('active');
+  const dots = dotsWrap.querySelectorAll('button');
+  dots.forEach((b,idx)=>b.classList.toggle('active', idx===currentIndex));
+}
+function next(){ goTo(currentIndex+1); }
+function prev(){ goTo(currentIndex-1); }
+
+/* ========= ABRIR / CERRAR ========= */
+function openModalById(id){
+  const item = MENU_DATA[id];
+  if(!item){ console.warn('ID no definido en MENU_DATA:', id); return; }
+  titleEl.textContent = item.title || '';
+  descEl.textContent  = item.desc  || '';
+  priceEl.textContent = item.price || '';
+  renderSlides(item.images || []);
+  modal.style.display = 'flex';
+}
+function closeModal(){ modal.style.display = 'none'; }
+
+/* ========= EVENTOS ========= */
+// Abrir desde cualquier card con data-id
+document.addEventListener('click', (e)=>{
+  const card = e.target.closest('.card[data-id]');
+  if(card){ openModalById(card.getAttribute('data-id')); }
+});
+
+// Cerrar con X
+modalClose.addEventListener('click', closeModal);
+
+// Cerrar al tocar fuera del contenido
+modal.addEventListener('click', (e)=>{ if(e.target===modal) closeModal(); });
+
+// Teclado: ESC, ← y →
+document.addEventListener('keydown', (e)=>{
+  if(modal.style.display==='flex'){
+    if(e.key==='Escape') closeModal();
+    if(e.key==='ArrowLeft')  prev();
+    if(e.key==='ArrowRight') next();
+  }
+});
+
+// Flechas
+btnPrev.addEventListener('click', prev);
+btnNext.addEventListener('click', next);
+
+// Swipe móvil
+let startX = 0;
+modal.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, {passive:true});
+modal.addEventListener('touchend',   e => {
+  const delta = e.changedTouches[0].clientX - startX;
+  if(Math.abs(delta)>60){ delta>0 ? prev() : next(); }
+}, {passive:true});
+
+/* ========= (Opcional) Filtro por búsqueda rápida ========= */
+const search = document.getElementById('search');
+if(search){
+  search.addEventListener('input', ()=>{
+    const q = search.value.trim().toLowerCase();
+    document.querySelectorAll('.card[data-id]').forEach(card=>{
+      const txt = card.innerText.toLowerCase();
+      card.style.display = txt.includes(q) ? '' : 'none';
+    });
+  });
+}
+</script>
+</body>
+</html>
 
 <!-- APPETIZER SECTION -->
 <section id="appetizer" class="section active">
