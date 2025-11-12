@@ -9,6 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
+
   .slider{position:relative;margin-bottom:10px}
 .slides{position:relative;overflow:hidden;border-radius:12px}
 .slide{display:none}
@@ -30,7 +31,23 @@ body {
   color:var(--text);
   font-family: system-ui, -apple-system, "Segoe UI", Inter, Roboto, Arial;
 }
-img{max-width:100%;display:block;border-radius:var(--radius);}
+.modal-content {
+  position: relative;
+  z-index: 2;
+}
+.close {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  z-index: 5;
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-size: 26px;
+  cursor: pointer;
+}
+
+  img{max-width:100%;display:block;border-radius:var(--radius);}
 
 /* --- TOPBAR --- */
 .topbar {
@@ -2612,6 +2629,33 @@ if (document.getElementById(initialCat)) {
 }
 </script>
 <script>
+    // ---- SWIPE EN CELULARES ----
+  let startX = 0;
+  let endX = 0;
+
+  document.addEventListener('touchstart', e => {
+    startX = e.touches[0].clientX;
+  });
+
+  document.addEventListener('touchend', e => {
+    endX = e.changedTouches[0].clientX;
+    const delta = endX - startX;
+
+    // Detecta swipe dentro de un modal abierto
+    const modal = document.querySelector('.modal[style*="display: flex"]');
+    if (!modal) return;
+    const slider = modal.querySelector('.slider');
+    if (!slider) return;
+    const name = slider.getAttribute('data-slider');
+
+    if (delta > 60) { // swipe derecha
+      prevSlide(name);
+    } else if (delta < -60) { // swipe izquierda
+      nextSlide(name);
+    }
+  });
+</script>
+
 // ---- MODALES ----
 function openModal(id){
   const m = document.getElementById('modal-'+id);
