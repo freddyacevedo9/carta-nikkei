@@ -67,6 +67,10 @@ img{max-width:100%;display:block;border-radius:var(--radius);}
 }
 
 /* --- CONTENT --- */
+  /* Mostrar solo la sección activa */
+.section{display:none}
+.section.active{display:block}
+
 .section {
   max-width:1000px; margin:0 auto; padding:20px 18px;
 }
@@ -167,7 +171,7 @@ body.noscroll { overflow:hidden; }
 </nav>
 
 <!-- APPETIZER SECTION -->
-<section id="appetizer" class="section">
+<section id="appetizer" class="section active">
   <h2>Appetizer</h2>
   <div class="grid">
 
@@ -764,15 +768,16 @@ body.noscroll { overflow:hidden; }
 </div>
 
 <script>
-// ====== BUSCADOR SIMPLE (opcional, filtra cards) ======
+// ====== BUSCADOR (filtra SOLO la sección activa) ======
 const search = document.getElementById('search');
 search?.addEventListener('input', () => {
   const term = search.value.trim().toLowerCase();
-  document.querySelectorAll('.card').forEach(card => {
+  document.querySelectorAll('.section.active .card').forEach(card => {
     const text = card.innerText.toLowerCase();
     card.style.display = text.includes(term) ? '' : 'none';
   });
 });
+
 
 // ====== MODALES + CARRUSEL ======
 const sliders = {}; // estado por modal { id: { index:0 } }
@@ -850,6 +855,37 @@ function closeModal(id){
   if(!modal) return;
   modal.classList.remove('open');
   document.body.classList.remove('noscroll');
+}
+</script>
+<script>
+// ====== NAVEGACIÓN POR CATEGORÍAS (mostrar solo una) ======
+const catLinks = document.querySelectorAll('.categories a');
+const catSections = document.querySelectorAll('section.section');
+
+function showCategory(id){
+  catSections.forEach(s => s.classList.toggle('active', s.id === id));
+  catLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#'+id));
+  // actualiza hash sin saltar la página
+  history.replaceState(null, '', '#'+id);
+  // resetea el filtro visual de las cards en la nueva sección
+  document.querySelectorAll('.section.active .card').forEach(c => c.style.display = '');
+}
+
+// Clic en barra de categorías
+catLinks.forEach(a => {
+  a.addEventListener('click', (e) => {
+    e.preventDefault();
+    const id = a.getAttribute('href').slice(1);
+    if (document.getElementById(id)) showCategory(id);
+  });
+});
+
+// Cargar según hash (si viene con #ceviches, etc.)
+const initialCat = location.hash ? location.hash.slice(1) : 'appetizer';
+if (document.getElementById(initialCat)) {
+  showCategory(initialCat);
+} else {
+  showCategory('appetizer');
 }
 </script>
 
