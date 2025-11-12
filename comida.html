@@ -1124,7 +1124,255 @@ img{max-width:100%;display:block;border-radius:var(--radius);}
     <div class="price">$18.900</div>
   </div>
 </div>
+<!-- MAKIMONO SECTION -->
+<section id="makimono" class="section">
+  <h2>Makimono</h2>
+  <div class="grid">
 
+    <!-- Shiromi -->
+    <div class="card" onclick="openModal('shiromi')">
+      <img src="shiromi.jpg" alt="Shiromi">
+      <div>
+        <h3>Shiromi</h3>
+        <p>Pescado blanco, palta y pepino; limpio y fresco.</p>
+        <div class="price">$10.900</div>
+      </div>
+    </div>
+
+    <!-- Tataki -->
+    <div class="card" onclick="openModal('tataki')">
+      <img src="tataki.jpg" alt="Tataki">
+      <div>
+        <h3>Tataki</h3>
+        <p>Pescado sellado al tataki con sésamo y ponzu.</p>
+        <div class="price">$11.900</div>
+      </div>
+    </div>
+
+    <!-- Kani -->
+    <div class="card" onclick="openModal('kani')">
+      <img src="kani.jpg" alt="Kani">
+      <div>
+        <h3>Kani</h3>
+        <p>Kanikama, palta y mayo japonesa.</p>
+        <div class="price">$9.900</div>
+      </div>
+    </div>
+
+    <!-- Criollo -->
+    <div class="card" onclick="openModal('criollo')">
+      <img src="criollo.jpg" alt="Criollo">
+      <div>
+        <h3>Criollo</h3>
+        <p>Salmón, ají verde y cebolla morada; toque limeño.</p>
+        <div class="price">$11.900</div>
+      </div>
+    </div>
+
+    <!-- Bataa -->
+    <div class="card" onclick="openModal('bataa')">
+      <img src="bataa.jpg" alt="Bataa">
+      <div>
+        <h3>Bataa</h3>
+        <p>Salmón flameado con mantequilla batayaki.</p>
+        <div class="price">$11.900</div>
+      </div>
+    </div>
+
+    <!-- Teriyaki -->
+    <div class="card" onclick="openModal('teriyaki')">
+      <img src="teriyaki.jpg" alt="Teriyaki">
+      <div>
+        <h3>Teriyaki</h3>
+        <p>Pollo/Salmon teriyaki, palta y sésamo.</p>
+        <div class="price">$10.900</div>
+      </div>
+    </div>
+
+    <!-- Azevimaki -->
+    <div class="card" onclick="openModal('azevimaki')">
+      <img src="azevimaki.jpg" alt="Azevimaki">
+      <div>
+        <h3>Azevimaki</h3>
+        <p>Salmón, queso crema y toque de ciboulette.</p>
+        <div class="price">$10.900</div>
+      </div>
+    </div>
+
+    <!-- Makimono del día -->
+    <div class="card" onclick="openModal('makimono-dia')">
+      <img src="makimono-dia.jpg" alt="Makimono del día">
+      <div>
+        <h3>Makimono del día</h3>
+        <p>Creación del chef según productos de temporada.</p>
+        <div class="price">$12.900</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- MODALES MAKIMONO -->
+
+<!-- Shiromi -->
+<div id="modal-shiromi" class="modal" role="dialog" aria-modal="true" aria-labelledby="tit-shiromi">
+  <div class="modal-content" data-modal="shiromi">
+    <button class="close" aria-label="Cerrar" onclick="closeModal('shiromi')">&times;</button>
+    <div class="slider" data-slider="shiromi">
+      <div class="slides">
+        <div class="slide active"><img src="shiromi-1.jpg" alt="Shiromi - 1"></div>
+        <div class="slide"><img src="shiromi-2.jpg" alt="Shiromi - 2"></div>
+        <div class="slide"><img src="shiromi-3.jpg" alt="Shiromi - 3"></div>
+      </div>
+      <button class="nav-btn left"  onclick="prevSlide('shiromi')" aria-label="Anterior">‹</button>
+      <button class="nav-btn right" onclick="nextSlide('shiromi')" aria-label="Siguiente">›</button>
+    </div>
+    <div class="dots" id="dots-shiromi"></div>
+    <h3 id="tit-shiromi">Shiromi</h3>
+    <p>Makimono de pescado blanco con palta y pepino; sabor limpio, textura suave y final cítrico.</p>
+    <div class="price">$10.900</div>
+  </div>
+</div>
+
+<!-- Tataki -->
+<div id="modal-tataki" class="modal" role="dialog" aria-modal="true" aria-labelledby="tit-tataki">
+  <div class="modal-content" data-modal="tataki">
+    <button class="close" aria-label="Cerrar" onclick="closeModal('tataki')">&times;</button>
+    <div class="slider" data-slider="tataki">
+      <div class="slides">
+        <div class="slide active"><img src="tataki-1.jpg" alt="Tataki - 1"></div>
+        <div class="slide"><img src="tataki-2.jpg" alt="Tataki - 2"></div>
+        <div class="slide"><img src="tataki-3.jpg" alt="Tataki - 3"></div>
+      </div>
+      <button class="nav-btn left"  onclick="prevSlide('tataki')" aria-label="Anterior">‹</button>
+      <button class="nav-btn right" onclick="nextSlide('tataki')" aria-label="Siguiente">›</button>
+    </div>
+    <div class="dots" id="dots-tataki"></div>
+    <h3 id="tit-tataki">Tataki</h3>
+    <p>Pescado sellado al tataki con sésamo, ponzu y notas de jengibre. Contraste entre exterior sellado e interior tierno.</p>
+    <div class="price">$11.900</div>
+  </div>
+</div>
+
+<!-- Kani -->
+<div id="modal-kani" class="modal" role="dialog" aria-modal="true" aria-labelledby="tit-kani">
+  <div class="modal-content" data-modal="kani">
+    <button class="close" aria-label="Cerrar" onclick="closeModal('kani')">&times;</button>
+    <div class="slider" data-slider="kani">
+      <div class="slides">
+        <div class="slide active"><img src="kani-1.jpg" alt="Kani - 1"></div>
+        <div class="slide"><img src="kani-2.jpg" alt="Kani - 2"></div>
+        <div class="slide"><img src="kani-3.jpg" alt="Kani - 3"></div>
+      </div>
+      <button class="nav-btn left"  onclick="prevSlide('kani')" aria-label="Anterior">‹</button>
+      <button class="nav-btn right" onclick="nextSlide('kani')" aria-label="Siguiente">›</button>
+    </div>
+    <div class="dots" id="dots-kani"></div>
+    <h3 id="tit-kani">Kani</h3>
+    <p>Kanikama con palta y mayo japonesa; cremoso y suave, ideal para comenzar.</p>
+    <div class="price">$9.900</div>
+  </div>
+</div>
+
+<!-- Criollo -->
+<div id="modal-criollo" class="modal" role="dialog" aria-modal="true" aria-labelledby="tit-criollo">
+  <div class="modal-content" data-modal="criollo">
+    <button class="close" aria-label="Cerrar" onclick="closeModal('criollo')">&times;</button>
+    <div class="slider" data-slider="criollo">
+      <div class="slides">
+        <div class="slide active"><img src="criollo-1.jpg" alt="Criollo - 1"></div>
+        <div class="slide"><img src="criollo-2.jpg" alt="Criollo - 2"></div>
+        <div class="slide"><img src="criollo-3.jpg" alt="Criollo - 3"></div>
+      </div>
+      <button class="nav-btn left"  onclick="prevSlide('criollo')" aria-label="Anterior">‹</button>
+      <button class="nav-btn right" onclick="nextSlide('criollo')" aria-label="Siguiente">›</button>
+    </div>
+    <div class="dots" id="dots-criollo"></div>
+    <h3 id="tit-criollo">Criollo</h3>
+    <p>Salmón con ají verde, cebolla morada y toque cítrico. Fresco y con carácter.</p>
+    <div class="price">$11.900</div>
+  </div>
+</div>
+
+<!-- Bataa -->
+<div id="modal-bataa" class="modal" role="dialog" aria-modal="true" aria-labelledby="tit-bataa">
+  <div class="modal-content" data-modal="bataa">
+    <button class="close" aria-label="Cerrar" onclick="closeModal('bataa')">&times;</button>
+    <div class="slider" data-slider="bataa">
+      <div class="slides">
+        <div class="slide active"><img src="bataa-1.jpg" alt="Bataa - 1"></div>
+        <div class="slide"><img src="bataa-2.jpg" alt="Bataa - 2"></div>
+        <div class="slide"><img src="bataa-3.jpg" alt="Bataa - 3"></div>
+      </div>
+      <button class="nav-btn left"  onclick="prevSlide('bataa')" aria-label="Anterior">‹</button>
+      <button class="nav-btn right" onclick="nextSlide('bataa')" aria-label="Siguiente">›</button>
+    </div>
+    <div class="dots" id="dots-bataa"></div>
+    <h3 id="tit-bataa">Bataa</h3>
+    <p>Makimono flameado con mantequilla batayaki; notas lácteas y cebollín.</p>
+    <div class="price">$11.900</div>
+  </div>
+</div>
+
+<!-- Teriyaki -->
+<div id="modal-teriyaki" class="modal" role="dialog" aria-modal="true" aria-labelledby="tit-teriyaki">
+  <div class="modal-content" data-modal="teriyaki">
+    <button class="close" aria-label="Cerrar" onclick="closeModal('teriyaki')">&times;</button>
+    <div class="slider" data-slider="teriyaki">
+      <div class="slides">
+        <div class="slide active"><img src="teriyaki-1.jpg" alt="Teriyaki - 1"></div>
+        <div class="slide"><img src="teriyaki-2.jpg" alt="Teriyaki - 2"></div>
+        <div class="slide"><img src="teriyaki-3.jpg" alt="Teriyaki - 3"></div>
+      </div>
+      <button class="nav-btn left"  onclick="prevSlide('teriyaki')" aria-label="Anterior">‹</button>
+      <button class="nav-btn right" onclick="nextSlide('teriyaki')" aria-label="Siguiente">›</button>
+    </div>
+    <div class="dots" id="dots-teriyaki"></div>
+    <h3 id="tit-teriyaki">Teriyaki</h3>
+    <p>Glaseado teriyaki en makimono de pollo o salmón, palta y sésamo tostado.</p>
+    <div class="price">$10.900</div>
+  </div>
+</div>
+
+<!-- Azevimaki -->
+<div id="modal-azevimaki" class="modal" role="dialog" aria-modal="true" aria-labelledby="tit-azevimaki">
+  <div class="modal-content" data-modal="azevimaki">
+    <button class="close" aria-label="Cerrar" onclick="closeModal('azevimaki')">&times;</button>
+    <div class="slider" data-slider="azevimaki">
+      <div class="slides">
+        <div class="slide active"><img src="azevimaki-1.jpg" alt="Azevimaki - 1"></div>
+        <div class="slide"><img src="azevimaki-2.jpg" alt="Azevimaki - 2"></div>
+        <div class="slide"><img src="azevimaki-3.jpg" alt="Azevimaki - 3"></div>
+      </div>
+      <button class="nav-btn left"  onclick="prevSlide('azevimaki')" aria-label="Anterior">‹</button>
+      <button class="nav-btn right" onclick="nextSlide('azevimaki')" aria-label="Siguiente">›</button>
+    </div>
+    <div class="dots" id="dots-azevimaki"></div>
+    <h3 id="tit-azevimaki">Azevimaki</h3>
+    <p>Salmón con queso crema, ciboulette y suave crocante. Clásico de la casa.</p>
+    <div class="price">$10.900</div>
+  </div>
+</div>
+
+<!-- Makimono del día -->
+<div id="modal-makimono-dia" class="modal" role="dialog" aria-modal="true" aria-labelledby="tit-makimono-dia">
+  <div class="modal-content" data-modal="makimono-dia">
+    <button class="close" aria-label="Cerrar" onclick="closeModal('makimono-dia')">&times;</button>
+    <div class="slider" data-slider="makimono-dia">
+      <div class="slides">
+        <div class="slide active"><img src="makimono-dia-1.jpg" alt="Makimono del día - 1"></div>
+        <div class="slide"><img src="makimono-dia-2.jpg" alt="Makimono del día - 2"></div>
+        <div class="slide"><img src="makimono-dia-3.jpg" alt="Makimono del día - 3"></div>
+      </div>
+      <button class="nav-btn left"  onclick="prevSlide('makimono-dia')" aria-label="Anterior">‹</button>
+      <button class="nav-btn right" onclick="nextSlide('makimono-dia')" aria-label="Siguiente">›</button>
+    </div>
+    <div class="dots" id="dots-makimono-dia"></div>
+    <h3 id="tit-makimono-dia">Makimono del día</h3>
+    <p>Creación del chef con productos de temporada; consulta al equipo por la versión actual.</p>
+    <div class="price">$12.900</div>
+  </div>
+</div>
 
 <script>
 // ====== BUSCADOR (filtra SOLO la sección activa) ======
