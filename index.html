@@ -10,6 +10,13 @@
   <meta property="og:type" content="website" />
   <meta property="og:image" content="/logo1.png" />
   <meta name="theme-color" content="#000000" />
+  <!-- Fuente para el branding -->
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root { --nikkei-font: 'Cinzel', serif; }
+  .nikkei { font-family: var(--nikkei-font); font-weight: 700; letter-spacing: .5px; }
+</style>
+
   <style>
     :root{
       --bg:#0a0a0a; --muted:#161616; --text:#f5f5f5; --soft:#cfcfcf; --accent:#f0b90b; --card:#111111;
@@ -104,6 +111,8 @@
       <!-- Logo visible junto al texto -->
       <img src="logo1.png" alt="Logo NIKKEI 419" style="width:48px;height:48px;border-radius:8px;object-fit:cover;">
       <h1 id="inicio" style="margin:0;font-size:18px;letter-spacing:1px;font-weight:700;">NIKKEI 419</h1>
+    <span class="nikkei">NIKKEI 419</span>
+  </h1>
     </a>
     <div class="spacer"></div>
     <nav class="menu" aria-label="Principal">
@@ -129,7 +138,7 @@
       <div class="hero-grid">
         <div>
           <div class="pill" aria-label="abierto hoy">✨ Abierto hoy — 13:00 a 23:00</div>
-          <h2 id="tit">NIKKEI 419</h2>
+          <h2 id="tit"><span class="nikkei">NIKKEI 419</span></h2>
           <p>Experimenta una fusion de sabores.</p>
          <div class="actions">
   <a class="btn primary" href="comida.html">Ver comida</a>
@@ -157,7 +166,7 @@
       <span class="pill">Nuestra historia</span>
       <h3 id="title-historia">NIKKEI 419</h3>
       <p>
-        Somos un restaurant de sushi ubicado en el corazón de viña del mar con mas de 20 años de trayectoria nos destacamos por nuestra dedicacion, profesionalismo y siempre tener productos de primera calidad. 
+        Somos un restaurant de sushi ubicado en el corazón de Viña del mar con mas de 20 años de trayectoria nos destacamos por nuestra dedicacion, profesionalismo y siempre tener productos de primera calidad. 
       </p>
     </div>
   </section>
@@ -179,7 +188,7 @@
         </div>
       </div>
       <div class="foot-row">
-        <span class="foot-small">© <span id="year"></span> NIKKEI 419. Todos los derechos reservados.</span>
+       <span class="foot-small">© <span id="year"></span> <span class="nikkei">NIKKEI 419</span>. Todos los derechos reservados.</span>
         <span class="foot-small">Restaurante Nikkei en Viña del Mar, Chile.</span>
       </div>
     </div>
@@ -258,6 +267,7 @@
   -->
 </body>
 </html>
+
 
 
 
