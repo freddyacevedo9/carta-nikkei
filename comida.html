@@ -140,52 +140,127 @@ img{max-width:100%;display:block;border-radius:var(--radius);}
   <a href="#postres">Postres</a>
 </nav>
 
-<!-- SECTION EJEMPLO -->
+<!-- APPETIZER SECTION -->
 <section id="appetizer" class="section">
   <h2>Appetizer</h2>
   <div class="grid">
-    <div class="card" onclick="openModal('edamame')">
-      <img src="edamame.jpg" alt="Edamame">
+
+    <div class="card" onclick="openModal('gyoza-pollo')">
+      <img src="gyoza-pollo.jpg" alt="Gyozas de Pollo">
       <div>
-        <h3>Edamame</h3>
-        <p>Vainas de poroto de soya salteadas con sal de mar.</p>
-        <div class="price">$6.900</div>
-      </div>
-    </div>
-    <div class="card" onclick="openModal('gyoza')">
-      <img src="gyoza.jpg" alt="Gyozas Pulpo">
-      <div>
-        <h3>Gyozas Pulpo</h3>
-        <p>Gyozas artesanales con salsa de olivo.</p>
+        <h3>Gyozas de Pollo</h3>
+        <p>Gyozas artesanales rellenas de pollo con jengibre y cebollín.</p>
         <div class="price">$7.900</div>
       </div>
     </div>
+
+    <div class="card" onclick="openModal('gyoza-cerdo')">
+      <img src="gyoza-cerdo.jpg" alt="Gyozas de Cerdo">
+      <div>
+        <h3>Gyozas de Cerdo</h3>
+        <p>Gyozas de cerdo con cebollín y salsa cítrica especial.</p>
+        <div class="price">$7.900</div>
+      </div>
+    </div>
+
+    <div class="card" onclick="openModal('gyoza-camaron')">
+      <img src="gyoza-camaron.jpg" alt="Gyozas de Camarón">
+      <div>
+        <h3>Gyozas de Camarón</h3>
+        <p>Gyozas rellenas de camarones frescos y vegetales orientales.</p>
+        <div class="price">$7.900</div>
+      </div>
+    </div>
+
+    <div class="card" onclick="openModal('camarones-tempura')">
+      <img src="camarones-tempura.jpg" alt="Camarones Tempura">
+      <div>
+        <h3>Camarones Tempura</h3>
+        <p>Camarones en tempura dorada acompañados con salsa tentsuyu.</p>
+        <div class="price">$8.900</div>
+      </div>
+    </div>
+
+    <div class="card" onclick="openModal('rollos-vietnamita')">
+      <img src="rollos-vietnamita.jpg" alt="Rollos Vietnamita">
+      <div>
+        <h3>Rollos Vietnamita</h3>
+        <p>Rollos frescos de papel de arroz con vegetales y camarón.</p>
+        <div class="price">$7.900</div>
+      </div>
+    </div>
+
+    <div class="card" onclick="openModal('nigiri-nikkei')">
+      <img src="nigiri-nikkei.jpg" alt="Nigiri Nikkei">
+      <div>
+        <h3>Nigiri Nikkei</h3>
+        <p>Nigiri con lámina de salmón flameado y salsa nikkei especial.</p>
+        <div class="price">$3.900</div>
+      </div>
+    </div>
+
+    <div class="card" onclick="openModal('nigiri-trufado')">
+      <img src="nigiri-trufado.jpg" alt="Nigiri Trufado">
+      <div>
+        <h3>Nigiri Trufado</h3>
+        <p>Nigiri con atún rojo, trufa negra y toque de yuzu.</p>
+        <div class="price">$4.200</div>
+      </div>
+    </div>
+
+    <div class="card" onclick="openModal('nigiri-batayaki')">
+      <img src="nigiri-batayaki.jpg" alt="Nigiri Batayaki">
+      <div>
+        <h3>Nigiri Batayaki</h3>
+        <p>Salmón flameado con mantequilla batayaki y cebollín.</p>
+        <div class="price">$4.200</div>
+      </div>
+    </div>
+
+    <div class="card" onclick="openModal('gunkan-tako')">
+      <img src="gunkan-tako.jpg" alt="Gunkan Tako Tartar">
+      <div>
+        <h3>Gunkan Tako Tartar</h3>
+        <p>Base de arroz envuelta en alga con tartar de pulpo y sésamo.</p>
+        <div class="price">$4.500</div>
+      </div>
+    </div>
+
+    <div class="card" onclick="openModal('gunkan-crab')">
+      <img src="gunkan-crab.jpg" alt="Gunkan Crab">
+      <div>
+        <h3>Gunkan Crab</h3>
+        <p>Gunkan relleno de cangrejo real y mayo japonesa.</p>
+        <div class="price">$4.500</div>
+      </div>
+    </div>
+
   </div>
 </section>
 
 <!-- MODALES -->
-<div id="modal-edamame" class="modal">
+<!-- Solo ejemplo: puedes duplicar y cambiar nombres -->
+<div id="modal-gyoza-pollo" class="modal">
   <div class="modal-content">
-    <button class="close" onclick="closeModal('edamame')">&times;</button>
-    <img src="edamame.jpg" alt="Edamame">
-    <h3>Edamame</h3>
-    <p>Vainas de poroto de soya al vapor, salteadas con sal de mar y un toque de aceite de sésamo. Ideal para comenzar tu experiencia Nikkei.</p>
-    <div class="price">$6.900</div>
-  </div>
-</div>
-
-<div id="modal-gyoza" class="modal">
-  <div class="modal-content">
-    <button class="close" onclick="closeModal('gyoza')">&times;</button>
-    <img src="gyoza.jpg" alt="Gyozas Pulpo">
-    <h3>Gyozas Pulpo</h3>
-    <p>Gyozas de elaboración propia rellenas de pulpo con jengibre y cebollín, bañadas en salsa de olivo y limón. Perfectas para compartir.</p>
+    <button class="close" onclick="closeModal('gyoza-pollo')">&times;</button>
+    <img src="gyoza-pollo.jpg" alt="Gyozas de Pollo">
+    <h3>Gyozas de Pollo</h3>
+    <p>Gyozas elaboradas artesanalmente, rellenas con pollo marinado en jengibre y cebollín, servidas con salsa cítrica nikkei.</p>
     <div class="price">$7.900</div>
   </div>
 </div>
 
+<div id="modal-gunkan-crab" class="modal">
+  <div class="modal-content">
+    <button class="close" onclick="closeModal('gunkan-crab')">&times;</button>
+    <img src="gunkan-crab.jpg" alt="Gunkan Crab">
+    <h3>Gunkan Crab</h3>
+    <p>Delicado gunkan con cangrejo real, coronado con mayonesa japonesa y cebollín fresco. Una explosión de sabor suave y equilibrado.</p>
+    <div class="price">$4.500</div>
+  </div>
+</div>
+
 <script>
-// FUNCIONES MODAL
 function openModal(id){
   document.getElementById('modal-'+id).style.display='flex';
 }
