@@ -9,17 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
-  /* Slider simple dentro del panel */
-.sheet-slider{position:relative;margin-bottom:12px}
-.sheet-slides{position:relative;overflow:hidden;border-radius:18px}
-.sheet-slide{display:none}
-.sheet-slide.active{display:block}
-.sheet-nav{position:absolute;top:50%;transform:translateY(-50%);background:#00000080;border:1px solid #333;border-radius:50%;width:36px;height:36px;cursor:pointer}
-.sheet-nav.left{left:8px}
-.sheet-nav.right{right:8px}
-.sheet-dots{display:flex;gap:6px;justify-content:center;margin-top:8px}
-.sheet-dots button{width:8px;height:8px;border:none;border-radius:50%;background:#888;opacity:.5;cursor:pointer}
-.sheet-dots button.active{opacity:1;background:#fff}
+
 
 /* Panel expandido (estilo tarjeta grande) */
 .sheet-backdrop{display:none;position:fixed;inset:0;z-index:120;
@@ -209,13 +199,8 @@ body {
 <div id="sheet" class="sheet-backdrop" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
   <div class="sheet">
     <button class="sheet-close" id="sheetClose" aria-label="Cerrar">×</button>
-   <!-- Slider dentro del panel -->
-<div class="sheet-slider">
-  <button class="sheet-nav left"  id="sheetPrev" aria-label="Anterior">‹</button>
-  <div class="sheet-slides" id="sheetSlides"></div>
-  <button class="sheet-nav right" id="sheetNext" aria-label="Siguiente">›</button>
-</div>
-<div class="sheet-dots" id="sheetDots"></div>
+   
+<img id="sheetImg" src="" alt="">
 
     <h3 id="sheetTitle">Título</h3>
     <p id="sheetDesc">Descripción del plato.</p>
@@ -2874,110 +2859,7 @@ sheet.addEventListener('touchend',   e => {
   }
 })();
 </script>
-<script>
-// referencias del panel (con slider)
-const sheet       = document.getElementById('sheet');
-const sheetClose  = document.getElementById('sheetClose');
-const sheetTitle  = document.getElementById('sheetTitle');
-const sheetDesc   = document.getElementById('sheetDesc');
-const sheetPrice  = document.getElementById('sheetPrice');
 
-const sheetSlides = document.getElementById('sheetSlides');
-const sheetDots   = document.getElementById('sheetDots');
-const sheetPrev   = document.getElementById('sheetPrev');
-const sheetNext   = document.getElementById('sheetNext');
-
-let sheetIndex = 0;
-
-// crea las diapositivas
-function renderSheetSlides(imgs){
-  sheetSlides.innerHTML = '';
-  sheetDots.innerHTML = '';
-  if(!imgs || !imgs.length){
-    const s = document.createElement('div');
-    s.className = 'sheet-slide active';
-    s.innerHTML = '<div style="height:220px;background:#151515;border-radius:18px;display:flex;align-items:center;justify-content:center;opacity:.6">Sin imágenes</div>';
-    sheetSlides.appendChild(s);
-    sheetPrev.style.display='none'; sheetNext.style.display='none'; sheetDots.style.display='none';
-    sheetIndex = 0;
-    return;
-  }
-  imgs.forEach((src,i)=>{
-    const slide = document.createElement('div');
-    slide.className = 'sheet-slide' + (i===0?' active':'');
-    slide.innerHTML = `<img src="${src}" alt="Imagen ${i+1}" style="width:100%;border-radius:18px">`;
-    sheetSlides.appendChild(slide);
-
-    const dot = document.createElement('button');
-    dot.className = i===0 ? 'active' : '';
-    dot.addEventListener('click', ()=>sheetGo(i));
-    sheetDots.appendChild(dot);
-  });
-  sheetIndex = 0;
-  const many = imgs.length > 1;
-  sheetPrev.style.display = many ? '' : 'none';
-  sheetNext.style.display = many ? '' : 'none';
-  sheetDots.style.display  = many ? 'flex' : 'none';
-}
-function sheetGo(i){
-  const slides = sheetSlides.querySelectorAll('.sheet-slide');
-  if(!slides.length) return;
-  slides[sheetIndex]?.classList.remove('active');
-  sheetIndex = (i + slides.length) % slides.length;
-  slides[sheetIndex]?.classList.add('active');
-  sheetDots.querySelectorAll('button').forEach((b,idx)=> b.classList.toggle('active', idx===sheetIndex));
-}
-const sheetPrevFn = ()=> sheetGo(sheetIndex-1);
-const sheetNextFn = ()=> sheetGo(sheetIndex+1);
-
-// abre el panel usando los datos de la card
-function openSheetFromCard(card){
-  const id    = card.getAttribute('data-id') || '';
-  const title = card.querySelector('h3')?.innerText || '';
-  const desc  = card.querySelector('p')?.innerText || '';
-  const price = card.querySelector('.price')?.innerText || '';
-  const cover = card.querySelector('img')?.getAttribute('src') || '';
-
-  // lee imágenes extra desde data-images="a.jpg,b.jpg,c.jpg"
-  const dataImages = card.getAttribute('data-images');
-  const imgs = dataImages ? dataImages.split(',').map(s=>s.trim()).filter(Boolean)
-                          : (cover ? [cover] : []);
-
-  sheetTitle.textContent = title;
-  sheetDesc.textContent  = desc;
-  sheetPrice.textContent = price;
-
-  renderSheetSlides(imgs);
-  sheet.style.display = 'flex';
-}
-function closeSheet(){ sheet.style.display='none'; }
-
-// listeners básicos (si ya los tienes, deja estos)
-document.addEventListener('click', (e)=>{
-  const card = e.target.closest('.card');
-  const inside = e.target.closest('#sheet');
-  if(card && !inside){ openSheetFromCard(card); }
-});
-sheetClose.addEventListener('click', closeSheet);
-sheet.addEventListener('click', (e)=>{ if(e.target===sheet) closeSheet(); });
-
-// flechas, teclado y swipe
-sheetPrev.addEventListener('click', sheetPrevFn);
-sheetNext.addEventListener('click', sheetNextFn);
-document.addEventListener('keydown', (e)=>{
-  if(sheet.style.display==='flex'){
-    if(e.key==='Escape') closeSheet();
-    if(e.key==='ArrowLeft')  sheetPrevFn();
-    if(e.key==='ArrowRight') sheetNextFn();
-  }
-});
-let startX = 0;
-sheet.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, {passive:true});
-sheet.addEventListener('touchend',   e => {
-  const dx = e.changedTouches[0].clientX - startX;
-  if(Math.abs(dx)>60){ dx>0 ? sheetPrevFn() : sheetNextFn(); }
-}, {passive:true});
-</script>
 
 </body>
 </html>
