@@ -767,6 +767,285 @@ body.noscroll { overflow:hidden; }
     <div class="price">$8.900</div>
   </div>
 </div>
+  <!-- SASHIMI SECTION -->
+<section id="sashimi" class="section">
+  <h2>Sashimi</h2>
+  <div class="grid">
+
+    <!-- Sashimi Salmón -->
+    <div class="card" onclick="openModal('sashimi-salmon')">
+      <img src="sashimi-salmon.jpg" alt="Sashimi Salmón">
+      <div>
+        <h3>Sashimi Salmón</h3>
+        <p>Láminas de salmón fresco, corte clásico.</p>
+        <div class="price">$12.900</div>
+      </div>
+    </div>
+
+    <!-- Sashimi Atún -->
+    <div class="card" onclick="openModal('sashimi-atun')">
+      <img src="sashimi-atun.jpg" alt="Sashimi Atún">
+      <div>
+        <h3>Sashimi Atún</h3>
+        <p>Atún rojo en lonjas firmes y delicadas.</p>
+        <div class="price">$14.900</div>
+      </div>
+    </div>
+
+    <!-- Sashimi Pulpo -->
+    <div class="card" onclick="openModal('sashimi-pulpo')">
+      <img src="sashimi-pulpo.jpg" alt="Sashimi Pulpo">
+      <div>
+        <h3>Sashimi Pulpo</h3>
+        <p>Pulpo laminado, textura suave y sabor marino.</p>
+        <div class="price">$13.900</div>
+      </div>
+    </div>
+
+    <!-- Sashimi de Temporada -->
+    <div class="card" onclick="openModal('sashimi-temporada')">
+      <img src="sashimi-temporada.jpg" alt="Sashimi de Temporada">
+      <div>
+        <h3>Sashimi de Temporada</h3>
+        <p>Selección de pesca del día según disponibilidad.</p>
+        <div class="price">$14.900</div>
+      </div>
+    </div>
+
+    <!-- Moriwase (mixto) -->
+    <div class="card" onclick="openModal('moriwase')">
+      <img src="moriwase.jpg" alt="Moriwase">
+      <div>
+        <h3>Moriwase</h3>
+        <p>Surtido mixto de sashimi del chef.</p>
+        <div class="price">$18.900</div>
+      </div>
+    </div>
+
+    <!-- Tiradito Sakana -->
+    <div class="card" onclick="openModal('tiradito-sakana')">
+      <img src="tiradito-sakana.jpg" alt="Tiradito Sakana">
+      <div>
+        <h3>Tiradito Sakana</h3>
+        <p>Pescado blanco con aderezo cítrico y ají suave.</p>
+        <div class="price">$12.900</div>
+      </div>
+    </div>
+
+    <!-- Tiradito Nikkei -->
+    <div class="card" onclick="openModal('tiradito-nikkei')">
+      <img src="tiradito-nikkei.jpg" alt="Tiradito Nikkei">
+      <div>
+        <h3>Tiradito Nikkei</h3>
+        <p>Láminas finas con salsa nikkei y sésamo.</p>
+        <div class="price">$13.900</div>
+      </div>
+    </div>
+
+    <!-- Tiradito de Pulpo -->
+    <div class="card" onclick="openModal('tiradito-pulpo')">
+      <img src="tiradito-pulpo.jpg" alt="Tiradito de Pulpo">
+      <div>
+        <h3>Tiradito de Pulpo</h3>
+        <p>Pulpo en láminas con oliva y notas cítricas.</p>
+        <div class="price">$13.900</div>
+      </div>
+    </div>
+
+    <!-- Fuego -->
+    <div class="card" onclick="openModal('fuego')">
+      <img src="fuego.jpg" alt="Fuego">
+      <div>
+        <h3>Fuego</h3>
+        <p>Sashimi flameado con aceite caliente, ajo y ají.</p>
+        <div class="price">$14.900</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+<!-- MODALES SASHIMI -->
+
+<!-- Sashimi Salmón -->
+<div id="modal-sashimi-salmon" class="modal" role="dialog" aria-modal="true" aria-labelledby="tit-sashimi-salmon">
+  <div class="modal-content" data-modal="sashimi-salmon">
+    <button class="close" aria-label="Cerrar" onclick="closeModal('sashimi-salmon')">&times;</button>
+    <div class="slider" data-slider="sashimi-salmon">
+      <div class="slides">
+        <div class="slide active"><img src="sashimi-salmon-1.jpg" alt="Sashimi Salmón - 1"></div>
+        <div class="slide"><img src="sashimi-salmon-2.jpg" alt="Sashimi Salmón - 2"></div>
+        <div class="slide"><img src="sashimi-salmon-3.jpg" alt="Sashimi Salmón - 3"></div>
+      </div>
+      <button class="nav-btn left"  onclick="prevSlide('sashimi-salmon')" aria-label="Anterior">‹</button>
+      <button class="nav-btn right" onclick="nextSlide('sashimi-salmon')" aria-label="Siguiente">›</button>
+    </div>
+    <div class="dots" id="dots-sashimi-salmon"></div>
+    <h3 id="tit-sashimi-salmon">Sashimi Salmón</h3>
+    <p>Corte clásico de salmón fresco, servido con salsa de soja suave y jengibre encurtido. Textura mantecosa y equilibrada.</p>
+    <div class="price">$12.900</div>
+  </div>
+</div>
+
+<!-- Sashimi Atún -->
+<div id="modal-sashimi-atun" class="modal" role="dialog" aria-modal="true" aria-labelledby="tit-sashimi-atun">
+  <div class="modal-content" data-modal="sashimi-atun">
+    <button class="close" aria-label="Cerrar" onclick="closeModal('sashimi-atun')">&times;</button>
+    <div class="slider" data-slider="sashimi-atun">
+      <div class="slides">
+        <div class="slide active"><img src="sashimi-atun-1.jpg" alt="Sashimi Atún - 1"></div>
+        <div class="slide"><img src="sashimi-atun-2.jpg" alt="Sashimi Atún - 2"></div>
+        <div class="slide"><img src="sashimi-atun-3.jpg" alt="Sashimi Atún - 3"></div>
+      </div>
+      <button class="nav-btn left"  onclick="prevSlide('sashimi-atun')" aria-label="Anterior">‹</button>
+      <button class="nav-btn right" onclick="nextSlide('sashimi-atun')" aria-label="Siguiente">›</button>
+    </div>
+    <div class="dots" id="dots-sashimi-atun"></div>
+    <h3 id="tit-sashimi-atun">Sashimi Atún</h3>
+    <p>Atún rojo de textura firme y sabor intenso, acompañado de soja suave y wasabi.</p>
+    <div class="price">$14.900</div>
+  </div>
+</div>
+
+<!-- Sashimi Pulpo -->
+<div id="modal-sashimi-pulpo" class="modal" role="dialog" aria-modal="true" aria-labelledby="tit-sashimi-pulpo">
+  <div class="modal-content" data-modal="sashimi-pulpo">
+    <button class="close" aria-label="Cerrar" onclick="closeModal('sashimi-pulpo')">&times;</button>
+    <div class="slider" data-slider="sashimi-pulpo">
+      <div class="slides">
+        <div class="slide active"><img src="sashimi-pulpo-1.jpg" alt="Sashimi Pulpo - 1"></div>
+        <div class="slide"><img src="sashimi-pulpo-2.jpg" alt="Sashimi Pulpo - 2"></div>
+        <div class="slide"><img src="sashimi-pulpo-3.jpg" alt="Sashimi Pulpo - 3"></div>
+      </div>
+      <button class="nav-btn left"  onclick="prevSlide('sashimi-pulpo')" aria-label="Anterior">‹</button>
+      <button class="nav-btn right" onclick="nextSlide('sashimi-pulpo')" aria-label="Siguiente">›</button>
+    </div>
+    <div class="dots" id="dots-sashimi-pulpo"></div>
+    <h3 id="tit-sashimi-pulpo">Sashimi Pulpo</h3>
+    <p>Pulpo laminado, textura delicada y notas marinas; ideal con gotas de limón.</p>
+    <div class="price">$13.900</div>
+  </div>
+</div>
+
+<!-- Sashimi de Temporada -->
+<div id="modal-sashimi-temporada" class="modal" role="dialog" aria-modal="true" aria-labelledby="tit-sashimi-temporada">
+  <div class="modal-content" data-modal="sashimi-temporada">
+    <button class="close" aria-label="Cerrar" onclick="closeModal('sashimi-temporada')">&times;</button>
+    <div class="slider" data-slider="sashimi-temporada">
+      <div class="slides">
+        <div class="slide active"><img src="sashimi-temporada-1.jpg" alt="Sashimi de Temporada - 1"></div>
+        <div class="slide"><img src="sashimi-temporada-2.jpg" alt="Sashimi de Temporada - 2"></div>
+        <div class="slide"><img src="sashimi-temporada-3.jpg" alt="Sashimi de Temporada - 3"></div>
+      </div>
+      <button class="nav-btn left"  onclick="prevSlide('sashimi-temporada')" aria-label="Anterior">‹</button>
+      <button class="nav-btn right" onclick="nextSlide('sashimi-temporada')" aria-label="Siguiente">›</button>
+    </div>
+    <div class="dots" id="dots-sashimi-temporada"></div>
+    <h3 id="tit-sashimi-temporada">Sashimi de Temporada</h3>
+    <p>Selección del día según disponibilidad, corte fresco y elegante.</p>
+    <div class="price">$14.900</div>
+  </div>
+</div>
+
+<!-- Moriwase -->
+<div id="modal-moriwase" class="modal" role="dialog" aria-modal="true" aria-labelledby="tit-moriwase">
+  <div class="modal-content" data-modal="moriwase">
+    <button class="close" aria-label="Cerrar" onclick="closeModal('moriwase')">&times;</button>
+    <div class="slider" data-slider="moriwase">
+      <div class="slides">
+        <div class="slide active"><img src="moriwase-1.jpg" alt="Moriwase - 1"></div>
+        <div class="slide"><img src="moriwase-2.jpg" alt="Moriwase - 2"></div>
+        <div class="slide"><img src="moriwase-3.jpg" alt="Moriwase - 3"></div>
+      </div>
+      <button class="nav-btn left"  onclick="prevSlide('moriwase')" aria-label="Anterior">‹</button>
+      <button class="nav-btn right" onclick="nextSlide('moriwase')" aria-label="Siguiente">›</button>
+    </div>
+    <div class="dots" id="dots-moriwase"></div>
+    <h3 id="tit-moriwase">Moriwase</h3>
+    <p>Combinado mixto de sashimi seleccionado por el chef.</p>
+    <div class="price">$18.900</div>
+  </div>
+</div>
+
+<!-- Tiradito Sakana -->
+<div id="modal-tiradito-sakana" class="modal" role="dialog" aria-modal="true" aria-labelledby="tit-tiradito-sakana">
+  <div class="modal-content" data-modal="tiradito-sakana">
+    <button class="close" aria-label="Cerrar" onclick="closeModal('tiradito-sakana')">&times;</button>
+    <div class="slider" data-slider="tiradito-sakana">
+      <div class="slides">
+        <div class="slide active"><img src="tiradito-sakana-1.jpg" alt="Tiradito Sakana - 1"></div>
+        <div class="slide"><img src="tiradito-sakana-2.jpg" alt="Tiradito Sakana - 2"></div>
+        <div class="slide"><img src="tiradito-sakana-3.jpg" alt="Tiradito Sakana - 3"></div>
+      </div>
+      <button class="nav-btn left"  onclick="prevSlide('tiradito-sakana')" aria-label="Anterior">‹</button>
+      <button class="nav-btn right" onclick="nextSlide('tiradito-sakana')" aria-label="Siguiente">›</button>
+    </div>
+    <div class="dots" id="dots-tiradito-sakana"></div>
+    <h3 id="tit-tiradito-sakana">Tiradito Sakana</h3>
+    <p>Pescado blanco con aderezo cítrico, aceite de oliva y ají suave.</p>
+    <div class="price">$12.900</div>
+  </div>
+</div>
+
+<!-- Tiradito Nikkei -->
+<div id="modal-tiradito-nikkei" class="modal" role="dialog" aria-modal="true" aria-labelledby="tit-tiradito-nikkei">
+  <div class="modal-content" data-modal="tiradito-nikkei">
+    <button class="close" aria-label="Cerrar" onclick="closeModal('tiradito-nikkei')">&times;</button>
+    <div class="slider" data-slider="tiradito-nikkei">
+      <div class="slides">
+        <div class="slide active"><img src="tiradito-nikkei-1.jpg" alt="Tiradito Nikkei - 1"></div>
+        <div class="slide"><img src="tiradito-nikkei-2.jpg" alt="Tiradito Nikkei - 2"></div>
+        <div class="slide"><img src="tiradito-nikkei-3.jpg" alt="Tiradito Nikkei - 3"></div>
+      </div>
+      <button class="nav-btn left"  onclick="prevSlide('tiradito-nikkei')" aria-label="Anterior">‹</button>
+      <button class="nav-btn right" onclick="nextSlide('tiradito-nikkei')" aria-label="Siguiente">›</button>
+    </div>
+    <div class="dots" id="dots-tiradito-nikkei"></div>
+    <h3 id="tit-tiradito-nikkei">Tiradito Nikkei</h3>
+    <p>Láminas finas con salsa nikkei, sésamo tostado y cebollín.</p>
+    <div class="price">$13.900</div>
+  </div>
+</div>
+
+<!-- Tiradito de Pulpo -->
+<div id="modal-tiradito-pulpo" class="modal" role="dialog" aria-modal="true" aria-labelledby="tit-tiradito-pulpo">
+  <div class="modal-content" data-modal="tiradito-pulpo">
+    <button class="close" aria-label="Cerrar" onclick="closeModal('tiradito-pulpo')">&times;</button>
+    <div class="slider" data-slider="tiradito-pulpo">
+      <div class="slides">
+        <div class="slide active"><img src="tiradito-pulpo-1.jpg" alt="Tiradito de Pulpo - 1"></div>
+        <div class="slide"><img src="tiradito-pulpo-2.jpg" alt="Tiradito de Pulpo - 2"></div>
+        <div class="slide"><img src="tiradito-pulpo-3.jpg" alt="Tiradito de Pulpo - 3"></div>
+      </div>
+      <button class="nav-btn left"  onclick="prevSlide('tiradito-pulpo')" aria-label="Anterior">‹</button>
+      <button class="nav-btn right" onclick="nextSlide('tiradito-pulpo')" aria-label="Siguiente">›</button>
+    </div>
+    <div class="dots" id="dots-tiradito-pulpo"></div>
+    <h3 id="tit-tiradito-pulpo">Tiradito de Pulpo</h3>
+    <p>Pulpo laminado con oliva, ají y toque cítrico.</p>
+    <div class="price">$13.900</div>
+  </div>
+</div>
+
+<!-- Fuego -->
+<div id="modal-fuego" class="modal" role="dialog" aria-modal="true" aria-labelledby="tit-fuego">
+  <div class="modal-content" data-modal="fuego">
+    <button class="close" aria-label="Cerrar" onclick="closeModal('fuego')">&times;</button>
+    <div class="slider" data-slider="fuego">
+      <div class="slides">
+        <div class="slide active"><img src="fuego-1.jpg" alt="Fuego - 1"></div>
+        <div class="slide"><img src="fuego-2.jpg" alt="Fuego - 2"></div>
+        <div class="slide"><img src="fuego-3.jpg" alt="Fuego - 3"></div>
+      </div>
+      <button class="nav-btn left"  onclick="prevSlide('fuego')" aria-label="Anterior">‹</button>
+      <button class="nav-btn right" onclick="nextSlide('fuego')" aria-label="Siguiente">›</button>
+    </div>
+    <div class="dots" id="dots-fuego"></div>
+    <h3 id="tit-fuego">Fuego</h3>
+    <p>Sashimi flameado con aceite caliente, ajo laminado y ají; notas ahumadas y aroma intenso.</p>
+    <div class="price">$14.900</div>
+  </div>
+</div>
+
 
 <script>
 // ====== BUSCADOR (filtra SOLO la sección activa) ======
