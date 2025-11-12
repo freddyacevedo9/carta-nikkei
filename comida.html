@@ -2821,6 +2821,40 @@ sheet.addEventListener('touchend',   e => {
   if(delta > 90) closeSheet(); // desliza hacia abajo para cerrar (opcional)
 }, {passive:true});
 </script>
+<script>
+// --- FIX: evitar doble apertura (forzamos que SOLO abra el panel "sheet") ---
+(function(){
+  if (!window.__sheetClickFixApplied) {
+    window.__sheetClickFixApplied = true;
+
+    // Quitamos cualquier listener previo que pueda abrir otro modal (si existía)
+    // No podemos desregistrar handlers anónimos de otros scripts,
+    // así que interceptamos el click en FASE DE CAPTURA y lo detenemos.
+    document.addEventListener('click', function(e){
+      const card = e.target.closest('.card');
+      const insideSheet = e.target.closest('#sheet');
+
+      // Si no es una card o el click fue dentro del sheet, no hacemos nada.
+      if (!card || insideSheet) return;
+
+      // Si la card tiene <a> adentro, evitamos que navegue.
+      const link = e.target.closest('a');
+      if (link) e.preventDefault();
+
+      // Detenemos propagación para que NO ejecuten otros listeners (modal viejo).
+      e.stopPropagation();
+      e.stopImmediatePropagation();
+
+      // Abrimos SOLO el panel "sheet"
+      try {
+        openSheetFromCard(card);
+      } catch(err){
+        console.error('openSheetFromCard no encontrado:', err);
+      }
+    }, true); // <- CAPTURA: este handler corre antes que los demás
+  }
+})();
+</script>
 
 </body>
 </html>
