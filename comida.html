@@ -242,19 +242,19 @@ body.noscroll { overflow:hidden; }
         <div class="price">$5.900</div>
       </div>
     </div>
-
-    <div class="card" onclick="openModal('gunkan-tako')">
-      <img src="gunkan-tako.jpg" alt="Gunkan Tako Tartar">
-      <div>
-        <div class="card" onclick="openModal('nigiri-olivo')">
-  <img src="nigiri-al-olivo.jpg" alt="Nigiri al Olivo">
+<div class="card" onclick="openModal('nigiri-olivo')">
+  <img src="nigiri-olivo.jpg" alt="Nigiri al Olivo">
   <div>
     <h3>Nigiri al Olivo</h3>
-    <p>Laminas de pulpo flameado y terminado con salsa al olivo.</p>
+    <p>Salmón flameado con emulsión de aceituna y toque cítrico.</p>
     <div class="price">$5.900</div>
   </div>
 </div>
 
+    <div class="card" onclick="openModal('gunkan-tako')">
+      <img src="gunkan-tako.jpg" alt="Gunkan Tako Tartar">
+      <div>
+      
         <h3>Gunkan Tako Tartar</h3>
         <p>Base de arroz envuelta en alga con tartar de pulpo y sésamo.</p>
         <div class="price">$5.900</div>
@@ -490,6 +490,27 @@ body.noscroll { overflow:hidden; }
 
     <h3 id="tit-gunkan-crab">Gunkan Crab</h3>
     <p>Cangrejo real con mayo japonesa y cebollín, textura cremosa y fresca.</p>
+    <div class="price">$5.900</div>
+  </div>
+</div>
+<div id="modal-nigiri-olivo" class="modal" role="dialog" aria-modal="true" aria-labelledby="tit-nigiri-olivo">
+  <div class="modal-content" data-modal="nigiri-olivo">
+    <button class="close" aria-label="Cerrar" onclick="closeModal('nigiri-olivo')">&times;</button>
+
+    <!-- Carrusel -->
+    <div class="slider" data-slider="nigiri-olivo">
+      <div class="slides">
+        <div class="slide active"><img src="nigiri-olivo-1.jpg" alt="Nigiri al Olivo - 1"></div>
+        <div class="slide"><img src="nigiri-olivo-2.jpg" alt="Nigiri al Olivo - 2"></div>
+        <div class="slide"><img src="nigiri-olivo-3.jpg" alt="Nigiri al Olivo - 3"></div>
+      </div>
+      <button class="nav-btn left"  onclick="prevSlide('nigiri-olivo')" aria-label="Anterior">‹</button>
+      <button class="nav-btn right" onclick="nextSlide('nigiri-olivo')" aria-label="Siguiente">›</button>
+    </div>
+    <div class="dots" id="dots-nigiri-olivo"></div>
+
+    <h3 id="tit-nigiri-olivo">Nigiri al Olivo</h3>
+    <p>Base de arroz y lámina de salmón flameado, cubierta con emulsión de aceituna negra al estilo nikkei, aceite de oliva suave y ralladura cítrica. Equilibrio entre umami y frescor.</p>
     <div class="price">$5.900</div>
   </div>
 </div>
