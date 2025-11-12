@@ -1373,6 +1373,254 @@ img{max-width:100%;display:block;border-radius:var(--radius);}
     <div class="price">$12.900</div>
   </div>
 </div>
+<!-- ROLLS GOURMET SECTION -->
+<section id="gourmet" class="section">
+  <h2>Rolls Gourmet</h2>
+  <div class="grid">
+
+    <!-- Chicken Tempura -->
+    <div class="card" onclick="openModal('chicken-tempura')">
+      <img src="chicken-tempura.jpg" alt="Chicken Tempura">
+      <div>
+        <h3>Chicken Tempura</h3>
+        <p>Pollo tempurizado, palta y mayo japonesa.</p>
+        <div class="price">$11.900</div>
+      </div>
+    </div>
+
+    <!-- Olivo Tako Roll -->
+    <div class="card" onclick="openModal('olivo-tako-roll')">
+      <img src="olivo-tako-roll.jpg" alt="Olivo Tako Roll">
+      <div>
+        <h3>Olivo Tako Roll</h3>
+        <p>Pulpo, emulsión de aceituna y toques cítricos.</p>
+        <div class="price">$12.900</div>
+      </div>
+    </div>
+
+    <!-- Shiitake Roll -->
+    <div class="card" onclick="openModal('shiitake-roll')">
+      <img src="shiitake-roll.jpg" alt="Shiitake Roll">
+      <div>
+        <h3>Shiitake Roll</h3>
+        <p>Shiitake salteado, pepino y sésamo tostado.</p>
+        <div class="price">$10.900</div>
+      </div>
+    </div>
+
+    <!-- Meli Roll -->
+    <div class="card" onclick="openModal('meli-roll')">
+      <img src="meli-roll.jpg" alt="Meli Roll">
+      <div>
+        <h3>Meli Roll</h3>
+        <p>Salmón, queso crema y miel de yuzu.</p>
+        <div class="price">$12.900</div>
+      </div>
+    </div>
+
+    <!-- Tuna Special Roll -->
+    <div class="card" onclick="openModal('tuna-special-roll')">
+      <img src="tuna-special-roll.jpg" alt="Tuna Special Roll">
+      <div>
+        <h3>Tuna Special Roll</h3>
+        <p>Atún rojo, palta y toque de trufa.</p>
+        <div class="price">$14.900</div>
+      </div>
+    </div>
+
+    <!-- Mango Special Roll -->
+    <div class="card" onclick="openModal('mango-special-roll')">
+      <img src="mango-special-roll.jpg" alt="Mango Special Roll">
+      <div>
+        <h3>Mango Special Roll</h3>
+        <p>Salmón, mango fresco y salsa nikkei.</p>
+        <div class="price">$12.900</div>
+      </div>
+    </div>
+
+    <!-- Futomaki -->
+    <div class="card" onclick="openModal('futomaki')">
+      <img src="futomaki.jpg" alt="Futomaki">
+      <div>
+        <h3>Futomaki</h3>
+        <p>Rollo grueso con vegetales y proteínas mixtas.</p>
+        <div class="price">$11.900</div>
+      </div>
+    </div>
+
+    <!-- Furay Roll -->
+    <div class="card" onclick="openModal('furay-roll')">
+      <img src="furay-roll.jpg" alt="Furay Roll">
+      <div>
+        <h3>Furay Roll</h3>
+        <p>Roll apanado crujiente con salsas de la casa.</p>
+        <div class="price">$12.900</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+<!-- MODALES ROLLS GOURMET -->
+
+<!-- Chicken Tempura -->
+<div id="modal-chicken-tempura" class="modal" role="dialog" aria-modal="true" aria-labelledby="tit-chicken-tempura">
+  <div class="modal-content" data-modal="chicken-tempura">
+    <button class="close" aria-label="Cerrar" onclick="closeModal('chicken-tempura')">&times;</button>
+    <div class="slider" data-slider="chicken-tempura">
+      <div class="slides">
+        <div class="slide active"><img src="chicken-tempura-1.jpg" alt="Chicken Tempura - 1"></div>
+        <div class="slide"><img src="chicken-tempura-2.jpg" alt="Chicken Tempura - 2"></div>
+        <div class="slide"><img src="chicken-tempura-3.jpg" alt="Chicken Tempura - 3"></div>
+      </div>
+      <button class="nav-btn left" onclick="prevSlide('chicken-tempura')" aria-label="Anterior">‹</button>
+      <button class="nav-btn right" onclick="nextSlide('chicken-tempura')" aria-label="Siguiente">›</button>
+    </div>
+    <div class="dots" id="dots-chicken-tempura"></div>
+    <h3 id="tit-chicken-tempura">Chicken Tempura</h3>
+    <p>Pollo tempurizado con palta y mayo japonesa; crujiente por fuera, jugoso por dentro.</p>
+    <div class="price">$11.900</div>
+  </div>
+</div>
+
+<!-- Olivo Tako Roll -->
+<div id="modal-olivo-tako-roll" class="modal" role="dialog" aria-modal="true" aria-labelledby="tit-olivo-tako-roll">
+  <div class="modal-content" data-modal="olivo-tako-roll">
+    <button class="close" aria-label="Cerrar" onclick="closeModal('olivo-tako-roll')">&times;</button>
+    <div class="slider" data-slider="olivo-tako-roll">
+      <div class="slides">
+        <div class="slide active"><img src="olivo-tako-roll-1.jpg" alt="Olivo Tako Roll - 1"></div>
+        <div class="slide"><img src="olivo-tako-roll-2.jpg" alt="Olivo Tako Roll - 2"></div>
+        <div class="slide"><img src="olivo-tako-roll-3.jpg" alt="Olivo Tako Roll - 3"></div>
+      </div>
+      <button class="nav-btn left" onclick="prevSlide('olivo-tako-roll')" aria-label="Anterior">‹</button>
+      <button class="nav-btn right" onclick="nextSlide('olivo-tako-roll')" aria-label="Siguiente">›</button>
+    </div>
+    <div class="dots" id="dots-olivo-tako-roll"></div>
+    <h3 id="tit-olivo-tako-roll">Olivo Tako Roll</h3>
+    <p>Pulpo con emulsión de aceituna, palta y toque cítrico; intenso y equilibrado.</p>
+    <div class="price">$12.900</div>
+  </div>
+</div>
+
+<!-- Shiitake Roll -->
+<div id="modal-shiitake-roll" class="modal" role="dialog" aria-modal="true" aria-labelledby="tit-shiitake-roll">
+  <div class="modal-content" data-modal="shiitake-roll">
+    <button class="close" aria-label="Cerrar" onclick="closeModal('shiitake-roll')">&times;</button>
+    <div class="slider" data-slider="shiitake-roll">
+      <div class="slides">
+        <div class="slide active"><img src="shiitake-roll-1.jpg" alt="Shiitake Roll - 1"></div>
+        <div class="slide"><img src="shiitake-roll-2.jpg" alt="Shiitake Roll - 2"></div>
+        <div class="slide"><img src="shiitake-roll-3.jpg" alt="Shiitake Roll - 3"></div>
+      </div>
+      <button class="nav-btn left" onclick="prevSlide('shiitake-roll')" aria-label="Anterior">‹</button>
+      <button class="nav-btn right" onclick="nextSlide('shiitake-roll')" aria-label="Siguiente">›</button>
+    </div>
+    <div class="dots" id="dots-shiitake-roll"></div>
+    <h3 id="tit-shiitake-roll">Shiitake Roll</h3>
+    <p>Shiitake salteado, pepino crocante y sésamo tostado; umami vegetal.</p>
+    <div class="price">$10.900</div>
+  </div>
+</div>
+
+<!-- Meli Roll -->
+<div id="modal-meli-roll" class="modal" role="dialog" aria-modal="true" aria-labelledby="tit-meli-roll">
+  <div class="modal-content" data-modal="meli-roll">
+    <button class="close" aria-label="Cerrar" onclick="closeModal('meli-roll')">&times;</button>
+    <div class="slider" data-slider="meli-roll">
+      <div class="slides">
+        <div class="slide active"><img src="meli-roll-1.jpg" alt="Meli Roll - 1"></div>
+        <div class="slide"><img src="meli-roll-2.jpg" alt="Meli Roll - 2"></div>
+        <div class="slide"><img src="meli-roll-3.jpg" alt="Meli Roll - 3"></div>
+      </div>
+      <button class="nav-btn left" onclick="prevSlide('meli-roll')" aria-label="Anterior">‹</button>
+      <button class="nav-btn right" onclick="nextSlide('meli-roll')" aria-label="Siguiente">›</button>
+    </div>
+    <div class="dots" id="dots-meli-roll"></div>
+    <h3 id="tit-meli-roll">Meli Roll</h3>
+    <p>Salmón, queso crema y miel cítrica de yuzu; dulce, ácido y cremoso.</p>
+    <div class="price">$12.900</div>
+  </div>
+</div>
+
+<!-- Tuna Special Roll -->
+<div id="modal-tuna-special-roll" class="modal" role="dialog" aria-modal="true" aria-labelledby="tit-tuna-special-roll">
+  <div class="modal-content" data-modal="tuna-special-roll">
+    <button class="close" aria-label="Cerrar" onclick="closeModal('tuna-special-roll')">&times;</button>
+    <div class="slider" data-slider="tuna-special-roll">
+      <div class="slides">
+        <div class="slide active"><img src="tuna-special-roll-1.jpg" alt="Tuna Special Roll - 1"></div>
+        <div class="slide"><img src="tuna-special-roll-2.jpg" alt="Tuna Special Roll - 2"></div>
+        <div class="slide"><img src="tuna-special-roll-3.jpg" alt="Tuna Special Roll - 3"></div>
+      </div>
+      <button class="nav-btn left" onclick="prevSlide('tuna-special-roll')" aria-label="Anterior">‹</button>
+      <button class="nav-btn right" onclick="nextSlide('tuna-special-roll')" aria-label="Siguiente">›</button>
+    </div>
+    <div class="dots" id="dots-tuna-special-roll"></div>
+    <h3 id="tit-tuna-special-roll">Tuna Special Roll</h3>
+    <p>Atún rojo con palta y perfume de trufa; final largo y aromático.</p>
+    <div class="price">$14.900</div>
+  </div>
+</div>
+
+<!-- Mango Special Roll -->
+<div id="modal-mango-special-roll" class="modal" role="dialog" aria-modal="true" aria-labelledby="tit-mango-special-roll">
+  <div class="modal-content" data-modal="mango-special-roll">
+    <button class="close" aria-label="Cerrar" onclick="closeModal('mango-special-roll')">&times;</button>
+    <div class="slider" data-slider="mango-special-roll">
+      <div class="slides">
+        <div class="slide active"><img src="mango-special-roll-1.jpg" alt="Mango Special Roll - 1"></div>
+        <div class="slide"><img src="mango-special-roll-2.jpg" alt="Mango Special Roll - 2"></div>
+        <div class="slide"><img src="mango-special-roll-3.jpg" alt="Mango Special Roll - 3"></div>
+      </div>
+      <button class="nav-btn left" onclick="prevSlide('mango-special-roll')" aria-label="Anterior">‹</button>
+      <button class="nav-btn right" onclick="nextSlide('mango-special-roll')" aria-label="Siguiente">›</button>
+    </div>
+    <div class="dots" id="dots-mango-special-roll"></div>
+    <h3 id="tit-mango-special-roll">Mango Special Roll</h3>
+    <p>Salmón y mango fresco con salsa nikkei; contraste dulce-ácido.</p>
+    <div class="price">$12.900</div>
+  </div>
+</div>
+
+<!-- Futomaki -->
+<div id="modal-futomaki" class="modal" role="dialog" aria-modal="true" aria-labelledby="tit-futomaki">
+  <div class="modal-content" data-modal="futomaki">
+    <button class="close" aria-label="Cerrar" onclick="closeModal('futomaki')">&times;</button>
+    <div class="slider" data-slider="futomaki">
+      <div class="slides">
+        <div class="slide active"><img src="futomaki-1.jpg" alt="Futomaki - 1"></div>
+        <div class="slide"><img src="futomaki-2.jpg" alt="Futomaki - 2"></div>
+        <div class="slide"><img src="futomaki-3.jpg" alt="Futomaki - 3"></div>
+      </div>
+      <button class="nav-btn left" onclick="prevSlide('futomaki')" aria-label="Anterior">‹</button>
+      <button class="nav-btn right" onclick="nextSlide('futomaki')" aria-label="Siguiente">›</button>
+    </div>
+    <div class="dots" id="dots-futomaki"></div>
+    <h3 id="tit-futomaki">Futomaki</h3>
+    <p>Rollo ancho con vegetales y proteínas mixtas; bocado generoso.</p>
+    <div class="price">$11.900</div>
+  </div>
+</div>
+
+<!-- Furay Roll -->
+<div id="modal-furay-roll" class="modal" role="dialog" aria-modal="true" aria-labelledby="tit-furay-roll">
+  <div class="modal-content" data-modal="furay-roll">
+    <button class="close" aria-label="Cerrar" onclick="closeModal('furay-roll')">&times;</button>
+    <div class="slider" data-slider="furay-roll">
+      <div class="slides">
+        <div class="slide active"><img src="furay-roll-1.jpg" alt="Furay Roll - 1"></div>
+        <div class="slide"><img src="furay-roll-2.jpg" alt="Furay Roll - 2"></div>
+        <div class="slide"><img src="furay-roll-3.jpg" alt="Furay Roll - 3"></div>
+      </div>
+      <button class="nav-btn left" onclick="prevSlide('furay-roll')" aria-label="Anterior">‹</button>
+      <button class="nav-btn right" onclick="nextSlide('furay-roll')" aria-label="Siguiente">›</button>
+    </div>
+    <div class="dots" id="dots-furay-roll"></div>
+    <h3 id="tit-furay-roll">Furay Roll</h3>
+    <p>Apanado y frito rápidamente; exterior crocante, interior cremoso.</p>
+    <div class="price">$12.900</div>
+  </div>
+</div>
 
 <script>
 // ====== BUSCADOR (filtra SOLO la sección activa) ======
