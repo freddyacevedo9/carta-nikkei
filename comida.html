@@ -2391,6 +2391,66 @@ img{max-width:100%;display:block;border-radius:var(--radius);}
     <div class="price">$10.900</div>
   </div>
 </div>
+<!-- Combinación S -->
+<div class="card" onclick="openModal('combinacion-s')">
+  <img src="combinacion-s.jpg" alt="Combinación S">
+  <div>
+    <h3>Combinación S</h3>
+    <p>12 piezas mixtas: rolls clásicos y nigiri.</p>
+    <div class="price">$12.900</div>
+  </div>
+</div>
+
+<!-- Combinación M -->
+<div class="card" onclick="openModal('combinacion-m')">
+  <img src="combinacion-m.jpg" alt="Combinación M">
+  <div>
+    <h3>Combinación M</h3>
+    <p>24 piezas variadas: tradicionales + gourmet.</p>
+    <div class="price">$19.900</div>
+  </div>
+</div>
+
+<!-- Combinación L -->
+<div class="card" onclick="openModal('combinacion-l')">
+  <img src="combinacion-l.jpg" alt="Combinación L">
+  <div>
+    <h3>Combinación L</h3>
+    <p>36 piezas: selección del chef con sashimi.</p>
+    <div class="price">$27.900</div>
+  </div>
+</div>
+<!-- MODALES COMBINACIONES S/M/L -->
+
+<div id="modal-combinacion-s" class="modal">
+  <div class="modal-content">
+    <button class="close" onclick="closeModal('combinacion-s')">&times;</button>
+    <img src="combinacion-s.jpg" alt="Combinación S">
+    <h3>Combinación S</h3>
+    <p>12 piezas mixtas pensadas para una persona: rolls tradicionales y 2 nigiris. Incluye salsa de soya, jengibre y wasabi.</p>
+    <div class="price">$12.900</div>
+  </div>
+</div>
+
+<div id="modal-combinacion-m" class="modal">
+  <div class="modal-content">
+    <button class="close" onclick="closeModal('combinacion-m')">&times;</button>
+    <img src="combinacion-m.jpg" alt="Combinación M">
+    <h3>Combinación M</h3>
+    <p>24 piezas para 2 personas: mix de rolls tradicionales y gourmet, con opciones veggie bajo solicitud.</p>
+    <div class="price">$19.900</div>
+  </div>
+</div>
+
+<div id="modal-combinacion-l" class="modal">
+  <div class="modal-content">
+    <button class="close" onclick="closeModal('combinacion-l')">&times;</button>
+    <img src="combinacion-l.jpg" alt="Combinación L">
+    <h3>Combinación L</h3>
+    <p>36 piezas para 3–4 personas: selección del chef con rolls variados y láminas de sashimi. Ideal para compartir.</p>
+    <div class="price">$27.900</div>
+  </div>
+</div>
 
 <script>
 // ====== BUSCADOR (filtra SOLO la sección activa) ======
