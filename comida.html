@@ -10,22 +10,22 @@
   <style>
     .section-title {
     font-family: 'Cinzel', serif;
-    font-size: 40px;
+    font-size: 26px;           /* ← TÍTULO MÁS GRANDE */
     font-weight: 700;
-    margin: 20px 0 10px;
+    margin: 28px 0 16px;       /* ← MÁS ESPACIO ANTES DEL PRIMER PLATO */
     display: flex;
     align-items: center;
-    gap: 10px; /* espacio entre el palito y el título */
+    gap: 12px;                 /* espacio entre palito y texto */
+    color: #ffffff;
     letter-spacing: 1px;
 }
 
 .section-title::before {
     content: "";
-    width: 3px;          /* grosor del palito */
-    height: 20px;        /* largo del palito */
-    background: #f0b90b; /* amarillo de tu paleta */
-    border-radius: 3px;  /* para que sea elegante */
-    display: inline-block;
+    width: 6px;
+    height: 28px;              /* ← PALITO AJUSTADO A LA LETRA */
+    background: #f0b90b;       /* dorado */
+    border-radius: 3px;
 }
 
     h1, h2, h3, h4, h5, h6 {
