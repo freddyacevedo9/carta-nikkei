@@ -1,273 +1,482 @@
 <!doctype html>
 <html lang="es">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Comida — NIKKEI 419</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Comida — NIKKEI 419</title>
 
-<!-- Fuente Cinzel -->
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+  <!-- Fuente branding -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0a0a0a; --card:#121212; --line:#1f1f1f; --text:#f5f5f5; --muted:#cfcfcf;
+      --accent:#f0b90b; --shadow:0 10px 30px rgba(0,0,0,.35); --radius:16px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Inter,Roboto,Arial}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
 
-<style>
-:root {
-  --bg:#0a0a0a; --card:#141414; --line:#222; --text:#f5f5f5; --muted:#cfcfcf;
-  --accent:#f0b90b; --radius:16px; --shadow:0 8px 30px rgba(0,0,0,.45);
-}
-body {
-  margin:0;
-  background:var(--bg);
-  color:var(--text);
-  font-family: system-ui, -apple-system, "Segoe UI", Inter, Roboto, Arial;
-}
-img{max-width:100%;display:block;border-radius:var(--radius);}
+    /* Top bar */
+    .top{position:sticky;top:0;z-index:30;background:rgba(10,10,10,.85);backdrop-filter:blur(8px);
+         border-bottom:1px solid var(--line)}
+    .wrap{max-width:1000px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:10px}
+    .brand{display:flex;align-items:center;gap:10px}
+    .brand img{width:32px;height:32px;border-radius:50%;object-fit:cover}
+    .brand .name{font-family:"Cinzel",serif;font-weight:700;letter-spacing:.5px;font-size:18px}
+    .back{margin-left:auto;border:1px solid var(--line);padding:6px 12px;border-radius:12px;background:#111;font-size:13px}
+    .back:hover{border-color:var(--accent);color:var(--accent)}
 
-/* --- TOPBAR --- */
-.topbar {
-  position:sticky; top:0; z-index:50;
-  backdrop-filter: blur(10px);
-  background: rgba(10,10,10,.9);
-  border-bottom:1px solid var(--line);
-}
-.top-wrap {
-  max-width:1000px; margin:0 auto;
-  padding:10px 18px;
-  display:flex; align-items:center; gap:12px;
-}
-.brand {
-  display:flex; align-items:center; gap:10px;
-}
-.brand img { width:38px; height:38px; border-radius:50%; object-fit:cover; }
-.brand span { font-family:'Cinzel',serif; font-weight:700; letter-spacing:.5px; font-size:18px; }
+    /* Page */
+    .page{max-width:1000px;margin:0 auto;padding:14px 16px 32px}
+    h1{font-size:26px;margin:10px 0 4px}
+    .sub{color:var(--muted);margin:0 0 14px;font-size:14px}
 
-.search-bar {
-  flex:1;
-  display:flex; align-items:center; gap:8px;
-  background:#111; border:1px solid var(--line); border-radius:10px; padding:6px 10px;
-}
-.search-bar input {
-  flex:1; background:transparent; border:none; color:var(--text); font-size:15px;
-}
-.search-bar input:focus{outline:none;}
-.search-bar i { color:var(--muted); }
+    /* Search */
+    .search-bar{margin:6px 0 12px;display:flex;align-items:center;gap:8px;background:#121212;
+                border-radius:999px;border:1px solid var(--line);padding:6px 12px}
+    .search-icon{font-size:16px;opacity:.8}
+    .search-input{flex:1;border:none;background:transparent;color:var(--text);font-size:14px}
+    .search-input:focus{outline:none}
 
-/* --- CATEGORY BAR --- */
-.categories {
-  display:flex; overflow-x:auto; gap:12px;
-  padding:10px 18px; background:#0f0f0f; border-bottom:1px solid var(--line);
-}
-.categories a {
-  white-space:nowrap; color:var(--text); font-size:14px;
-  padding:6px 12px; border-radius:999px;
-  border:1px solid transparent;
-}
-.categories a.active,
-.categories a:hover {
-  border-color:var(--accent);
-  color:var(--accent);
-}
+    /* Category pills */
+    .cats{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;margin-bottom:12px}
+    .cat-pill{flex:0 0 auto;padding:6px 12px;border-radius:999px;border:1px solid var(--line);
+              background:#121212;font-size:13px;white-space:nowrap;cursor:pointer}
+    .cat-pill.active,
+    .cat-pill:hover{border-color:var(--accent);color:var(--accent)}
 
-/* --- CONTENT --- */
-.section {
-  max-width:1000px; margin:0 auto; padding:20px 18px;
-}
-.section h2 {
-  font-family:'Cinzel',serif; font-size:22px; margin:14px 0 10px;
-  border-left:4px solid var(--accent); padding-left:8px;
-}
-.grid {
-  display:grid; gap:14px;
-}
-.card {
-  display:grid; grid-template-columns:120px 1fr; gap:12px;
-  background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
-  box-shadow:var(--shadow); padding:10px;
-  cursor:pointer;
-}
-.card:hover { border-color:var(--accent); }
-.card img { width:100%; height:100px; object-fit:cover; border-radius:10px; }
-.card h3 { margin:0; font-size:16px; }
-.card p { margin:4px 0 0; color:var(--muted); font-size:14px; }
-.price { color:var(--accent); font-weight:700; margin-top:6px; }
+    /* Sections */
+    .section-title{font-size:18px;margin:18px 0 8px}
+    .list{display:grid;gap:12px}
 
-/* --- MODAL --- */
-.modal {
-  display:none; position:fixed; inset:0;
-  background:rgba(0,0,0,.7); backdrop-filter:blur(6px);
-  justify-content:center; align-items:center;
-  z-index:100;
-}
-.modal-content {
-  background:#111; border:1px solid var(--line); border-radius:18px;
-  max-width:480px; width:90%; padding:18px; color:var(--text);
-}
-.modal-content img { width:100%; height:220px; object-fit:cover; border-radius:12px; }
-.modal-content h3 { margin:10px 0 4px; font-family:'Cinzel',serif; }
-.modal-content p { color:var(--muted); }
-.close {
-  background:none; border:none; color:var(--accent);
-  font-size:20px; float:right; cursor:pointer;
-}
-</style>
+    /* Cards */
+    .card{display:grid;grid-template-columns:120px 1fr;gap:12px;background:var(--card);
+          border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);overflow:hidden;
+          cursor:pointer;transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease}
+    .card:hover{transform:translateY(-2px);border-color:var(--accent);box-shadow:0 14px 40px rgba(0,0,0,.55)}
+    .photo{height:110px;background:#151515}
+    .photo img{width:100%;height:100%;object-fit:cover}
+    .body{padding:10px 12px;display:grid;grid-template-columns:1fr auto;gap:6px;align-items:center}
+    .title{font-weight:700;font-size:15px}
+    .desc{color:var(--muted);margin:2px 0 0;font-size:13px}
+    .meta{display:flex;align-items:center;gap:10px;justify-self:end}
+    .price{font-weight:800;font-size:14px}
+    .price::before{content:"$"}
+    .add{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--accent);
+         color:#111;background:var(--accent);font-weight:900;font-size:16px;cursor:pointer}
+    .add:active{transform:scale(.95)}
+
+    @media (max-width:640px){
+      .card{grid-template-columns:110px 1fr}
+      .photo{height:100px}
+    }
+
+    /* Modal con carrusel */
+    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:50}
+    .modal.open{display:flex}
+    .modal-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.75)}
+    .modal-card{position:relative;background:#101010;border-radius:20px;border:1px solid var(--line);
+                max-width:420px;width:90%;max-height:90vh;overflow-y:auto;box-shadow:0 18px 60px rgba(0,0,0,.8)}
+    .carousel{position:relative}
+    .modal-img{width:100%;height:230px;object-fit:cover;border-radius:20px 20px 0 0}
+    .car-btn{position:absolute;top:50%;transform:translateY(-50%);border:none;background:rgba(0,0,0,.55);
+             color:#fff;width:32px;height:32px;border-radius:999px;display:grid;place-items:center;
+             cursor:pointer;font-size:20px}
+    .car-btn.left{left:10px}
+    .car-btn.right{right:10px}
+    .dots{display:flex;justify-content:center;gap:6px;padding:6px 0 4px}
+    .dot{width:7px;height:7px;border-radius:999px;background:#444}
+    .dot.active{background:var(--accent)}
+
+    .modal-body{padding:16px}
+    .modal-title{font-size:20px;margin:0 0 4px}
+    .modal-cat{font-size:12px;color:var(--muted);margin:0 0 10px;text-transform:uppercase;letter-spacing:.08em}
+    .modal-desc{font-size:14px;color:var(--muted);margin:0 0 8px}
+    .modal-detail{font-size:14px;margin:0 0 10px}
+    .modal-price{font-weight:800;font-size:16px;margin:4px 0 10px}
+    .modal-price::before{content:"$"}
+    .modal-close{position:absolute;top:8px;right:10px;border:none;background:rgba(0,0,0,.65);
+                 color:#fff;font-size:20px;border-radius:999px;width:30px;height:30px;
+                 display:grid;place-items:center;cursor:pointer}
+  </style>
 </head>
-
 <body>
 
-<!-- TOPBAR -->
-<header class="topbar">
-  <div class="top-wrap">
-    <div class="brand">
-      <img src="logo1.png" alt="Logo NIKKEI 419">
-      <span>NIKKEI 419</span>
+  <!-- Top bar -->
+  <div class="top">
+    <div class="wrap">
+      <div class="brand">
+        <img src="logo1.png" alt="Logo NIKKEI 419">
+        <span class="name">NIKKEI 419</span>
+      </div>
+      <a class="back" href="index.html">← Volver al inicio</a>
     </div>
+  </div>
+
+  <main class="page">
+    <h1>Comida</h1>
+    <p class="sub">Busca y explora nuestra carta nikkei por categoría.</p>
+
+    <!-- Buscador -->
     <div class="search-bar">
-      <i>🔍</i>
-      <input type="text" placeholder="Buscar plato...">
+      <span class="search-icon">🔍</span>
+      <input class="search-input" id="search" type="text" placeholder="Buscar plato o ingrediente…">
+    </div>
+
+    <!-- Categorías -->
+    <div class="cats">
+      <button class="cat-pill active" data-target="appetizer">Appetizer</button>
+      <button class="cat-pill" data-target="ceviches">Ceviches</button>
+      <button class="cat-pill" data-target="sashimi">Sashimi</button>
+      <button class="cat-pill" data-target="omakase">Omakase</button>
+      <button class="cat-pill" data-target="makimono">Makimono</button>
+      <button class="cat-pill" data-target="rolls-gourmet">Rolls gourmet</button>
+      <button class="cat-pill" data-target="rolls-sin-arroz">Rolls sin arroz</button>
+      <button class="cat-pill" data-target="rolls-tradicionales">Rolls tradicionales</button>
+      <button class="cat-pill" data-target="platos-calientes">Platos calientes</button>
+      <button class="cat-pill" data-target="combinaciones">Combinaciones</button>
+      <button class="cat-pill" data-target="postres">Postres</button>
+    </div>
+
+    <!-- APPETIZER -->
+    <section id="appetizer">
+      <h2 class="section-title">Appetizer</h2>
+      <div class="list">
+
+        <!-- Ejemplo 1 -->
+        <article class="card"
+          data-name="Edamame"
+          data-category="Appetizer"
+          data-detail="Vainas de poroto de soya al vapor, salteadas en wok con aceite de sésamo, sal de mar y toque de togarashi."
+          data-img1="edamame1.jpg"
+          data-img2="edamame2.jpg"
+          data-img3="edamame3.jpg"
+        >
+          <div class="photo">
+            <!-- Imagen principal en la lista -->
+            <img src="edamame-list.jpg" alt="Edamame">
+          </div>
+          <div class="body">
+            <div>
+              <div class="title">Edamame</div>
+              <p class="desc">Vainas de poroto de soya al vapor y salteadas con sal de mar.</p>
+            </div>
+            <div class="meta">
+              <div class="price">6900</div>
+              <button class="add" aria-label="Agregar Edamame" onclick="event.stopPropagation()">+</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Ejemplo 2 -->
+        <article class="card"
+          data-name="Gyozas pulpo"
+          data-category="Appetizer"
+          data-detail="Gyozas de elaboración propia rellenas de pulpo con verduras, selladas a la plancha y servidas con salsa de olivo y toques cítricos."
+          data-img1="gyoza-pulpo1.jpg"
+          data-img2="gyoza-pulpo2.jpg"
+          data-img3="gyoza-pulpo3.jpg"
+        >
+          <div class="photo">
+            <img src="gyoza-pulpo-list.jpg" alt="Gyozas pulpo">
+          </div>
+          <div class="body">
+            <div>
+              <div class="title">Gyozas pulpo</div>
+              <p class="desc">Gyozas caseras con pulpo y salsa de olivo.</p>
+            </div>
+            <div class="meta">
+              <div class="price">7900</div>
+              <button class="add" aria-label="Agregar Gyozas pulpo" onclick="event.stopPropagation()">+</button>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- CEVICHES -->
+    <section id="ceviches">
+      <h2 class="section-title">Ceviches</h2>
+      <div class="list">
+        <article class="card"
+          data-name="Ceviche Nikkei"
+          data-category="Ceviches"
+          data-detail="Cubos de pescado blanco, leche de tigre estilo nikkei, ají amarillo, cilantro, cebolla morada y chips de camote."
+          data-img1="ceviche1.jpg"
+          data-img2="ceviche2.jpg"
+          data-img3="ceviche3.jpg"
+        >
+          <div class="photo">
+            <img src="ceviche-list.jpg" alt="Ceviche Nikkei">
+          </div>
+          <div class="body">
+            <div>
+              <div class="title">Ceviche Nikkei</div>
+              <p class="desc">Pescado blanco fresco en leche de tigre nikkei.</p>
+            </div>
+            <div class="meta">
+              <div class="price">10900</div>
+              <button class="add" aria-label="Agregar Ceviche Nikkei" onclick="event.stopPropagation()">+</button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- SASHIMI -->
+    <section id="sashimi">
+      <h2 class="section-title">Sashimi</h2>
+      <div class="list">
+        <article class="card"
+          data-name="Sashimi mix"
+          data-category="Sashimi"
+          data-detail="Selección de cortes de salmón, atún y pescado blanco, acompañados de salsa ponzu y wasabi."
+          data-img1="sashimi1.jpg"
+          data-img2="sashimi2.jpg"
+          data-img3="sashimi3.jpg"
+        >
+          <div class="photo">
+            <img src="sashimi-list.jpg" alt="Sashimi mix">
+          </div>
+          <div class="body">
+            <div>
+              <div class="title">Sashimi mix</div>
+              <p class="desc">Cortes de salmón, atún y pesca del día.</p>
+            </div>
+            <div class="meta">
+              <div class="price">11900</div>
+              <button class="add" aria-label="Agregar Sashimi mix" onclick="event.stopPropagation()">+</button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- OMAKASE -->
+    <section id="omakase">
+      <h2 class="section-title">Omakase</h2>
+      <div class="list">
+        <article class="card"
+          data-name="Omakase del chef"
+          data-category="Omakase"
+          data-detail="Selección sorpresa del chef con sashimi, nigiri y rolls especiales según temporada."
+          data-img1="omakase1.jpg"
+          data-img2="omakase2.jpg"
+          data-img3="omakase3.jpg"
+        >
+          <div class="photo">
+            <img src="omakase-list.jpg" alt="Omakase del chef">
+          </div>
+          <div class="body">
+            <div>
+              <div class="title">Omakase del chef</div>
+              <p class="desc">Degustación sorpresa según temporada.</p>
+            </div>
+            <div class="meta">
+              <div class="price">19900</div>
+              <button class="add" aria-label="Agregar Omakase del chef" onclick="event.stopPropagation()">+</button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- MAKIMONO -->
+    <section id="makimono">
+      <h2 class="section-title">Makimono</h2>
+      <div class="list">
+        <article class="card"
+          data-name="Makimono Bataa"
+          data-category="Makimono"
+          data-detail="Roll relleno de tartar de atún y camarón tempurizado, envuelto en salmón grillado con mantequilla batayaki, kimchi y cilantro."
+          data-img1="bataa1.jpg"
+          data-img2="bataa2.jpg"
+          data-img3="bataa3.jpg"
+        >
+          <div class="photo">
+            <img src="bataa-list.jpg" alt="Makimono Bataa">
+          </div>
+          <div class="body">
+            <div>
+              <div class="title">Makimono Bataa</div>
+              <p class="desc">Atún y camarón tempurizado, envuelto en salmón grillado con batayaki.</p>
+            </div>
+            <div class="meta">
+              <div class="price">10900</div>
+              <button class="add" aria-label="Agregar Makimono Bataa" onclick="event.stopPropagation()">+</button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Secciones para que las vayas llenando -->
+    <section id="rolls-gourmet">
+      <h2 class="section-title">Rolls gourmet</h2>
+      <div class="list"><!-- agrega aquí tus rolls gourmet --></div>
+    </section>
+
+    <section id="rolls-sin-arroz">
+      <h2 class="section-title">Rolls sin arroz</h2>
+      <div class="list"><!-- agrega aquí tus rolls sin arroz --></div>
+    </section>
+
+    <section id="rolls-tradicionales">
+      <h2 class="section-title">Rolls tradicionales</h2>
+      <div class="list"><!-- agrega aquí tus rolls tradicionales --></div>
+    </section>
+
+    <section id="platos-calientes">
+      <h2 class="section-title">Platos calientes</h2>
+      <div class="list"><!-- agrega aquí tus platos calientes --></div>
+    </section>
+
+    <section id="combinaciones">
+      <h2 class="section-title">Combinaciones</h2>
+      <div class="list"><!-- combos / tablas --></div>
+    </section>
+
+    <section id="postres">
+      <h2 class="section-title">Postres</h2>
+      <div class="list"><!-- tus postres --></div>
+    </section>
+
+  </main>
+
+  <!-- MODAL CON CARRUSEL -->
+  <div class="modal" id="modal" aria-hidden="true">
+    <div class="modal-backdrop"></div>
+    <div class="modal-card">
+      <button class="modal-close" id="modalClose" aria-label="Cerrar">×</button>
+
+      <div class="carousel">
+        <button class="car-btn left" id="carPrev" aria-label="Foto anterior">‹</button>
+        <img src="" alt="" class="modal-img" id="modalImg">
+        <button class="car-btn right" id="carNext" aria-label="Foto siguiente">›</button>
+      </div>
+      <div class="dots" id="dots"></div>
+
+      <div class="modal-body">
+        <p class="modal-cat" id="modalCat"></p>
+        <h2 class="modal-title" id="modalTitle"></h2>
+        <p class="modal-desc" id="modalDesc"></p>
+        <p class="modal-detail" id="modalDetail"></p>
+        <p class="modal-price" id="modalPrice"></p>
+      </div>
     </div>
   </div>
-</header>
 
-<!-- CATEGORY BAR -->
-<nav class="categories">
-  <a href="#appetizer" class="active">Appetizer</a>
-  <a href="#ceviches">Ceviches</a>
-  <a href="#sashimi">Sashimi</a>
-  <a href="#omakase">Omakase</a>
-  <a href="#makimono">Makimono</a>
-  <a href="#gourmet">Rolls Gourmet</a>
-  <a href="#sin-arroz">Rolls sin arroz</a>
-  <a href="#tradicionales">Rolls tradicionales</a>
-  <a href="#calientes">Platos calientes</a>
-  <a href="#postres">Postres</a>
-</nav>
+  <script>
+    // Búsqueda
+    const searchInput = document.getElementById('search');
+    const cards = Array.from(document.querySelectorAll('.card'));
 
-<!-- APPETIZER SECTION -->
-<section id="appetizer" class="section">
-  <h2>Appetizer</h2>
-  <div class="grid">
+    searchInput.addEventListener('input', () => {
+      const q = searchInput.value.toLowerCase();
+      cards.forEach(card => {
+        const name = card.dataset.name.toLowerCase();
+        const desc = card.querySelector('.desc').textContent.toLowerCase();
+        const match = name.includes(q) || desc.includes(q);
+        card.style.display = match ? '' : 'none';
+      });
+    });
 
-    <div class="card" onclick="openModal('gyoza-pollo')">
-      <img src="gyoza-pollo.jpg" alt="Gyozas de Pollo">
-      <div>
-        <h3>Gyozas de Pollo</h3>
-        <p>Gyozas artesanales rellenas de pollo con jengibre y cebollín.</p>
-        <div class="price">$7.900</div>
-      </div>
-    </div>
+    // Categorías
+    document.querySelectorAll('.cat-pill').forEach(pill => {
+      pill.addEventListener('click', () => {
+        document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        const id = pill.dataset.target;
+        const section = document.getElementById(id);
+        if(section){
+          window.scrollTo({ top: section.offsetTop - 90, behavior: 'smooth' });
+        }
+      });
+    });
 
-    <div class="card" onclick="openModal('gyoza-cerdo')">
-      <img src="gyoza-cerdo.jpg" alt="Gyozas de Cerdo">
-      <div>
-        <h3>Gyozas de Cerdo</h3>
-        <p>Gyozas de cerdo con cebollín y salsa cítrica especial.</p>
-        <div class="price">$7.900</div>
-      </div>
-    </div>
+    // Modal + carrusel
+    const modal = document.getElementById('modal');
+    const modalImg = document.getElementById('modalImg');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalCat = document.getElementById('modalCat');
+    const modalDesc = document.getElementById('modalDesc');
+    const modalDetail = document.getElementById('modalDetail');
+    const modalPrice = document.getElementById('modalPrice');
+    const modalClose = document.getElementById('modalClose');
+    const carPrev = document.getElementById('carPrev');
+    const carNext = document.getElementById('carNext');
+    const dotsContainer = document.getElementById('dots');
 
-    <div class="card" onclick="openModal('gyoza-camaron')">
-      <img src="gyoza-camaron.jpg" alt="Gyozas de Camarón">
-      <div>
-        <h3>Gyozas de Camarón</h3>
-        <p>Gyozas rellenas de camarones frescos y vegetales orientales.</p>
-        <div class="price">$7.900</div>
-      </div>
-    </div>
+    let currentImages = [];
+    let currentIndex = 0;
 
-    <div class="card" onclick="openModal('camarones-tempura')">
-      <img src="camarones-tempura.jpg" alt="Camarones Tempura">
-      <div>
-        <h3>Camarones Tempura</h3>
-        <p>Camarones en tempura dorada acompañados con salsa tentsuyu.</p>
-        <div class="price">$8.900</div>
-      </div>
-    </div>
+    function renderCarousel(){
+      if(currentImages.length === 0) return;
+      modalImg.src = currentImages[currentIndex];
+      // Dots
+      dotsContainer.innerHTML = '';
+      currentImages.forEach((_, i)=>{
+        const d = document.createElement('div');
+        d.className = 'dot' + (i === currentIndex ? ' active' : '');
+        d.addEventListener('click', ()=>{ currentIndex = i; renderCarousel(); });
+        dotsContainer.appendChild(d);
+      });
+    }
 
-    <div class="card" onclick="openModal('rollos-vietnamita')">
-      <img src="rollos-vietnamita.jpg" alt="Rollos Vietnamita">
-      <div>
-        <h3>Rollos Vietnamita</h3>
-        <p>Rollos frescos de papel de arroz con vegetales y camarón.</p>
-        <div class="price">$7.900</div>
-      </div>
-    </div>
+    cards.forEach(card => {
+      card.addEventListener('click', (e) => {
+        // si el click viene del botón +, no abrir modal
+        if(e.target.closest('.add')) return;
 
-    <div class="card" onclick="openModal('nigiri-nikkei')">
-      <img src="nigiri-nikkei.jpg" alt="Nigiri Nikkei">
-      <div>
-        <h3>Nigiri Nikkei</h3>
-        <p>Nigiri con lámina de salmón flameado y salsa nikkei especial.</p>
-        <div class="price">$3.900</div>
-      </div>
-    </div>
+        const name = card.dataset.name || card.querySelector('.title').textContent;
+        const cat  = card.dataset.category || '';
+        const desc = card.querySelector('.desc').textContent;
+        const detail = card.dataset.detail || '';
+        const price = card.querySelector('.price') ? card.querySelector('.price').textContent : '';
 
-    <div class="card" onclick="openModal('nigiri-trufado')">
-      <img src="nigiri-trufado.jpg" alt="Nigiri Trufado">
-      <div>
-        <h3>Nigiri Trufado</h3>
-        <p>Nigiri con atún rojo, trufa negra y toque de yuzu.</p>
-        <div class="price">$4.200</div>
-      </div>
-    </div>
+        // imágenes de carrusel (pueden ser 1, 2 o 3)
+        currentImages = [card.dataset.img1, card.dataset.img2, card.dataset.img3].filter(Boolean);
+        currentIndex = 0;
+        renderCarousel();
 
-    <div class="card" onclick="openModal('nigiri-batayaki')">
-      <img src="nigiri-batayaki.jpg" alt="Nigiri Batayaki">
-      <div>
-        <h3>Nigiri Batayaki</h3>
-        <p>Salmón flameado con mantequilla batayaki y cebollín.</p>
-        <div class="price">$4.200</div>
-      </div>
-    </div>
+        modalTitle.textContent = name;
+        modalCat.textContent = cat;
+        modalDesc.textContent = desc;
+        modalDetail.textContent = detail;
+        modalPrice.textContent = price;
 
-    <div class="card" onclick="openModal('gunkan-tako')">
-      <img src="gunkan-tako.jpg" alt="Gunkan Tako Tartar">
-      <div>
-        <h3>Gunkan Tako Tartar</h3>
-        <p>Base de arroz envuelta en alga con tartar de pulpo y sésamo.</p>
-        <div class="price">$4.500</div>
-      </div>
-    </div>
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden', 'false');
+      });
+    });
 
-    <div class="card" onclick="openModal('gunkan-crab')">
-      <img src="gunkan-crab.jpg" alt="Gunkan Crab">
-      <div>
-        <h3>Gunkan Crab</h3>
-        <p>Gunkan relleno de cangrejo real y mayo japonesa.</p>
-        <div class="price">$4.500</div>
-      </div>
-    </div>
+    function closeModal(){
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden','true');
+    }
 
-  </div>
-</section>
+    modalClose.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+      if(e.target.classList.contains('modal-backdrop')) closeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+      if(e.key === 'Escape') closeModal();
+    });
 
-<!-- MODALES -->
-<!-- Solo ejemplo: puedes duplicar y cambiar nombres -->
-<div id="modal-gyoza-pollo" class="modal">
-  <div class="modal-content">
-    <button class="close" onclick="closeModal('gyoza-pollo')">&times;</button>
-    <img src="gyoza-pollo.jpg" alt="Gyozas de Pollo">
-    <h3>Gyozas de Pollo</h3>
-    <p>Gyozas elaboradas artesanalmente, rellenas con pollo marinado en jengibre y cebollín, servidas con salsa cítrica nikkei.</p>
-    <div class="price">$7.900</div>
-  </div>
-</div>
-
-<div id="modal-gunkan-crab" class="modal">
-  <div class="modal-content">
-    <button class="close" onclick="closeModal('gunkan-crab')">&times;</button>
-    <img src="gunkan-crab.jpg" alt="Gunkan Crab">
-    <h3>Gunkan Crab</h3>
-    <p>Delicado gunkan con cangrejo real, coronado con mayonesa japonesa y cebollín fresco. Una explosión de sabor suave y equilibrado.</p>
-    <div class="price">$4.500</div>
-  </div>
-</div>
-
-<script>
-function openModal(id){
-  document.getElementById('modal-'+id).style.display='flex';
-}
-function closeModal(id){
-  document.getElementById('modal-'+id).style.display='none';
-}
-</script>
-
+    carPrev.addEventListener('click', (e)=>{
+      e.stopPropagation();
+      if(currentImages.length === 0) return;
+      currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+      renderCarousel();
+    });
+    carNext.addEventListener('click', (e)=>{
+      e.stopPropagation();
+      if(currentImages.length === 0) return;
+      currentIndex = (currentIndex + 1) % currentImages.length;
+      renderCarousel();
+    });
+  </script>
 </body>
 </html>
