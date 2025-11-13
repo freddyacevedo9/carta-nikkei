@@ -368,13 +368,12 @@
     </div>
   </div>
 
-  <script>
-  // --- BÚSQUEDA Y SECCIONES ---
+ <script>
   const searchInput = document.getElementById('search');
-  const cards = Array.from(document.querySelectorAll('.card'));
+  const cards   = Array.from(document.querySelectorAll('.card'));
   const sections = Array.from(document.querySelectorAll('main section'));
 
-  // Al cargar: solo se ve APPETIZER
+  // Al cargar: solo APPETIZER visible
   sections.forEach(sec => {
     if (sec.id !== 'appetizer') sec.style.display = 'none';
   });
@@ -385,28 +384,30 @@
     });
   }
 
-  // Buscador: si hay texto, muestra TODO; si está vacío, respeta la categoría activa
-  searchInput.addEventListener('input', () => {
-    const q = searchInput.value.toLowerCase();
+  // BUSCADOR
+  if (searchInput) {
+    searchInput.addEventListener('input', () => {
+      const q = searchInput.value.toLowerCase();
 
-    if (q.length > 0) {
-      // Mostrar todas las secciones mientras se busca
-      sections.forEach(sec => sec.style.display = '');
-    } else {
-      // Volver a mostrar solo la sección de la categoría seleccionada
-      const active = document.querySelector('.cat-pill.active');
-      if (active) mostrarSeccion(active.dataset.target);
-    }
+      if (q.length > 0) {
+        // Mostrar todas las secciones cuando se busca
+        sections.forEach(sec => sec.style.display = '');
+      } else {
+        // Volver a la categoría activa
+        const active = document.querySelector('.cat-pill.active');
+        if (active) mostrarSeccion(active.dataset.target);
+      }
 
-    cards.forEach(card => {
-      const name = card.dataset.name.toLowerCase();
-      const desc = card.querySelector('.desc').textContent.toLowerCase();
-      const match = name.includes(q) || desc.includes(q);
-      card.style.display = match ? '' : 'none';
+      cards.forEach(card => {
+        const name = (card.dataset.name || '').toLowerCase();
+        const desc = card.querySelector('.desc').textContent.toLowerCase();
+        const match = name.includes(q) || desc.includes(q);
+        card.style.display = match ? '' : 'none';
+      });
     });
-  });
+  }
 
-  // Categorías: muestran solo su sección
+  // CATEGORÍAS
   document.querySelectorAll('.cat-pill').forEach(pill => {
     pill.addEventListener('click', () => {
       document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
@@ -415,95 +416,115 @@
       const id = pill.dataset.target;
       mostrarSeccion(id);
       window.scrollTo({ top: 0, behavior: 'smooth' });
-      
-      // Cuando cambias de categoría, limpiar búsqueda
-      searchInput.value = '';
+
+      if (searchInput) {
+        searchInput.value = '';
+      }
       cards.forEach(card => card.style.display = '');
     });
   });
 
-  // --- MODAL + CARRUSEL ---
-  const modal = document.getElementById('modal');
-  const modalImg = document.getElementById('modalImg');
-  const modalTitle = document.getElementById('modalTitle');
-  const modalCat = document.getElementById('modalCat');
-  const modalDesc = document.getElementById('modalDesc');
+  // MODAL + CARRUSEL
+  const modal       = document.getElementById('modal');
+  const modalImg    = document.getElementById('modalImg');
+  const modalTitle  = document.getElementById('modalTitle');
+  const modalCat    = document.getElementById('modalCat');
+  const modalDesc   = document.getElementById('modalDesc');
   const modalDetail = document.getElementById('modalDetail');
-  const modalPrice = document.getElementById('modalPrice');
-  const modalClose = document.getElementById('modalClose');
-  const carPrev = document.getElementById('carPrev');
-  const carNext = document.getElementById('carNext');
+  const modalPrice  = document.getElementById('modalPrice');
+  const modalClose  = document.getElementById('modalClose');
+  const carPrev     = document.getElementById('carPrev');
+  const carNext     = document.getElementById('carNext');
   const dotsContainer = document.getElementById('dots');
 
   let currentImages = [];
-  let currentIndex = 0;
+  let currentIndex  = 0;
 
   function renderCarousel(){
-    if(currentImages.length === 0) return;
+    if (!currentImages.length) return;
     modalImg.src = currentImages[currentIndex];
 
-    // Puntitos
     dotsContainer.innerHTML = '';
-    currentImages.forEach((_, i)=>{
+    currentImages.forEach((_, i) => {
       const d = document.createElement('div');
       d.className = 'dot' + (i === currentIndex ? ' active' : '');
-      d.addEventListener('click', ()=>{ currentIndex = i; renderCarousel(); });
+      d.addEventListener('click', () => {
+        currentIndex = i;
+        renderCarousel();
+      });
       dotsContainer.appendChild(d);
     });
   }
 
-  cards.forEach(card => {
-    card.addEventListener('click', (e) => {
-      // Si clickea el botón +, no abrir modal
-      if(e.target.closest('.add')) return;
+  function openModalFromCard(card){
+    const name   = card.dataset.name || card.querySelector('.title').textContent;
+    const cat    = card.dataset.category || '';
+    const desc   = card.querySelector('.desc').textContent;
+    const detail = card.dataset.detail || '';
+    const price  = card.querySelector('.price') ? card.querySelector('.price').textContent : '';
 
-      const name = card.dataset.name || card.querySelector('.title').textContent;
-      const cat  = card.dataset.category || '';
-      const desc = card.querySelector('.desc').textContent;
-      const detail = card.dataset.detail || '';
-      const price = card.querySelector('.price') ? card.querySelector('.price').textContent : '';
+    currentImages = [card.dataset.img1, card.dataset.img2, card.dataset.img3].filter(Boolean);
+    currentIndex  = 0;
+    renderCarousel();
 
-      // Imágenes desde data-img1 / 2 / 3
-      currentImages = [card.dataset.img1, card.dataset.img2, card.dataset.img3].filter(Boolean);
-      currentIndex = 0;
-      renderCarousel();
+    modalTitle.textContent  = name;
+    modalCat.textContent    = cat;
+    modalDesc.textContent   = desc;
+    modalDetail.textContent = detail;
+    modalPrice.textContent  = price;
 
-      modalTitle.textContent = name;
-      modalCat.textContent = cat;
-      modalDesc.textContent = desc;
-      modalDetail.textContent = detail;
-      modalPrice.textContent = price;
-
-      modal.classList.add('open');
-      modal.setAttribute('aria-hidden', 'false');
-    });
-  });
-
-  function closeModal(){
-    modal.classList.remove('open');
-    modal.setAttribute('aria-hidden','true');
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden','false');
   }
 
-  modalClose.addEventListener('click', closeModal);
-  modal.addEventListener('click', (e) => {
-    if(e.target.classList.contains('modal-backdrop')) closeModal();
-  });
-  document.addEventListener('keydown', (e) => {
-    if(e.key === 'Escape') closeModal();
-  });
+  if (modal) {
+    cards.forEach(card => {
+      card.addEventListener('click', (e) => {
+        // No abrir modal si se hace click en el botón "+"
+        if (e.target.closest('.add')) return;
+        openModalFromCard(card);
+      });
+    });
 
-  carPrev.addEventListener('click', (e)=>{
-    e.stopPropagation();
-    if(currentImages.length === 0) return;
-    currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
-    renderCarousel();
-  });
-  carNext.addEventListener('click', (e)=>{
-    e.stopPropagation();
-    if(currentImages.length === 0) return;
-    currentIndex = (currentIndex + 1) % currentImages.length;
-    renderCarousel();
-  });
+    function closeModal(){
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden','true');
+    }
+
+    if (modalClose) {
+      modalClose.addEventListener('click', closeModal);
+    }
+
+    // Cerrar al hacer click fuera de la tarjeta (en cualquier parte oscura)
+    modal.addEventListener('click', (e) => {
+      if (!e.target.closest('.modal-card')) {
+        closeModal();
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    if (carPrev) {
+      carPrev.addEventListener('click', (e)=>{
+        e.stopPropagation();
+        if (!currentImages.length) return;
+        currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+        renderCarousel();
+      });
+    }
+
+    if (carNext) {
+      carNext.addEventListener('click', (e)=>{
+        e.stopPropagation();
+        if (!currentImages.length) return;
+        currentIndex = (currentIndex + 1) % currentImages.length;
+        renderCarousel();
+      });
+    }
+  }
 </script>
+
 </body>
 </html>
