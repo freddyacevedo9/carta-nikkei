@@ -8,6 +8,11 @@
   <!-- Fuente branding -->
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap" rel="stylesheet">
   <style>
+    .dish-card, .item-card {
+    width: 100%;           /* ocupa todo el ancho disponible */
+    max-width: 98%;        /* un poquito de margen para estética */
+    margin: 0 auto 14px;   /* centrado + espacio inferior */
+}
     .section-title {
     font-family: 'Cinzel', serif;
     font-size: 26px;           /* ← TÍTULO MÁS GRANDE */
@@ -668,5 +673,45 @@
   }
 
   </script>
+  <footer style="border-top:1px solid #1b1b1b; background:#0a0a0a; margin-top:40px;">
+    <div style="max-width:1100px; margin:0 auto; padding:24px 20px; display:grid; gap:14px;">
+        
+        <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px;">
+            
+            <!-- Instagram -->
+            <a href="https://instagram.com/nikkei419" target="_blank" rel="noopener"
+               style="display:inline-flex; align-items:center; gap:10px; padding:10px 12px;
+                      border-radius:14px; border:1px solid #232323; background:#121212; color:#fff;">
+               📸 <strong>@nikkei419</strong>
+            </a>
+
+            <!-- Dirección -->
+            <div style="color:#d9d9d9; font-size:14px;">
+                <strong>Dirección:</strong>
+                <a href="https://maps.google.com/?q=San+Martín+421,+Viña+del+Mar"
+                   target="_blank" rel="noopener"
+                   style="color:#9f9f9f; text-decoration:underline;">
+                   San Martín 421, Viña del Mar, Chile
+                </a>
+            </div>
+
+        </div>
+
+        <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px;">
+            <span style="color:#9f9f9f; font-size:13px;">
+                © <span id="year"></span> NIKKEI 419. Todos los derechos reservados.
+            </span>
+
+            <span style="color:#9f9f9f; font-size:13px;">
+                Sitio minimalista con fondo negro.
+            </span>
+        </div>
+
+    </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
 </body>
 </html>
