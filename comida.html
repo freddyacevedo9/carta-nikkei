@@ -8,6 +8,24 @@
   <!-- Fuente branding -->
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap" rel="stylesheet">
   <style>
+    .section-title {
+    font-family: 'Cinzel', serif;
+    font-size: 18px;
+    margin: 18px 0 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px; /* espacio entre el palito y el título */
+}
+
+.section-title::before {
+    content: "";
+    width: 6px;          /* grosor del palito */
+    height: 20px;        /* largo del palito */
+    background: #f0b90b; /* amarillo de tu paleta */
+    border-radius: 3px;  /* para que sea elegante */
+    display: inline-block;
+}
+
     h1, h2, h3, h4, h5, h6 {
     font-family: 'Cinzel', serif !important;
     letter-spacing: 1px;
