@@ -82,7 +82,7 @@
     .modal-img{width:100%;height:230px;object-fit:cover;border-radius:20px 20px 0 0}
     .car-btn{position:absolute;top:50%;transform:translateY(-50%);border:none;background:rgba(0,0,0,.55);
              color:#fff;width:32px;height:32px;border-radius:999px;display:grid;place-items:center;
-             cursor:pointer;font-size:20px}
+             cursor:pointer;font-size:20px;z-index:3}
     .car-btn.left{left:10px}
     .car-btn.right{right:10px}
     .dots{display:flex;justify-content:center;gap:6px;padding:6px 0 4px}
@@ -96,9 +96,11 @@
     .modal-detail{font-size:14px;margin:0 0 10px}
     .modal-price{font-weight:800;font-size:16px;margin:4px 0 10px}
     .modal-price::before{content:"$"}
-    .modal-close{position:absolute;top:8px;right:10px;border:none;background:rgba(0,0,0,.65);
-                 color:#fff;font-size:20px;border-radius:999px;width:30px;height:30px;
-                 display:grid;place-items:center;cursor:pointer}
+    .modal-close{
+      position:absolute;top:8px;right:10px;border:none;background:rgba(0,0,0,.75);
+      color:#fff;font-size:20px;border-radius:999px;width:30px;height:30px;
+      display:grid;place-items:center;cursor:pointer;z-index:4;
+    }
   </style>
 </head>
 <body>
@@ -144,18 +146,16 @@
       <h2 class="section-title">Appetizer</h2>
       <div class="list">
 
-        <!-- Ejemplo 1 -->
         <article class="card"
           data-name="Edamame"
           data-category="Appetizer"
           data-detail="Vainas de poroto de soya al vapor, salteadas en wok con aceite de sésamo, sal de mar y toque de togarashi."
-          data-img1="kani.jpg"
-          data-img2="fuego.jpg"
-          data-img3="shiromi.jpg"
+          data-img1="edamame1.jpg"
+          data-img2="edamame2.jpg"
+          data-img3="edamame3.jpg"
         >
           <div class="photo">
-            <!-- Imagen principal en la lista -->
-            <img src="bataa.jpg" alt="Edamame">
+            <img src="edamame-list.jpg" alt="Edamame">
           </div>
           <div class="body">
             <div>
@@ -169,7 +169,6 @@
           </div>
         </article>
 
-        <!-- Ejemplo 2 -->
         <article class="card"
           data-name="Gyozas pulpo"
           data-category="Appetizer"
@@ -312,223 +311,228 @@
       </div>
     </section>
 
-    <!-- Secciones para que las vayas llenando -->
+    <!-- Secciones vacías para que las completes -->
     <section id="rolls-gourmet">
       <h2 class="section-title">Rolls gourmet</h2>
-      <div class="list"><!-- agrega aquí tus rolls gourmet --></div>
+      <div class="list"></div>
     </section>
 
     <section id="rolls-sin-arroz">
       <h2 class="section-title">Rolls sin arroz</h2>
-      <div class="list"><!-- agrega aquí tus rolls sin arroz --></div>
+      <div class="list"></div>
     </section>
 
     <section id="rolls-tradicionales">
       <h2 class="section-title">Rolls tradicionales</h2>
-      <div class="list"><!-- agrega aquí tus rolls tradicionales --></div>
+      <div class="list"></div>
     </section>
 
     <section id="platos-calientes">
       <h2 class="section-title">Platos calientes</h2>
-      <div class="list"><!-- agrega aquí tus platos calientes --></div>
+      <div class="list"></div>
     </section>
 
     <section id="combinaciones">
       <h2 class="section-title">Combinaciones</h2>
-      <div class="list"><!-- combos / tablas --></div>
+      <div class="list"></div>
     </section>
 
     <section id="postres">
       <h2 class="section-title">Postres</h2>
-      <div class="list"><!-- tus postres --></div>
+      <div class="list"></div>
     </section>
 
   </main>
 
   <!-- MODAL CON CARRUSEL -->
-<div class="modal" id="modal" aria-hidden="true">
-  <div class="modal-backdrop"></div>
-  <div class="modal-card">
-    <button type="button" class="modal-close" id="modalClose" aria-label="Cerrar">×</button>
+  <div class="modal" id="modal" aria-hidden="true">
+    <div class="modal-backdrop"></div>
+    <div class="modal-card">
+      <button type="button" class="modal-close" id="modalClose" aria-label="Cerrar">×</button>
 
-    <div class="carousel">
-      <button class="car-btn left" id="carPrev" aria-label="Foto anterior">‹</button>
-      <img src="" alt="" class="modal-img" id="modalImg">
-      <button class="car-btn right" id="carNext" aria-label="Foto siguiente">›</button>
-    </div>
-    <div class="dots" id="dots"></div>
+      <div class="carousel">
+        <button class="car-btn left" id="carPrev" aria-label="Foto anterior">‹</button>
+        <img src="" alt="" class="modal-img" id="modalImg">
+        <button class="car-btn right" id="carNext" aria-label="Foto siguiente">›</button>
+      </div>
+      <div class="dots" id="dots"></div>
 
-    <div class="modal-body">
-      <p class="modal-cat" id="modalCat"></p>
-      <h2 class="modal-title" id="modalTitle"></h2>
-      <p class="modal-desc" id="modalDesc"></p>
-      <p class="modal-detail" id="modalDetail"></p>
-      <p class="modal-price" id="modalPrice"></p>
+      <div class="modal-body">
+        <p class="modal-cat" id="modalCat"></p>
+        <h2 class="modal-title" id="modalTitle"></h2>
+        <p class="modal-desc" id="modalDesc"></p>
+        <p class="modal-detail" id="modalDetail"></p>
+        <p class="modal-price" id="modalPrice"></p>
+      </div>
     </div>
   </div>
-</div>
 
-<script>
-  // =============================
-  // SECCIONES + BUSCADOR
-  // =============================
-  const searchInput = document.getElementById('search');
-  const cards   = Array.from(document.querySelectorAll('.card'));
-  const sections = Array.from(document.querySelectorAll('main section'));
+  <script>
+    // =============================
+    // SECCIONES + BUSCADOR
+    // =============================
+    const searchInput = document.getElementById('search');
+    const cards   = Array.from(document.querySelectorAll('.card'));
+    const sections = Array.from(document.querySelectorAll('main section'));
 
-  // Al cargar: solo APPETIZER visible
-  sections.forEach(sec => {
-    if (sec.id !== 'appetizer') sec.style.display = 'none';
-  });
-
-  function mostrarSeccion(id) {
+    // Al cargar: solo APPETIZER visible
     sections.forEach(sec => {
-      sec.style.display = (sec.id === id ? '' : 'none');
+      if (sec.id !== 'appetizer') sec.style.display = 'none';
     });
-  }
 
-  // BUSCADOR
-  if (searchInput) {
-    searchInput.addEventListener('input', () => {
-      const q = searchInput.value.toLowerCase();
+    function mostrarSeccion(id) {
+      sections.forEach(sec => {
+        sec.style.display = (sec.id === id ? '' : 'none');
+      });
+    }
 
-      if (q.length > 0) {
-        // Mostrar todas las secciones mientras se busca
-        sections.forEach(sec => sec.style.display = '');
-      } else {
-        // Volver a la categoría activa
-        const active = document.querySelector('.cat-pill.active');
-        if (active) mostrarSeccion(active.dataset.target);
-      }
+    // BUSCADOR
+    if (searchInput) {
+      searchInput.addEventListener('input', () => {
+        const q = searchInput.value.toLowerCase();
 
-      cards.forEach(card => {
-        const name = (card.dataset.name || '').toLowerCase();
-        const desc = card.querySelector('.desc').textContent.toLowerCase();
-        const match = name.includes(q) || desc.includes(q);
-        card.style.display = match ? '' : 'none';
+        if (q.length > 0) {
+          // Mostrar todas las secciones mientras se busca
+          sections.forEach(sec => sec.style.display = '');
+        } else {
+          // Volver a la categoría activa
+          const active = document.querySelector('.cat-pill.active');
+          if (active) mostrarSeccion(active.dataset.target);
+        }
+
+        cards.forEach(card => {
+          const name = (card.dataset.name || '').toLowerCase();
+          const desc = card.querySelector('.desc').textContent.toLowerCase();
+          const match = name.includes(q) || desc.includes(q);
+          card.style.display = match ? '' : 'none';
+        });
+      });
+    }
+
+    // CATEGORÍAS
+    document.querySelectorAll('.cat-pill').forEach(pill => {
+      pill.addEventListener('click', () => {
+        document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+
+        const id = pill.dataset.target;
+        mostrarSeccion(id);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        if (searchInput) searchInput.value = '';
+        cards.forEach(card => card.style.display = '');
       });
     });
-  }
 
-  // CATEGORÍAS
-  document.querySelectorAll('.cat-pill').forEach(pill => {
-    pill.addEventListener('click', () => {
-      document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
-      pill.classList.add('active');
+    // =============================
+    // MODAL + CARRUSEL
+    // =============================
+    const modal       = document.getElementById('modal');
+    const modalImg    = document.getElementById('modalImg');
+    const modalTitle  = document.getElementById('modalTitle');
+    const modalCat    = document.getElementById('modalCat');
+    const modalDesc   = document.getElementById('modalDesc');
+    const modalDetail = document.getElementById('modalDetail');
+    const modalPrice  = document.getElementById('modalPrice');
+    const modalClose  = document.getElementById('modalClose');
+    const carPrev     = document.getElementById('carPrev');
+    const carNext     = document.getElementById('carNext');
+    const dotsContainer = document.getElementById('dots');
 
-      const id = pill.dataset.target;
-      mostrarSeccion(id);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    let currentImages = [];
+    let currentIndex  = 0;
 
-      if (searchInput) searchInput.value = '';
-      cards.forEach(card => card.style.display = '');
+    function renderCarousel(){
+      if (!currentImages.length) return;
+      modalImg.src = currentImages[currentIndex];
+
+      dotsContainer.innerHTML = '';
+      currentImages.forEach((_, i) => {
+        const d = document.createElement('div');
+        d.className = 'dot' + (i === currentIndex ? ' active' : '');
+        d.addEventListener('click', () => {
+          currentIndex = i;
+          renderCarousel();
+        });
+        dotsContainer.appendChild(d);
+      });
+    }
+
+    function openModalFromCard(card){
+      const name   = card.dataset.name || card.querySelector('.title').textContent;
+      const cat    = card.dataset.category || '';
+      const desc   = card.querySelector('.desc').textContent;
+      const detail = card.dataset.detail || '';
+      const price  = card.querySelector('.price') ? card.querySelector('.price').textContent : '';
+
+      currentImages = [card.dataset.img1, card.dataset.img2, card.dataset.img3].filter(Boolean);
+      currentIndex  = 0;
+      renderCarousel();
+
+      modalTitle.textContent  = name;
+      modalCat.textContent    = cat;
+      modalDesc.textContent   = desc;
+      modalDetail.textContent = detail;
+      modalPrice.textContent  = price;
+
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden','false');
+    }
+
+    // Abrir modal al hacer click en card (menos el botón +)
+    cards.forEach(card => {
+      card.addEventListener('click', (e) => {
+        if (e.target.closest('.add')) return; // el + no abre modal
+        openModalFromCard(card);
+      });
     });
-  });
 
-  // =============================
-  // MODAL + CARRUSEL
-  // =============================
-  const modal       = document.getElementById('modal');
-  const modalImg    = document.getElementById('modalImg');
-  const modalTitle  = document.getElementById('modalTitle');
-  const modalCat    = document.getElementById('modalCat');
-  const modalDesc   = document.getElementById('modalDesc');
-  const modalDetail = document.getElementById('modalDetail');
-  const modalPrice  = document.getElementById('modalPrice');
-  const carPrev     = document.getElementById('carPrev');
-  const carNext     = document.getElementById('carNext');
-  const dotsContainer = document.getElementById('dots');
+    // Función para cerrar modal
+    function closeModal(){
+      if (!modal) return;
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden','true');
+    }
 
-  let currentImages = [];
-  let currentIndex  = 0;
+    // CERRAR: con la X
+    if (modalClose) {
+      modalClose.addEventListener('click', (e)=>{
+        e.stopPropagation();
+        closeModal();
+      });
+    }
 
-  function renderCarousel(){
-    if (!currentImages.length) return;
-    modalImg.src = currentImages[currentIndex];
+    // CERRAR: clic en fondo oscuro
+    if (modal) {
+      modal.addEventListener('click', (e) => {
+        if (e.target.classList && e.target.classList.contains('modal-backdrop')) {
+          closeModal();
+        }
+      });
+    }
 
-    dotsContainer.innerHTML = '';
-    currentImages.forEach((_, i) => {
-      const d = document.createElement('div');
-      d.className = 'dot' + (i === currentIndex ? ' active' : '');
-      d.addEventListener('click', () => {
-        currentIndex = i;
+    // CERRAR: tecla Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    // Flechas carrusel
+    if (carPrev) {
+      carPrev.addEventListener('click', (e)=>{
+        e.stopPropagation();
+        if (!currentImages.length) return;
+        currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
         renderCarousel();
       });
-      dotsContainer.appendChild(d);
-    });
-  }
-
-  function openModalFromCard(card){
-    const name   = card.dataset.name || card.querySelector('.title').textContent;
-    const cat    = card.dataset.category || '';
-    const desc   = card.querySelector('.desc').textContent;
-    const detail = card.dataset.detail || '';
-    const price  = card.querySelector('.price') ? card.querySelector('.price').textContent : '';
-
-    currentImages = [card.dataset.img1, card.dataset.img2, card.dataset.img3].filter(Boolean);
-    currentIndex  = 0;
-    renderCarousel();
-
-    modalTitle.textContent  = name;
-    modalCat.textContent    = cat;
-    modalDesc.textContent   = desc;
-    modalDetail.textContent = detail;
-    modalPrice.textContent  = price;
-
-    modal.classList.add('open');
-    modal.setAttribute('aria-hidden','false');
-  }
-
-  // Abrir modal al hacer click en card (menos el botón +)
-  cards.forEach(card => {
-    card.addEventListener('click', (e) => {
-      if (e.target.closest('.add')) return; // el + no abre modal
-      openModalFromCard(card);
-    });
-  });
-
-  // Función para cerrar modal
-  function closeModal(){
-    if (!modal) return;
-    modal.classList.remove('open');
-    modal.setAttribute('aria-hidden','true');
-  }
-
-  // CERRAR: con la X, clic fuera, o Escape
-  document.addEventListener('click', (e) => {
-    // X
-    if (e.target.id === 'modalClose' || e.target.closest('#modalClose')) {
-      closeModal();
     }
-    // Clic en fondo oscuro
-    if (e.target.classList && e.target.classList.contains('modal-backdrop')) {
-      closeModal();
+    if (carNext) {
+      carNext.addEventListener('click', (e)=>{
+        e.stopPropagation();
+        if (!currentImages.length) return;
+        currentIndex = (currentIndex + 1) % currentImages.length;
+        renderCarousel();
+      });
     }
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeModal();
-  });
-
-  // Flechas carrusel
-  if (carPrev) {
-    carPrev.addEventListener('click', (e)=>{
-      e.stopPropagation();
-      if (!currentImages.length) return;
-      currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
-      renderCarousel();
-    });
-  }
-  if (carNext) {
-    carNext.addEventListener('click', (e)=>{
-      e.stopPropagation();
-      if (!currentImages.length) return;
-      currentIndex = (currentIndex + 1) % currentImages.length;
-      renderCarousel();
-    });
-  }
-</script>
-
-
+  </script>
 </body>
 </html>
