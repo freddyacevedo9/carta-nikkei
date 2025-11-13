@@ -61,7 +61,14 @@
     .title{font-weight:700;font-size:15px}
     .desc{color:var(--muted);margin:2px 0 0;font-size:13px}
     .meta{display:flex;align-items:center;gap:10px;justify-self:end}
-    .price{font-weight:800;font-size:14px}
+   .price {
+    font-size: 17px;          /* tamaño más elegante */
+    font-weight: 700;         /* negrita para destacarlo */
+    color: #f0b90b;           /* amarillo dorado de tu paleta */
+    font-family: "Inter", sans-serif; /* tipografía moderna */
+    letter-spacing: 0.3px;    /* detallito premium */
+}
+
     .price::before{content:"$"}
     .add{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--accent);
          color:#111;background:var(--accent);font-weight:900;font-size:16px;cursor:pointer}
