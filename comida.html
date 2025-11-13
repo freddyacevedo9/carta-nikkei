@@ -369,114 +369,141 @@
   </div>
 
   <script>
-    // Búsqueda
-    const searchInput = document.getElementById('search');
-    const cards = Array.from(document.querySelectorAll('.card'));
+  // --- BÚSQUEDA Y SECCIONES ---
+  const searchInput = document.getElementById('search');
+  const cards = Array.from(document.querySelectorAll('.card'));
+  const sections = Array.from(document.querySelectorAll('main section'));
 
-    searchInput.addEventListener('input', () => {
-      const q = searchInput.value.toLowerCase();
-      cards.forEach(card => {
-        const name = card.dataset.name.toLowerCase();
-        const desc = card.querySelector('.desc').textContent.toLowerCase();
-        const match = name.includes(q) || desc.includes(q);
-        card.style.display = match ? '' : 'none';
-      });
+  // Al cargar: solo se ve APPETIZER
+  sections.forEach(sec => {
+    if (sec.id !== 'appetizer') sec.style.display = 'none';
+  });
+
+  function mostrarSeccion(id) {
+    sections.forEach(sec => {
+      sec.style.display = (sec.id === id ? '' : 'none');
     });
+  }
 
-    // Categorías
-    document.querySelectorAll('.cat-pill').forEach(pill => {
-      pill.addEventListener('click', () => {
-        document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
-        pill.classList.add('active');
-        const id = pill.dataset.target;
-        const section = document.getElementById(id);
-        if(section){
-          window.scrollTo({ top: section.offsetTop - 90, behavior: 'smooth' });
-        }
-      });
-    });
+  // Buscador: si hay texto, muestra TODO; si está vacío, respeta la categoría activa
+  searchInput.addEventListener('input', () => {
+    const q = searchInput.value.toLowerCase();
 
-    // Modal + carrusel
-    const modal = document.getElementById('modal');
-    const modalImg = document.getElementById('modalImg');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalCat = document.getElementById('modalCat');
-    const modalDesc = document.getElementById('modalDesc');
-    const modalDetail = document.getElementById('modalDetail');
-    const modalPrice = document.getElementById('modalPrice');
-    const modalClose = document.getElementById('modalClose');
-    const carPrev = document.getElementById('carPrev');
-    const carNext = document.getElementById('carNext');
-    const dotsContainer = document.getElementById('dots');
-
-    let currentImages = [];
-    let currentIndex = 0;
-
-    function renderCarousel(){
-      if(currentImages.length === 0) return;
-      modalImg.src = currentImages[currentIndex];
-      // Dots
-      dotsContainer.innerHTML = '';
-      currentImages.forEach((_, i)=>{
-        const d = document.createElement('div');
-        d.className = 'dot' + (i === currentIndex ? ' active' : '');
-        d.addEventListener('click', ()=>{ currentIndex = i; renderCarousel(); });
-        dotsContainer.appendChild(d);
-      });
+    if (q.length > 0) {
+      // Mostrar todas las secciones mientras se busca
+      sections.forEach(sec => sec.style.display = '');
+    } else {
+      // Volver a mostrar solo la sección de la categoría seleccionada
+      const active = document.querySelector('.cat-pill.active');
+      if (active) mostrarSeccion(active.dataset.target);
     }
 
     cards.forEach(card => {
-      card.addEventListener('click', (e) => {
-        // si el click viene del botón +, no abrir modal
-        if(e.target.closest('.add')) return;
-
-        const name = card.dataset.name || card.querySelector('.title').textContent;
-        const cat  = card.dataset.category || '';
-        const desc = card.querySelector('.desc').textContent;
-        const detail = card.dataset.detail || '';
-        const price = card.querySelector('.price') ? card.querySelector('.price').textContent : '';
-
-        // imágenes de carrusel (pueden ser 1, 2 o 3)
-        currentImages = [card.dataset.img1, card.dataset.img2, card.dataset.img3].filter(Boolean);
-        currentIndex = 0;
-        renderCarousel();
-
-        modalTitle.textContent = name;
-        modalCat.textContent = cat;
-        modalDesc.textContent = desc;
-        modalDetail.textContent = detail;
-        modalPrice.textContent = price;
-
-        modal.classList.add('open');
-        modal.setAttribute('aria-hidden', 'false');
-      });
+      const name = card.dataset.name.toLowerCase();
+      const desc = card.querySelector('.desc').textContent.toLowerCase();
+      const match = name.includes(q) || desc.includes(q);
+      card.style.display = match ? '' : 'none';
     });
+  });
 
-    function closeModal(){
-      modal.classList.remove('open');
-      modal.setAttribute('aria-hidden','true');
-    }
+  // Categorías: muestran solo su sección
+  document.querySelectorAll('.cat-pill').forEach(pill => {
+    pill.addEventListener('click', () => {
+      document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
 
-    modalClose.addEventListener('click', closeModal);
-    modal.addEventListener('click', (e) => {
-      if(e.target.classList.contains('modal-backdrop')) closeModal();
+      const id = pill.dataset.target;
+      mostrarSeccion(id);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      
+      // Cuando cambias de categoría, limpiar búsqueda
+      searchInput.value = '';
+      cards.forEach(card => card.style.display = '');
     });
-    document.addEventListener('keydown', (e) => {
-      if(e.key === 'Escape') closeModal();
-    });
+  });
 
-    carPrev.addEventListener('click', (e)=>{
-      e.stopPropagation();
-      if(currentImages.length === 0) return;
-      currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+  // --- MODAL + CARRUSEL ---
+  const modal = document.getElementById('modal');
+  const modalImg = document.getElementById('modalImg');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalCat = document.getElementById('modalCat');
+  const modalDesc = document.getElementById('modalDesc');
+  const modalDetail = document.getElementById('modalDetail');
+  const modalPrice = document.getElementById('modalPrice');
+  const modalClose = document.getElementById('modalClose');
+  const carPrev = document.getElementById('carPrev');
+  const carNext = document.getElementById('carNext');
+  const dotsContainer = document.getElementById('dots');
+
+  let currentImages = [];
+  let currentIndex = 0;
+
+  function renderCarousel(){
+    if(currentImages.length === 0) return;
+    modalImg.src = currentImages[currentIndex];
+
+    // Puntitos
+    dotsContainer.innerHTML = '';
+    currentImages.forEach((_, i)=>{
+      const d = document.createElement('div');
+      d.className = 'dot' + (i === currentIndex ? ' active' : '');
+      d.addEventListener('click', ()=>{ currentIndex = i; renderCarousel(); });
+      dotsContainer.appendChild(d);
+    });
+  }
+
+  cards.forEach(card => {
+    card.addEventListener('click', (e) => {
+      // Si clickea el botón +, no abrir modal
+      if(e.target.closest('.add')) return;
+
+      const name = card.dataset.name || card.querySelector('.title').textContent;
+      const cat  = card.dataset.category || '';
+      const desc = card.querySelector('.desc').textContent;
+      const detail = card.dataset.detail || '';
+      const price = card.querySelector('.price') ? card.querySelector('.price').textContent : '';
+
+      // Imágenes desde data-img1 / 2 / 3
+      currentImages = [card.dataset.img1, card.dataset.img2, card.dataset.img3].filter(Boolean);
+      currentIndex = 0;
       renderCarousel();
+
+      modalTitle.textContent = name;
+      modalCat.textContent = cat;
+      modalDesc.textContent = desc;
+      modalDetail.textContent = detail;
+      modalPrice.textContent = price;
+
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden', 'false');
     });
-    carNext.addEventListener('click', (e)=>{
-      e.stopPropagation();
-      if(currentImages.length === 0) return;
-      currentIndex = (currentIndex + 1) % currentImages.length;
-      renderCarousel();
-    });
-  </script>
+  });
+
+  function closeModal(){
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden','true');
+  }
+
+  modalClose.addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => {
+    if(e.target.classList.contains('modal-backdrop')) closeModal();
+  });
+  document.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape') closeModal();
+  });
+
+  carPrev.addEventListener('click', (e)=>{
+    e.stopPropagation();
+    if(currentImages.length === 0) return;
+    currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+    renderCarousel();
+  });
+  carNext.addEventListener('click', (e)=>{
+    e.stopPropagation();
+    if(currentImages.length === 0) return;
+    currentIndex = (currentIndex + 1) % currentImages.length;
+    renderCarousel();
+  });
+</script>
 </body>
 </html>
