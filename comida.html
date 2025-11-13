@@ -516,23 +516,62 @@
       if (e.key === 'Escape') closeModal();
     });
 
-    // Flechas carrusel
-    if (carPrev) {
-      carPrev.addEventListener('click', (e)=>{
-        e.stopPropagation();
-        if (!currentImages.length) return;
-        currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
-        renderCarousel();
-      });
-    }
-    if (carNext) {
-      carNext.addEventListener('click', (e)=>{
-        e.stopPropagation();
-        if (!currentImages.length) return;
-        currentIndex = (currentIndex + 1) % currentImages.length;
-        renderCarousel();
-      });
-    }
+    // Flechas carrusel + swipe táctil
+  function goPrev(){
+    if (!currentImages.length) return;
+    currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+    renderCarousel();
+  }
+
+  function goNext(){
+    if (!currentImages.length) return;
+    currentIndex = (currentIndex + 1) % currentImages.length;
+    renderCarousel();
+  }
+
+  if (carPrev) {
+    carPrev.addEventListener('click', (e)=>{
+      e.stopPropagation();
+      goPrev();
+    });
+  }
+
+  if (carNext) {
+    carNext.addEventListener('click', (e)=>{
+      e.stopPropagation();
+      goNext();
+    });
+  }
+
+  // Swipe en celular (deslizar imagen)
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  if (modalImg) {
+    modalImg.addEventListener('touchstart', (e) => {
+      if (!e.touches || !e.touches.length) return;
+      touchStartX = e.touches[0].clientX;
+    }, { passive: true });
+
+    modalImg.addEventListener('touchend', (e) => {
+      if (!e.changedTouches || !e.changedTouches.length) return;
+      touchEndX = e.changedTouches[0].clientX;
+      const diff = touchEndX - touchStartX;
+
+      // Umbral para que no tome toques muy cortos
+      const threshold = 40;
+      if (Math.abs(diff) > threshold) {
+        if (diff < 0) {
+          // swipe hacia la izquierda → siguiente foto
+          goNext();
+        } else {
+          // swipe hacia la derecha → foto anterior
+          goPrev();
+        }
+      }
+    }, { passive: true });
+  }
+
   </script>
 </body>
 </html>
