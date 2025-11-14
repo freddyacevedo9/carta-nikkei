@@ -68,6 +68,60 @@
     img{max-width:100%;display:block}
 
     /* Top bar */
+    /* Top layout */
+.top {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  background: rgba(10,10,10,.85);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+
+.wrap {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 10px 16px;
+  display: grid;
+  grid-template-columns: 40px 1fr 40px;
+  align-items: center;
+}
+
+/* Menú izquierda */
+.menu-icon {
+  border: 1px solid #ffffff;
+  background: #0f0f0f;
+  color: #ffffff;
+  padding: 6px 9px;
+  font-size: 18px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* Logo centrado */
+.center-logo {
+  display: flex;
+  justify-content: center;
+}
+.center-logo img {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Botón volver (icono derecha) */
+.home-icon img {
+  width: 34px;
+  height: 34px;
+  object-fit: cover;
+  border-radius: 50%;
+  opacity: .85;
+  transition: .2s;
+}
+.home-icon img:hover {
+  opacity: 1;
+}
     .top{position:sticky;top:0;z-index:30;background:rgba(10,10,10,.85);backdrop-filter:blur(8px);
          border-bottom:1px solid var(--line)}
     .wrap{max-width:1000px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:10px}
@@ -164,15 +218,25 @@
 <body>
 
   <!-- Top bar -->
-  <div class="top">
-    <div class="wrap">
-      <div class="brand">
-        <img src="logo1.png" alt="Logo NIKKEI 419">
-        <span class="name">NIKKEI 419</span>
-      </div>
-      <a class="back" href="index.html">← Volver al inicio</a>
+<div class="top">
+  <div class="wrap">
+
+    <!-- Botón menú (3 líneas) izquierda -->
+    <button id="menu-btn" class="menu-icon">☰</button>
+
+    <!-- Logo centrado -->
+    <div class="center-logo">
+      <img src="logo1.png" alt="Logo" />
     </div>
+
+    <!-- Logo para volver (derecha) -->
+    <a href="index.html" class="home-icon">
+      <img src="logo1.png" alt="Home">
+    </a>
+
   </div>
+</div>
+
 
   <main class="page">
     <h1>Comida</h1>
