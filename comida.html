@@ -67,22 +67,31 @@
   }
 
   /* Top bar */
-  .top {
-    position: sticky;
-    top: 0;
-    z-index: 30;
-    background: rgba(10,10,10,.85);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--line);
-  }
-  .wrap {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 10px 16px;
-    display: grid;
-    grid-template-columns: 40px 1fr 40px;
-    align-items: center;
-  }
+ /* Top bar */
+.top {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  background: rgba(10,10,10,0.88);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+  height: 72px; /* ← hace más alta toda la barra */
+  display: flex;
+  align-items: center; /* centra todo verticalmente */
+}
+
+/* Contenedor interno */
+.wrap {
+  max-width: 1000px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 20px; /* ← más ancho a los lados */
+  display: grid;
+  grid-template-columns: 40px 1fr 40px;
+  align-items: center;
+  height: 100%; /* ← se adapta a la altura de .top */
+}
+
 
   .menu-icon {
     border: none;
