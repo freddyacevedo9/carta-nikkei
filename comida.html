@@ -471,24 +471,35 @@
     
 
     <!-- Categorías -->
-   <div class="cats-row">
+  
+<!-- BARRA DE CATEGORÍAS -->
+<div class="categories-bar">
   <!-- Lupa fija a la izquierda -->
   <button class="search-icon-min" id="openSearch">🔍</button>
 
-  <!-- Títulos que se pueden mover (scroll horizontal) -->
-  <div class="cats-scroll">
-    <button class="cat-pill active" data-target="appetizer">Appetizer</button>
-    <button class="cat-pill" data-target="ceviches">Ceviches</button>
-    <button class="cat-pill" data-target="sashimi">Sashimi</button>
-    <button class="cat-pill" data-target="omakase">Omakase</button>
-    <button class="cat-pill" data-target="makimono">Makimono</button>
-    <button class="cat-pill" data-target="rolls-gourmet">Rolls gourmet</button>
-    <button class="cat-pill" data-target="rolls-sin-arroz">Rolls sin arroz</button>
-    <button class="cat-pill" data-target="rolls-tradicionales">Rolls tradicionales</button>
-    <button class="cat-pill" data-target="platos-calientes">Platos calientes</button>
-    <button class="cat-pill" data-target="combinaciones">Combinaciones</button>
-    <button class="cat-pill" data-target="postres">Postres</button>
+  <!-- Títulos que se mueven en scroll horizontal -->
+  <div class="categories-scroll">
+    <span class="cat-item active" data-target="appetizer">Appetizer</span>
+    <span class="cat-item" data-target="ceviches">Ceviches</span>
+    <span class="cat-item" data-target="sashimi">Sashimi</span>
+    <span class="cat-item" data-target="omakase">Omakase</span>
+    <span class="cat-item" data-target="makimono">Makimono</span>
+    <span class="cat-item" data-target="rolls-gourmet">Rolls gourmet</span>
+    <span class="cat-item" data-target="rolls-sin-arroz">Rolls sin arroz</span>
+    <span class="cat-item" data-target="rolls-tradicionales">Rolls tradicionales</span>
+    <span class="cat-item" data-target="platos-calientes">Platos calientes</span>
+    <span class="cat-item" data-target="combinaciones">Combinaciones</span>
+    <span class="cat-item" data-target="postres">Postres</span>
   </div>
+</div>
+
+<!-- Buscador que se despliega al tocar la lupa -->
+<div id="searchBox" class="search-box-hidden">
+  <input
+    id="search"
+    class="search-input-full"
+    type="text"
+    placeholder="Buscar plato o ingrediente…">
 </div>
 
 
