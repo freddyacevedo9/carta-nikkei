@@ -128,24 +128,27 @@
       opacity: 1;
     }
     .back-icon {
-  font-size: 20px;
+  font-size: 22px;
+  font-weight: 300; /* línea fina como en tu referencia */
   color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 32px;
   height: 32px;
+  padding: 0;
+  background: transparent;
   border: none;
-  background: transparent; 
   cursor: pointer;
   opacity: 0.9;
   transition: .2s;
 }
 
 .back-icon:hover {
-  border-color: var(--accent);
+  opacity: 1;
   color: var(--accent);
 }
+
 
 
     /* Page */
@@ -158,25 +161,40 @@
     .sub{color:var(--muted);margin:0 0 14px;font-size:14px}
 
     /* Search */
-    .search-bar{
-      margin:6px 0 12px;
-      display:flex;
-      align-items:center;
-      gap:8px;
-      background:#121212;
-      border-radius:999px;
-      border:1px solid var(--line);
-      padding:6px 12px;
-    }
-    .search-icon{font-size:16px;opacity:.8}
-    .search-input{
-      flex:1;
-      border:none;
-      background:transparent;
-      color:var(--text);
-      font-size:14px;
-    }
-    .search-input:focus{outline:none}
+    .search-box-hidden {
+  display: none;
+  padding: 10px 16px;
+}
+
+.search-input-full {
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 16px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: #121212;
+  color: #fff;
+}
+
+   
+   .search-icon-min {
+  font-size: 22px;
+  color: #ffffff;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: .9;
+  transition: .2s;
+}
+
+.search-icon-min:hover {
+  opacity: 1;
+  color: var(--accent);
+}
+
 
     /* Category pills */
     .cats{
@@ -405,6 +423,10 @@
   <!-- Top bar -->
   <div class="top">
     <div class="wrap">
+      <div id="searchBox" class="search-box-hidden">
+  <input id="search" class="search-input-full" type="text" placeholder="Buscar…">
+</div>
+
 
       <!-- Botón menú (3 líneas) izquierda -->
       <button id="menu-btn" class="menu-icon">☰</button>
@@ -428,10 +450,7 @@
     <p class="sub">Busca y explora nuestra carta nikkei por categoría.</p>
 
     <!-- Buscador -->
-    <div class="search-bar">
-      <span class="search-icon">🔍</span>
-      <input class="search-input" id="search" type="text" placeholder="Buscar plato o ingrediente…">
-    </div>
+    <div class="search-icon-min" id="openSearch">🔍</div>
 
     <!-- Categorías -->
     <div class="cats">
@@ -718,46 +737,29 @@
 
   <!-- SCRIPTS -->
   <script>
-    // =============================
-    // SECCIONES + BUSCADOR
-    // =============================
-    const searchInput = document.getElementById('search');
-    const cards   = Array.from(document.querySelectorAll('.card'));
-    const sections = Array.from(document.querySelectorAll('main section'));
+  // NUEVO BUSCADOR MINIMALISTA
+const openSearch = document.getElementById('openSearch');
+const searchBox  = document.getElementById('searchBox');
+const searchInput = document.getElementById('search');
+const cards   = Array.from(document.querySelectorAll('.card'));
+const sections = Array.from(document.querySelectorAll('main section'));
 
-    // Al cargar: solo APPETIZER visible
-    sections.forEach(sec => {
-      if (sec.id !== 'appetizer') sec.style.display = 'none';
-    });
+openSearch.addEventListener('click', () => {
+  searchBox.style.display = searchBox.style.display === 'block' ? 'none' : 'block';
+});
 
-    function mostrarSeccion(id) {
-      sections.forEach(sec => {
-        sec.style.display = (sec.id === id ? '' : 'none');
-      });
-    }
+// FILTRAR
+searchInput.addEventListener('input', () => {
+  const q = searchInput.value.toLowerCase();
 
-    // BUSCADOR
-    if (searchInput) {
-      searchInput.addEventListener('input', () => {
-        const q = searchInput.value.toLowerCase();
+  cards.forEach(card => {
+    const name = (card.dataset.name || '').toLowerCase();
+    const desc = card.querySelector('.desc').textContent.toLowerCase();
+    const match = name.includes(q) || desc.includes(q);
+    card.style.display = match ? '' : 'none';
+  });
+});
 
-        if (q.length > 0) {
-          // Mostrar todas las secciones mientras se busca
-          sections.forEach(sec => sec.style.display = '');
-        } else {
-          // Volver a la categoría activa
-          const active = document.querySelector('.cat-pill.active');
-          if (active) mostrarSeccion(active.dataset.target);
-        }
-
-        cards.forEach(card => {
-          const name = (card.dataset.name || '').toLowerCase();
-          const desc = card.querySelector('.desc').textContent.toLowerCase();
-          const match = name.includes(q) || desc.includes(q);
-          card.style.display = match ? '' : 'none';
-        });
-      });
-    }
 
     // CATEGORÍAS
     document.querySelectorAll('.cat-pill').forEach(pill => {
