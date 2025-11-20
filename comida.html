@@ -151,35 +151,42 @@
 
 /* Contenedor del botón */
 .back-icon {
-  display: flex;
-  align-items: center;       /* Centra verticalmente flecha + corchete */
-  justify-content: center;   /* Centra horizontalmente */
+  font-size: 32px;
+  font-weight: 350;
   width: 46px;
   height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: transparent;
   border: none;
   color: #ffffff;
   cursor: pointer;
-  font-size: 32px;           /* Tamaño unificado */
-  line-height: 1;            /* IMPORTANTE: misma línea para ambos */
-  padding: 0;
   opacity: 0.9;
   transition: .2s;
+  padding: 0;
+
+  /* TRUCO: alineación perfecta de ambos caracteres */
+  line-height: 0.85;
 }
 
-/* Flecha y corchete SON IGUALES = se alinean perfectos */
+/* Flecha + corchete alineados */
 .back-arrow,
 .back-bracket {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 1;       /* MISMA altura exacta */
-  font-size: inherit;   /* usa el mismo tamaño del padre */
+  display: inline-block;
+  line-height: 0.85;
+  vertical-align: middle;
 }
 
-/* la flecha un poco más cerca del corchete */
+/* Ajuste milimétrico */
 .back-arrow {
-  margin-right: -4px;
+  position: relative;
+  top: 1px;     /* baja la flecha para centrar */
+}
+
+.back-bracket {
+  position: relative;
+  top: -1px;    /* sube un poco el corchete */
 }
 
 .back-icon:hover {
