@@ -137,37 +137,48 @@
     object-fit: cover;
   }
 
-  .back-icon {
-    font-size: 30px;
-    font-weight: 350; /* línea fina tipo referencia */
-    color: #ffffff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 42px;
-    height: 42px;
-    padding: 0;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    opacity: .9;
-    transition: .2s;
-    line-height: 1;                   /* evita que se desalineen → ] */
-  letter-spacing: -3px;             /* UNE la flecha con el corchete visualmente */
+.back-icon {
+  font-size: 28px;
+  font-weight: 350;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;      /* centra verticalmente el conjunto */
+  justify-content: center;  /* centra horizontalmente */
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  opacity: 0.9;
+  transition: .2s;
+}
 
-  }
-  .back-icon:hover {
-    opacity: 1;
-    color: var(--accent);
-  }
+/* Ambos caracteres sin alturas raras */
+.back-arrow,
+.back-bracket {
+  line-height: 1;
+  display: block;
+}
+
+/* Subimos UN POCO la flecha para que quede centrada con el corchete */
+.back-arrow {
+  position: relative;
+  top: -1px;        /* si aún la ves baja, prueba -2px */
+  margin-right: -2px; /* para que se pegue más al corchete */
+}
+
+.back-icon:hover {
+  opacity: 1;
+  color: var(--accent);
+}
+
    
-    @media (max-width:640px){
+   @media (max-width:640px){
   .back-icon {
-    font-size: 28px !important;
-    font-weight: 300 !important;
-    width: 42px !important;
-    height: 42px !important;
-    letter-spacing: -3px;
+    font-size: 29px;
+  }
+  .back-arrow {
+    top: -1.5px;
   }
 }
 
@@ -512,9 +523,9 @@
       </div>
 
       <!-- Flecha volver (derecha) -->
-      <a href="index.html" class="back-icon" aria-label="Volver">
-        →]
-      </a>
+    <a href="index.html" class="back-icon" aria-label="Volver">
+  <span class="back-arrow">→</span><span class="back-bracket">]</span>
+</a>
 
     </div>
   </div>
