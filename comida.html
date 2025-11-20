@@ -149,41 +149,37 @@
 
   }
 
+/* Contenedor del botón */
 .back-icon {
-  font-size: 28px;
-  font-weight: 350;
-  width: 42px;               /* un poco más ancho → centrado real */
-  height: 42px;
-  display: flex !important;
-  align-items: center !important;       
-  justify-content: center !important; 
+  display: flex;
+  align-items: center;       /* Centra verticalmente flecha + corchete */
+  justify-content: center;   /* Centra horizontalmente */
+  width: 46px;
+  height: 46px;
   background: transparent;
   border: none;
   color: #ffffff;
   cursor: pointer;
+  font-size: 32px;           /* Tamaño unificado */
+  line-height: 1;            /* IMPORTANTE: misma línea para ambos */
+  padding: 0;
   opacity: 0.9;
   transition: .2s;
-  padding: 0;
 }
 
-/* Flecha + corchete sin problemas de altura */
+/* Flecha y corchete SON IGUALES = se alinean perfectos */
 .back-arrow,
 .back-bracket {
-  line-height: 1;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;       /* MISMA altura exacta */
+  font-size: inherit;   /* usa el mismo tamaño del padre */
 }
 
-/* FLECHA centrada respecto al corchete */
+/* la flecha un poco más cerca del corchete */
 .back-arrow {
-  position: relative;
-  top: 0.5px;          /* Ajuste fino de vertical */
-  margin-right: -2px;  /* Acerca la flecha al corchete */
-}
-
-/* CORCHETE perfectamente alineado */
-.back-bracket {
-  position: relative;
-  top: -0.5px;         /* sube un poquito para emparejar */
+  margin-right: -4px;
 }
 
 .back-icon:hover {
@@ -191,24 +187,12 @@
   color: var(--accent);
 }
 
-/* Ajustes SOLO para móvil */
+/* Versión móvil */
 @media (max-width:640px){
   .back-icon {
-    font-size: 30px;   /* Más grande en móvil */
-    width: 44px;
-    height: 44px;
-  }
-  .back-arrow,
-  .back-bracket {
-    line-height: 0.9;   /* FIJA el alto → centra en Safari */
-  }
-}
-
-  .back-arrow {
-    top: 0px;        /* Ajuste móvil */
-  }
-  .back-bracket {
-    top: 0px;       /* Compensa flecha */
+    width: 48px;
+    height: 48px;
+    font-size: 34px;        /* un poquito más grande */
   }
 }
 
@@ -554,8 +538,9 @@
       </div>
 
       <!-- Flecha volver (derecha) -->
-    <a href="index.html" class="back-icon" aria-label="Volver">
-  <span class="back-arrow">→</span><span class="back-bracket">]</span>
+<a href="index.html" class="back-icon">
+  <span class="back-arrow">→</span>
+  <span class="back-bracket">]</span>
 </a>
 
     </div>
