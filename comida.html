@@ -149,6 +149,71 @@
   color: var(--accent);
 }
 
+/* Barra completa con líneas arriba y abajo */
+.categories-bar {
+  border-top: 1px solid #2a2a2a;
+  border-bottom: 1px solid #2a2a2a;
+  padding: 10px 0;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+/* LUPA minimal */
+.search-icon-min {
+  font-size: 18px;
+  color: #ffffff;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  opacity: .85;
+  transition: .2s;
+}
+.search-icon-min:hover {
+  opacity: 1;
+  color: var(--accent);
+}
+
+/* Scroll horizontal de categorías */
+.categories-scroll {
+  display: flex;
+  gap: 18px;
+  overflow-x: auto;
+  white-space: nowrap;
+  padding-right: 10px;
+  scrollbar-width: none;
+}
+.categories-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* Textos blancos, sin fondo */
+.cat-item {
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: .2s;
+  opacity: 0.8;
+}
+
+.cat-item:hover {
+  opacity: 1;
+  color: var(--accent);
+}
+
+/* Categoría activa */
+.cat-item.active {
+  opacity: 1;
+  color: var(--accent);
+  font-weight: 600;
+}
 
 
     /* Page */
