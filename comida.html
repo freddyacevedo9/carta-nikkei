@@ -84,15 +84,26 @@
       align-items: center;
     }
 
-    .menu-icon {
-      border: 1px solid #ffffff;
-      background: #0f0f0f;
-      color: #ffffff;
-      padding: 6px 9px;
-      font-size: 18px;
-      border-radius: 10px;
-      cursor: pointer;
-    }
+   .menu-icon {
+  border: none;            /* SIN recuadro */
+  background: transparent; /* SIN fondo */
+  color: #ffffff;          
+  font-size: 20px;         /* mismo tamaño que la flecha */
+  padding: 0;              
+  width: 32px;             /* mismo ancho de la flecha */
+  height: 32px;            /* mismo alto de la flecha */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0.9;
+  transition: .2s;
+}
+
+.menu-icon:hover {
+  opacity: 1;
+  color: var(--accent);    /* se ilumina dorado igual que la flecha */
+}
 
     .center-logo {
       display: flex;
