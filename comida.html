@@ -7,176 +7,244 @@
 
   <!-- Fuente branding -->
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap" rel="stylesheet">
+
   <style>
-    .dish-card, .item-card {
-    width: 100%;           /* ocupa todo el ancho disponible */
-    max-width: 98%;        /* un poquito de margen para estética */
-    margin: 0 auto 14px;   /* centrado + espacio inferior */
-}
-    .section-title {
-    font-family: 'Cinzel', serif;
-    font-size: 26px;           /* ← TÍTULO MÁS GRANDE */
-    font-weight: 700;
-    margin: 28px 0 16px;       /* ← MÁS ESPACIO ANTES DEL PRIMER PLATO */
-    display: flex;
-    align-items: center;
-    gap: 12px;                 /* espacio entre palito y texto */
-    color: #ffffff;
-    letter-spacing: 1px;
-}
-
-.section-title::before {
-    content: "";
-    width: 6px;
-    height: 28px;              /* ← PALITO AJUSTADO A LA LETRA */
-    background: #f0b90b;       /* dorado */
-    border-radius: 3px;
-}
-
-    h1, h2, h3, h4, h5, h6 {
-    font-family: 'Cinzel', serif !important;
-    letter-spacing: 1px;
-    font-weight: 700;
-    color: #ffffff;
-}
-    h1, h2, h3, h4, h5, h6 {
-    font-family: 'Cinzel', serif !important;
-    letter-spacing: 1px;
-    font-weight: 700;
-    color: #ffffff;
-    text-shadow: 0 0 6px rgba(240,185,11,0.18); /* brillo dorado sutil */
-}
-.card {
-    position: relative; /* necesario para que el precio se ubique dentro */
-}
-
-.price {
-    position: absolute;
-    bottom: 8px;   /* distancia desde abajo */
-    right: 12px;    /* distancia desde la derecha */
-    font-size: 10px;
-    font-weight: 700;
-    color: #f0b90b; /* tu dorado */
-}
-   :root{
-      --bg:#0a0a0a; --card:#121212; --line:#1f1f1f; --text:#f5f5f5; --muted:#cfcfcf;
-      --accent:#f0b90b; --shadow:0 10px 30px rgba(0,0,0,.35); --radius:16px;
+    :root{
+      --bg:#0a0a0a;
+      --card:#121212;
+      --line:#1f1f1f;
+      --text:#f5f5f5;
+      --muted:#cfcfcf;
+      --accent:#f0b90b;
+      --shadow:0 10px 30px rgba(0,0,0,.35);
+      --radius:16px;
     }
+
     *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Inter,Roboto,Arial}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family:system-ui,-apple-system,Segoe UI,Inter,Roboto,Arial;
+    }
     a{color:inherit;text-decoration:none}
     img{max-width:100%;display:block}
 
+    /* TÍTULOS GENERALES */
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Cinzel', serif !important;
+      letter-spacing: 1px;
+      font-weight: 700;
+      color: #ffffff;
+      text-shadow: 0 0 6px rgba(240,185,11,0.18); /* brillo dorado sutil */
+    }
+
+    /* TARJETAS FULL WIDTH SI LAS USAS EN OTROS LUGARES */
+    .dish-card, .item-card {
+      width: 100%;
+      max-width: 98%;
+      margin: 0 auto 14px;
+    }
+
+    /* TÍTULOS DE SECCIÓN CON PALITO AMARILLO */
+    .section-title {
+      font-family: 'Cinzel', serif;
+      font-size: 26px;
+      font-weight: 700;
+      margin: 28px 0 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #ffffff;
+      letter-spacing: 1px;
+    }
+    .section-title::before {
+      content: "";
+      width: 6px;
+      height: 28px;
+      background: #f0b90b;
+      border-radius: 3px;
+    }
+
     /* Top bar */
-    /* Top layout */
-.top {
-  position: sticky;
-  top: 0;
-  z-index: 30;
-  background: rgba(10,10,10,.85);
-  backdrop-filter: blur(8px);
-  border-bottom: 1px solid var(--line);
-}
+    .top {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: rgba(10,10,10,.85);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--line);
+    }
+    .wrap {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 10px 16px;
+      display: grid;
+      grid-template-columns: 40px 1fr 40px;
+      align-items: center;
+    }
 
-.wrap {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 10px 16px;
-  display: grid;
-  grid-template-columns: 40px 1fr 40px;
-  align-items: center;
-}
+    .menu-icon {
+      border: 1px solid #ffffff;
+      background: #0f0f0f;
+      color: #ffffff;
+      padding: 6px 9px;
+      font-size: 18px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
 
-/* Menú izquierda */
-.menu-icon {
-  border: 1px solid #ffffff;
-  background: #0f0f0f;
-  color: #ffffff;
-  padding: 6px 9px;
-  font-size: 18px;
-  border-radius: 10px;
-  cursor: pointer;
-}
+    .center-logo {
+      display: flex;
+      justify-content: center;
+    }
+    .center-logo img {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
 
-/* Logo centrado */
-.center-logo {
-  display: flex;
-  justify-content: center;
-}
-.center-logo img {
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-/* Botón volver (icono derecha) */
-.home-icon img {
-  width: 34px;
-  height: 34px;
-  object-fit: cover;
-  border-radius: 50%;
-  opacity: .85;
-  transition: .2s;
-}
-.home-icon img:hover {
-  opacity: 1;
-}
-    .top{position:sticky;top:0;z-index:30;background:rgba(10,10,10,.85);backdrop-filter:blur(8px);
-         border-bottom:1px solid var(--line)}
-    .wrap{max-width:1000px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:10px}
-    .brand{display:flex;align-items:center;gap:10px}
-    .brand img{width:32px;height:32px;border-radius:50%;object-fit:cover}
-    .brand .name{font-family:"Cinzel",serif;font-weight:700;letter-spacing:.5px;font-size:18px}
-    .back{margin-left:auto;border:1px solid var(--line);padding:6px 12px;border-radius:12px;background:#111;font-size:13px}
-    .back:hover{border-color:var(--accent);color:var(--accent)}
+    .home-icon img {
+      width: 34px;
+      height: 34px;
+      object-fit: cover;
+      border-radius: 50%;
+      opacity: .85;
+      transition: .2s;
+    }
+    .home-icon img:hover {
+      opacity: 1;
+    }
 
     /* Page */
-    .page{max-width:1200px;margin:0 auto;padding:14px 16px 32px}
+    .page{
+      max-width:1200px;
+      margin:0 auto;
+      padding:14px 16px 32px;
+    }
     h1{font-size:26px;margin:10px 0 4px}
     .sub{color:var(--muted);margin:0 0 14px;font-size:14px}
 
     /* Search */
-    .search-bar{margin:6px 0 12px;display:flex;align-items:center;gap:8px;background:#121212;
-                border-radius:999px;border:1px solid var(--line);padding:6px 12px}
+    .search-bar{
+      margin:6px 0 12px;
+      display:flex;
+      align-items:center;
+      gap:8px;
+      background:#121212;
+      border-radius:999px;
+      border:1px solid var(--line);
+      padding:6px 12px;
+    }
     .search-icon{font-size:16px;opacity:.8}
-    .search-input{flex:1;border:none;background:transparent;color:var(--text);font-size:14px}
+    .search-input{
+      flex:1;
+      border:none;
+      background:transparent;
+      color:var(--text);
+      font-size:14px;
+    }
     .search-input:focus{outline:none}
 
     /* Category pills */
-    .cats{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;margin-bottom:12px}
-    .cat-pill{flex:0 0 auto;padding:6px 12px;border-radius:999px;border:1px solid var(--line);
-              background:#121212;font-size:13px;white-space:nowrap;cursor:pointer}
+    .cats{
+      display:flex;
+      gap:8px;
+      overflow-x:auto;
+      padding-bottom:6px;
+      margin-bottom:12px;
+    }
+    .cat-pill{
+      flex:0 0 auto;
+      padding:6px 12px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:#121212;
+      font-size:13px;
+      white-space:nowrap;
+      cursor:pointer;
+    }
     .cat-pill.active,
-    .cat-pill:hover{border-color:var(--accent);color:var(--accent)}
+    .cat-pill:hover{
+      border-color:var(--accent);
+      color:var(--accent);
+    }
 
     /* Sections */
-    .section-title{font-size:18px;margin:18px 0 8px}
     .list{display:grid;gap:12px}
 
     /* Cards */
-    .card{display:grid;grid-template-columns:120px 1fr;gap:12px;background:var(--card);
-          border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);overflow:hidden;
-          cursor:pointer;transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease}
-    .card:hover{transform:translateY(-2px);border-color:var(--accent);box-shadow:0 14px 40px rgba(0,0,0,.55)}
+    .card{
+      position:relative;
+      display:grid;
+      grid-template-columns:120px 1fr;
+      gap:12px;
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:18px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      cursor:pointer;
+      transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+    }
+    .card:hover{
+      transform:translateY(-2px);
+      border-color:var(--accent);
+      box-shadow:0 14px 40px rgba(0,0,0,.55);
+    }
     .photo{height:100px;background:#151515}
-    .photo img{width:100%;height:100%;object-fit:cover}
-    .body{padding:10px 12px;display:grid;grid-template-columns:1fr auto;gap:6px;align-items:center}
-    .title{font-weight:700;font-size:15px;
-    margin-bottom:6px}
-    .desc{color:var(--muted);margin:2px 0 0;font-size:13px}
-    .meta{display:flex;align-items:center;gap:10px;justify-self:end}
-   .price {
-    font-size: 17px;          /* tamaño más elegante */
-    font-weight: 700;         /* negrita para destacarlo */
-    color: #f0b90b;           /* amarillo dorado de tu paleta */
-    font-family: "Inter", sans-serif; /* tipografía moderna */
-    letter-spacing: 0.3px;    /* detallito premium */
-}
+    .photo img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+    .body{
+      padding:10px 12px;
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:6px;
+      align-items:center;
+    }
+    .title{
+      font-weight:700;
+      font-size:15px;
+      margin-bottom:6px;
+    }
+    .desc{
+      color:var(--muted);
+      margin:2px 0 0;
+      font-size:13px;
+    }
+    .meta{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      justify-self:end;
+    }
 
+    .price {
+      font-size: 17px;
+      font-weight: 700;
+      color: #f0b90b;
+      font-family: "Inter", sans-serif;
+      letter-spacing: 0.3px;
+    }
     .price::before{content:"$"}
-    .add{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--accent);
-         color:#111;background:var(--accent);font-weight:900;font-size:16px;cursor:pointer}
+
+    .add{
+      width:28px;
+      height:28px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      border:1px solid var(--accent);
+      color:#111;
+      background:var(--accent);
+      font-weight:900;
+      font-size:16px;
+      cursor:pointer;
+    }
     .add:active{transform:scale(.95)}
 
     @media (max-width:640px){
@@ -185,58 +253,134 @@
     }
 
     /* Modal con carrusel */
-    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:50}
+    .modal{
+      position:fixed;
+      inset:0;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index:50;
+    }
     .modal.open{display:flex}
-    .modal-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.75)}
-    .modal-card{position:relative;background:#101010;border-radius:20px;border:1px solid var(--line);
-                max-width:420px;width:90%;max-height:90vh;overflow-y:auto;box-shadow:0 18px 60px rgba(0,0,0,.8)}
+    .modal-backdrop{
+      position:absolute;
+      inset:0;
+      background:rgba(0,0,0,.75);
+    }
+    .modal-card{
+      position:relative;
+      background:#101010;
+      border-radius:20px;
+      border:1px solid var(--line);
+      max-width:420px;
+      width:90%;
+      max-height:90vh;
+      overflow-y:auto;
+      box-shadow:0 18px 60px rgba(0,0,0,.8);
+    }
     .carousel{position:relative}
-    .modal-img{width:100%;height:230px;object-fit:cover;border-radius:20px 20px 0 0}
-    .car-btn{position:absolute;top:50%;transform:translateY(-50%);border:none;background:rgba(0,0,0,.55);
-             color:#fff;width:32px;height:32px;border-radius:999px;display:grid;place-items:center;
-             cursor:pointer;font-size:20px;z-index:3}
+    .modal-img{
+      width:100%;
+      height:230px;
+      object-fit:cover;
+      border-radius:20px 20px 0 0;
+    }
+    .car-btn{
+      position:absolute;
+      top:50%;
+      transform:translateY(-50%);
+      border:none;
+      background:rgba(0,0,0,.55);
+      color:#fff;
+      width:32px;
+      height:32px;
+      border-radius:999px;
+      display:grid;
+      place-items:center;
+      cursor:pointer;
+      font-size:20px;
+      z-index:3;
+    }
     .car-btn.left{left:10px}
     .car-btn.right{right:10px}
-    .dots{display:flex;justify-content:center;gap:6px;padding:6px 0 4px}
-    .dot{width:7px;height:7px;border-radius:999px;background:#444}
+    .dots{
+      display:flex;
+      justify-content:center;
+      gap:6px;
+      padding:6px 0 4px;
+    }
+    .dot{
+      width:7px;
+      height:7px;
+      border-radius:999px;
+      background:#444;
+    }
     .dot.active{background:var(--accent)}
 
     .modal-body{padding:16px}
     .modal-title{font-size:20px;margin:0 0 4px}
-    .modal-cat{font-size:12px;color:var(--muted);margin:0 0 10px;text-transform:uppercase;letter-spacing:.08em}
-    .modal-desc{font-size:14px;color:var(--muted);margin:0 0 8px}
-    .modal-detail{font-size:14px;margin:0 0 10px}
-    .modal-price{font-weight:800;font-size:16px;margin:4px 0 10px}
+    .modal-cat{
+      font-size:12px;
+      color:var(--muted);
+      margin:0 0 10px;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+    }
+    .modal-desc{
+      font-size:14px;
+      color:var(--muted);
+      margin:0 0 8px;
+    }
+    .modal-detail{
+      font-size:14px;
+      margin:0 0 10px;
+    }
+    .modal-price{
+      font-weight:800;
+      font-size:16px;
+      margin:4px 0 10px;
+    }
     .modal-price::before{content:"$"}
+
     .modal-close{
-      position:absolute;top:8px;right:10px;border:none;background:rgba(0,0,0,.75);
-      color:#fff;font-size:20px;border-radius:999px;width:30px;height:30px;
-      display:grid;place-items:center;cursor:pointer;z-index:4;
+      position:absolute;
+      top:8px;
+      right:10px;
+      border:none;
+      background:rgba(0,0,0,.75);
+      color:#fff;
+      font-size:20px;
+      border-radius:999px;
+      width:30px;
+      height:30px;
+      display:grid;
+      place-items:center;
+      cursor:pointer;
+      z-index:4;
     }
   </style>
 </head>
 <body>
 
   <!-- Top bar -->
-<div class="top">
-  <div class="wrap">
+  <div class="top">
+    <div class="wrap">
 
-    <!-- Botón menú (3 líneas) izquierda -->
-    <button id="menu-btn" class="menu-icon">☰</button>
+      <!-- Botón menú (3 líneas) izquierda -->
+      <button id="menu-btn" class="menu-icon">☰</button>
 
-    <!-- Logo centrado -->
-    <div class="center-logo">
-      <img src="logo1.png" alt="Logo" />
+      <!-- Logo centrado -->
+      <div class="center-logo">
+        <img src="logo1.png" alt="Logo" />
+      </div>
+
+      <!-- Logo para volver (derecha) -->
+      <a href="index.html" class="home-icon">
+        <img src="logo1.png" alt="Home">
+      </a>
+
     </div>
-
-    <!-- Logo para volver (derecha) -->
-    <a href="index.html" class="home-icon">
-      <img src="logo1.png" alt="Home">
-    </a>
-
   </div>
-</div>
-
 
   <main class="page">
     <h1>Comida</h1>
@@ -268,7 +412,7 @@
       <h2 class="section-title">Appetizer</h2>
       <div class="list">
 
-<article class="card"
+        <article class="card"
           data-name="Gyozas de pollo"
           data-category="Appetizer"
           data-detail="Gyozas de pollo y verduras, cocinadas al vapor y luego selladas suavemente en salsa ponzu, finalizadas con un toque de cebollín fresco y semillas de sésamo."
@@ -277,7 +421,7 @@
           data-img3="gyozas-pollo3.jpg"
         >
           <div class="photo">
-            <img src="gyozas-pollo.jpg" alt="gyozas de pollo">
+            <img src="gyozas-pollo.jpg" alt="Gyozas de pollo">
           </div>
           <div class="body">
             <div>
@@ -290,7 +434,7 @@
           </div>
         </article>
 
- <article class="card"
+        <article class="card"
           data-name="Gyozas de cerdo"
           data-category="Appetizer"
           data-detail="Gyozas de cerdo y verduras, cocinadas al vapor y luego selladas suavemente en salsa ponzu, finalizadas con un toque de cebollín fresco y semillas de sésamo."
@@ -299,7 +443,7 @@
           data-img3="gyoza-cerdo3.jpg"
         >
           <div class="photo">
-            <img src="gyoza-cerdojpg" alt="Gyozas pulpo">
+            <img src="gyoza-cerdo.jpg" alt="Gyozas de cerdo">
           </div>
           <div class="body">
             <div>
@@ -311,30 +455,8 @@
             </div>
           </div>
         </article>
-        
- <article class="card"
-          data-name="Gyozas de camaron"
-          data-category="Appetizer"
-          data-detail="Gyozas de camaron y verduras, cocinadas al vapor y luego selladas suavemente en salsa ponzu, finalizadas con un toque de cebollín fresco y semillas de sésamo."
-          data-img1="gyozas-camaron1.jpg"
-          data-img2="gyozas-camaron2.jpg"
-          data-img3="gyozas-camaron3.jpg"
-        >
-          <div class="photo">
-            <img src="gyozas-camaron.jpg" alt="gyozas de pollo">
-          </div>
-          <div class="body">
-            <div>
-              <div class="title">Gyozas de camaron</div>
-              <p class="desc">Gyozas de camaron y verduras.</p>
-            </div>
-            <div class="meta">
-              <div class="price">5900</div>
-            </div>
-          </div>
-        </article>
 
-         <article class="card"
+        <article class="card"
           data-name="Gyozas de pollo"
           data-category="Appetizer"
           data-detail="Gyozas de pollo y verduras, cocinadas al vapor y luego selladas suavemente en salsa ponzu, finalizadas con un toque de cebollín fresco y semillas de sésamo."
@@ -343,7 +465,7 @@
           data-img3="gyozas-pollo3.jpg"
         >
           <div class="photo">
-            <img src="gyozas-pollo.jpg" alt="gyozas de pollo">
+            <img src="gyozas-pollo.jpg" alt="Gyozas de pollo">
           </div>
           <div class="body">
             <div>
@@ -355,9 +477,31 @@
             </div>
           </div>
         </article>
+
+        <article class="card"
+          data-name="Gyozas de pollo"
+          data-category="Appetizer"
+          data-detail="Gyozas de pollo y verduras, cocinadas al vapor y luego selladas suavemente en salsa ponzu, finalizadas con un toque de cebollín fresco y semillas de sésamo."
+          data-img1="gyozas-pollo1.jpg"
+          data-img2="gyozas-pollo2.jpg"
+          data-img3="gyozas-pollo3.jpg"
+        >
+          <div class="photo">
+            <img src="gyozas-pollo.jpg" alt="Gyozas de pollo">
+          </div>
+          <div class="body">
+            <div>
+              <div class="title">Gyozas de pollo</div>
+              <p class="desc">Gyozas de pollo y verduras.</p>
+            </div>
+            <div class="meta">
+              <div class="price">5900</div>
+            </div>
+          </div>
+        </article>
+
       </div>
     </section>
-    
 
     <!-- CEVICHES -->
     <section id="ceviches">
@@ -475,7 +619,7 @@
       </div>
     </section>
 
-    <!-- Secciones vacías para que las completes -->
+    <!-- Secciones vacías para completar después -->
     <section id="rolls-gourmet">
       <h2 class="section-title">Rolls gourmet</h2>
       <div class="list"></div>
@@ -531,6 +675,7 @@
     </div>
   </div>
 
+  <!-- SCRIPTS -->
   <script>
     // =============================
     // SECCIONES + BUSCADOR
@@ -681,62 +826,59 @@
     });
 
     // Flechas carrusel + swipe táctil
-  function goPrev(){
-    if (!currentImages.length) return;
-    currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
-    renderCarousel();
-  }
+    function goPrev(){
+      if (!currentImages.length) return;
+      currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+      renderCarousel();
+    }
 
-  function goNext(){
-    if (!currentImages.length) return;
-    currentIndex = (currentIndex + 1) % currentImages.length;
-    renderCarousel();
-  }
+    function goNext(){
+      if (!currentImages.length) return;
+      currentIndex = (currentIndex + 1) % currentImages.length;
+      renderCarousel();
+    }
 
-  if (carPrev) {
-    carPrev.addEventListener('click', (e)=>{
-      e.stopPropagation();
-      goPrev();
-    });
-  }
+    if (carPrev) {
+      carPrev.addEventListener('click', (e)=>{
+        e.stopPropagation();
+        goPrev();
+      });
+    }
 
-  if (carNext) {
-    carNext.addEventListener('click', (e)=>{
-      e.stopPropagation();
-      goNext();
-    });
-  }
+    if (carNext) {
+      carNext.addEventListener('click', (e)=>{
+        e.stopPropagation();
+        goNext();
+      });
+    }
 
-  // Swipe en celular (deslizar imagen)
-  let touchStartX = 0;
-  let touchEndX = 0;
+    // Swipe en celular (deslizar imagen)
+    let touchStartX = 0;
+    let touchEndX = 0;
 
-  if (modalImg) {
-    modalImg.addEventListener('touchstart', (e) => {
-      if (!e.touches || !e.touches.length) return;
-      touchStartX = e.touches[0].clientX;
-    }, { passive: true });
+    if (modalImg) {
+      modalImg.addEventListener('touchstart', (e) => {
+        if (!e.touches || !e.touches.length) return;
+        touchStartX = e.touches[0].clientX;
+      }, { passive: true });
 
-    modalImg.addEventListener('touchend', (e) => {
-      if (!e.changedTouches || !e.changedTouches.length) return;
-      touchEndX = e.changedTouches[0].clientX;
-      const diff = touchEndX - touchStartX;
+      modalImg.addEventListener('touchend', (e) => {
+        if (!e.changedTouches || !e.changedTouches.length) return;
+        touchEndX = e.changedTouches[0].clientX;
+        const diff = touchEndX - touchStartX;
 
-      // Umbral para que no tome toques muy cortos
-      const threshold = 40;
-      if (Math.abs(diff) > threshold) {
-        if (diff < 0) {
-          // swipe hacia la izquierda → siguiente foto
-          goNext();
-        } else {
-          // swipe hacia la derecha → foto anterior
-          goPrev();
+        const threshold = 40;
+        if (Math.abs(diff) > threshold) {
+          if (diff < 0) {
+            goNext();
+          } else {
+            goPrev();
+          }
         }
-      }
-    }, { passive: true });
-  }
-
+      }, { passive: true });
+    }
   </script>
+
   <footer style="border-top:1px solid #1b1b1b; background:#0a0a0a; margin-top:40px;">
     <div style="max-width:1100px; margin:0 auto; padding:24px 20px; display:grid; gap:14px;">
         
@@ -772,10 +914,11 @@
         </div>
 
     </div>
-</footer>
+  </footer>
 
-<script>
-  document.getElementById('year').textContent = new Date().getFullYear();
-</script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
 </body>
 </html>
