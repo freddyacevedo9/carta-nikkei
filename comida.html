@@ -431,10 +431,6 @@
   <!-- Top bar -->
   <div class="top">
     <div class="wrap">
-      <div id="searchBox" class="search-box-hidden">
-  <input id="search" class="search-input-full" type="text" placeholder="Buscar…">
-</div>
-
 
       <!-- Botón menú (3 líneas) izquierda -->
       <button id="menu-btn" class="menu-icon">☰</button>
@@ -444,11 +440,10 @@
         <img src="logo1.png" alt="Logo" />
       </div>
 
-      <!-- Logo para volver (derecha) -->
-    <a href="index.html" class="back-icon" aria-label="Volver">
-  →]
-</a>
-
+      <!-- Flecha volver (derecha) -->
+      <a href="index.html" class="back-icon" aria-label="Volver">
+        →]
+      </a>
 
     </div>
   </div>
@@ -457,51 +452,35 @@
     <h1>Nuestra carta</h1>
     <p class="sub">Busca y explora nuestra carta nikkei por categoría.</p>
 
-    <!-- Buscador -->
-  <div class="cats-row">
-  <button class="search-icon-min" id="openSearch">🔍</button>
-  <div class="cats-scroll">
-    <!-- tus categorías aquí -->
-  </div>
-</div>
-<div id="searchBox" class="search-box-hidden">
-  <input id="search" class="search-input-full" type="text" placeholder="Buscar…">
-</div>
+    <!-- BARRA DE CATEGORÍAS TIPO LA BIRRA -->
+    <div class="categories-bar">
+      <!-- Lupa fija a la izquierda -->
+      <button class="search-icon-min" id="openSearch">🔍</button>
 
-    
+      <!-- Títulos en texto blanco, scroll horizontal -->
+      <div class="categories-scroll">
+        <span class="cat-item active" data-target="appetizer">Appetizer</span>
+        <span class="cat-item" data-target="ceviches">Ceviches</span>
+        <span class="cat-item" data-target="sashimi">Sashimi</span>
+        <span class="cat-item" data-target="omakase">Omakase</span>
+        <span class="cat-item" data-target="makimono">Makimono</span>
+        <span class="cat-item" data-target="rolls-gourmet">Rolls gourmet</span>
+        <span class="cat-item" data-target="rolls-sin-arroz">Rolls sin arroz</span>
+        <span class="cat-item" data-target="rolls-tradicionales">Rolls tradicionales</span>
+        <span class="cat-item" data-target="platos-calientes">Platos calientes</span>
+        <span class="cat-item" data-target="combinaciones">Combinaciones</span>
+        <span class="cat-item" data-target="postres">Postres</span>
+      </div>
+    </div>
 
-    <!-- Categorías -->
-  
-<!-- BARRA DE CATEGORÍAS -->
-<div class="categories-bar">
-  <!-- Lupa fija a la izquierda -->
-  <button class="search-icon-min" id="openSearch">🔍</button>
-
-  <!-- Títulos que se mueven en scroll horizontal -->
-  <div class="categories-scroll">
-    <span class="cat-item active" data-target="appetizer">Appetizer</span>
-    <span class="cat-item" data-target="ceviches">Ceviches</span>
-    <span class="cat-item" data-target="sashimi">Sashimi</span>
-    <span class="cat-item" data-target="omakase">Omakase</span>
-    <span class="cat-item" data-target="makimono">Makimono</span>
-    <span class="cat-item" data-target="rolls-gourmet">Rolls gourmet</span>
-    <span class="cat-item" data-target="rolls-sin-arroz">Rolls sin arroz</span>
-    <span class="cat-item" data-target="rolls-tradicionales">Rolls tradicionales</span>
-    <span class="cat-item" data-target="platos-calientes">Platos calientes</span>
-    <span class="cat-item" data-target="combinaciones">Combinaciones</span>
-    <span class="cat-item" data-target="postres">Postres</span>
-  </div>
-</div>
-
-<!-- Buscador que se despliega al tocar la lupa -->
-<div id="searchBox" class="search-box-hidden">
-  <input
-    id="search"
-    class="search-input-full"
-    type="text"
-    placeholder="Buscar plato o ingrediente…">
-</div>
-
+    <!-- Buscador que se despliega al tocar la lupa -->
+    <div id="searchBox" class="search-box-hidden">
+      <input
+        id="search"
+        class="search-input-full"
+        type="text"
+        placeholder="Buscar plato o ingrediente…">
+    </div>
 
     <!-- APPETIZER -->
     <section id="appetizer">
