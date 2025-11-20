@@ -312,10 +312,43 @@
   }
   .add:active{transform:scale(.95)}
 
-  @media (max-width:640px){
-    .card{grid-template-columns:110px 1fr}
-    .photo{height:100px}
+ @media (max-width:640px){
+
+  /* Más ancho para foto */
+  .card {
+    grid-template-columns: 140px 1fr; /* aumenta el ancho de la imagen */
+    min-height: 160px;                /* aumenta el alto del card */
+    padding: 0;                       /* más limpio */
   }
+
+  /* Imagen más alta */
+  .photo {
+    height: 160px; /* antes 100px */
+  }
+
+  /* Texto con más aire */
+  .body {
+    padding: 14px 16px 18px 16px;
+  }
+
+  /* Título más grande */
+  .title {
+    font-size: 16px;
+  }
+
+  /* Descripción más legible */
+  .desc {
+    font-size: 14px;
+  }
+
+  /* Precio más grande */
+  .price {
+    font-size: 18px;
+    bottom: 10px;
+    right: 14px;
+  }
+}
+
 
   /* Modal con carrusel */
   .modal{
