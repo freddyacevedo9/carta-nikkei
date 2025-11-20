@@ -152,31 +152,38 @@
 .back-icon {
   font-size: 28px;
   font-weight: 350;
-  width: 40px;
-  height: 40px;
+  width: 42px;               /* un poco más ancho → centrado real */
+  height: 42px;
   display: flex;
-  align-items: center;      /* centra verticalmente el conjunto */
-  justify-content: center;  /* centra horizontalmente */
+  align-items: center;       
+  justify-content: center; 
   background: transparent;
   border: none;
   color: #ffffff;
   cursor: pointer;
   opacity: 0.9;
   transition: .2s;
+  padding: 0;
 }
 
-/* Ambos caracteres sin alturas raras */
+/* Flecha + corchete sin problemas de altura */
 .back-arrow,
 .back-bracket {
   line-height: 1;
   display: block;
 }
 
-/* Subimos UN POCO la flecha para que quede centrada con el corchete */
+/* FLECHA centrada respecto al corchete */
 .back-arrow {
   position: relative;
-  top: 1.5px;        /* si aún la ves baja, prueba -2px */
-  margin-right: -3px; /* para que se pegue más al corchete */
+  top: 0.5px;          /* Ajuste fino de vertical */
+  margin-right: -2px;  /* Acerca la flecha al corchete */
+}
+
+/* CORCHETE perfectamente alineado */
+.back-bracket {
+  position: relative;
+  top: -0.5px;         /* sube un poquito para emparejar */
 }
 
 .back-icon:hover {
@@ -184,15 +191,21 @@
   color: var(--accent);
 }
 
-   
-   @media (max-width:640px){
+/* Ajustes SOLO para móvil */
+@media (max-width:640px){
   .back-icon {
-    font-size: 29px;
+    font-size: 30px;   /* Más grande en móvil */
+    width: 44px;
+    height: 44px;
   }
   .back-arrow {
-    top: 2px;
+    top: 1px;        /* Ajuste móvil */
+  }
+  .back-bracket {
+    top: -1px;       /* Compensa flecha */
   }
 }
+
 
 
   /* Page */
