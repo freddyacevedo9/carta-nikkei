@@ -194,6 +194,43 @@
   opacity: 1;
   color: var(--accent);
 }
+    .cats-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.cats-scroll {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: none;
+}
+.cats-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.search-icon-min {
+  font-size: 20px;
+  color: #ffffff;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: .9;
+  background: transparent;
+  border: none;
+  transition: .2s;
+}
+.search-icon-min:hover {
+  opacity: 1;
+  color: var(--accent);
+}
+
 
 
     /* Category pills */
@@ -451,21 +488,29 @@
 
     <!-- Buscador -->
     <div class="search-icon-min" id="openSearch">🔍</div>
+    
 
     <!-- Categorías -->
-    <div class="cats">
-      <button class="cat-pill active" data-target="appetizer">Appetizer</button>
-      <button class="cat-pill" data-target="ceviches">Ceviches</button>
-      <button class="cat-pill" data-target="sashimi">Sashimi</button>
-      <button class="cat-pill" data-target="omakase">Omakase</button>
-      <button class="cat-pill" data-target="makimono">Makimono</button>
-      <button class="cat-pill" data-target="rolls-gourmet">Rolls gourmet</button>
-      <button class="cat-pill" data-target="rolls-sin-arroz">Rolls sin arroz</button>
-      <button class="cat-pill" data-target="rolls-tradicionales">Rolls tradicionales</button>
-      <button class="cat-pill" data-target="platos-calientes">Platos calientes</button>
-      <button class="cat-pill" data-target="combinaciones">Combinaciones</button>
-      <button class="cat-pill" data-target="postres">Postres</button>
-    </div>
+   <div class="cats-row">
+  <!-- Lupa fija a la izquierda -->
+  <button class="search-icon-min" id="openSearch">🔍</button>
+
+  <!-- Títulos que se pueden mover (scroll horizontal) -->
+  <div class="cats-scroll">
+    <button class="cat-pill active" data-target="appetizer">Appetizer</button>
+    <button class="cat-pill" data-target="ceviches">Ceviches</button>
+    <button class="cat-pill" data-target="sashimi">Sashimi</button>
+    <button class="cat-pill" data-target="omakase">Omakase</button>
+    <button class="cat-pill" data-target="makimono">Makimono</button>
+    <button class="cat-pill" data-target="rolls-gourmet">Rolls gourmet</button>
+    <button class="cat-pill" data-target="rolls-sin-arroz">Rolls sin arroz</button>
+    <button class="cat-pill" data-target="rolls-tradicionales">Rolls tradicionales</button>
+    <button class="cat-pill" data-target="platos-calientes">Platos calientes</button>
+    <button class="cat-pill" data-target="combinaciones">Combinaciones</button>
+    <button class="cat-pill" data-target="postres">Postres</button>
+  </div>
+</div>
+
 
     <!-- APPETIZER -->
     <section id="appetizer">
