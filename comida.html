@@ -116,6 +116,26 @@
     .home-icon img:hover {
       opacity: 1;
     }
+    .back-icon {
+  font-size: 26px;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  border: 1px solid #ffffff33;
+  background: transparent; 
+  cursor: pointer;
+  transition: .2s;
+}
+
+.back-icon:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
 
     /* Page */
     .page{
@@ -384,9 +404,10 @@
       </div>
 
       <!-- Logo para volver (derecha) -->
-      <a href="index.html" class="home-icon">
-        <img src="logo1.png" alt="Home">
-      </a>
+    <a href="index.html" class="back-icon" aria-label="Volver">
+  →]
+</a>
+
 
     </div>
   </div>
