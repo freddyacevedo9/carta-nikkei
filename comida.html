@@ -139,8 +139,8 @@
   }
 
   .back-icon {
-    font-size: 22px;
-    font-weight: 300; /* línea fina tipo referencia */
+    font-size: 30px;
+    font-weight: 700; /* línea fina tipo referencia */
     color: #ffffff;
     display: flex;
     align-items: center;
@@ -151,13 +151,22 @@
     background: transparent;
     border: none;
     cursor: pointer;
-    opacity: 0.9;
+    opacity: .9;
     transition: .2s;
   }
   .back-icon:hover {
     opacity: 1;
     color: var(--accent);
   }
+   
+    @media (max-width:640px){
+  .back-icon {
+    font-size: 32px !important;
+    width: 42px !important;
+    height: 42px !important;
+  }
+}
+
 
   /* Page */
   .page{
