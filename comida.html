@@ -761,222 +761,240 @@
   </div>
 
   <!-- SCRIPTS -->
-  <script>
-  // NUEVO BUSCADOR MINIMALISTA
-const openSearch = document.getElementById('openSearch');
-const searchBox  = document.getElementById('searchBox');
-const searchInput = document.getElementById('search');
-const cards   = Array.from(document.querySelectorAll('.card'));
-const sections = Array.from(document.querySelectorAll('main section'));
+ <script>
+  // =============================
+  // SECCIONES + BUSCADOR
+  // =============================
+  const openSearch  = document.getElementById('openSearch');
+  const searchBox   = document.getElementById('searchBox');
+  const searchInput = document.getElementById('search');
+  const cards       = Array.from(document.querySelectorAll('.card'));
+  const sections    = Array.from(document.querySelectorAll('main section'));
 
-openSearch.addEventListener('click', () => {
-  searchBox.style.display = searchBox.style.display === 'block' ? 'none' : 'block';
-});
-
-
-    // CATEGORÍAS
-    document.querySelectorAll('.cat-item').forEach(item => {
-  item.addEventListener('click', () => {
-
-    document.querySelectorAll('.cat-item').forEach(i => i.classList.remove('active'));
-    item.classList.add('active');
-
-    const id = item.dataset.target;
-    mostrarSeccion(id);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-
-    searchInput.value = '';
-    cards.forEach(card => card.style.display = '');
+  // Al cargar: solo APPETIZER visible
+  sections.forEach(sec => {
+    if (sec.id !== 'appetizer') sec.style.display = 'none';
   });
-});
 
+  function mostrarSeccion(id) {
+    sections.forEach(sec => {
+      sec.style.display = (sec.id === id ? '' : 'none');
+    });
+  }
 
-    // =============================
-    // MODAL + CARRUSEL
-    // =============================
-    const modal       = document.getElementById('modal');
-    const modalImg    = document.getElementById('modalImg');
-    const modalTitle  = document.getElementById('modalTitle');
-    const modalCat    = document.getElementById('modalCat');
-    const modalDesc   = document.getElementById('modalDesc');
-    const modalDetail = document.getElementById('modalDetail');
-    const modalPrice  = document.getElementById('modalPrice');
-    const modalClose  = document.getElementById('modalClose');
-    const carPrev     = document.getElementById('carPrev');
-    const carNext     = document.getElementById('carNext');
-    const dotsContainer = document.getElementById('dots');
+  // Abrir / cerrar cuadro de búsqueda al tocar la lupa
+  if (openSearch && searchBox) {
+    openSearch.addEventListener('click', () => {
+      const visible = searchBox.style.display === 'block';
+      searchBox.style.display = visible ? 'none' : 'block';
+      if (!visible && searchInput) {
+        searchInput.focus();
+      }
+    });
+  }
 
-    let currentImages = [];
-    let currentIndex  = 0;
+  // Búsqueda de platos
+  if (searchInput) {
+    searchInput.addEventListener('input', () => {
+      const q = searchInput.value.toLowerCase().trim();
 
-    function renderCarousel(){
-      if (!currentImages.length) return;
-      modalImg.src = currentImages[currentIndex];
+      if (q.length > 0) {
+        // Mientras se busca, mostrar todas las secciones
+        sections.forEach(sec => sec.style.display = '');
+      } else {
+        // Sin texto: volvemos a la categoría activa
+        const activeCat = document.querySelector('.cat-item.active');
+        if (activeCat && activeCat.dataset.target) {
+          mostrarSeccion(activeCat.dataset.target);
+        }
+      }
 
-      dotsContainer.innerHTML = '';
-      currentImages.forEach((_, i) => {
-        const d = document.createElement('div');
-        d.className = 'dot' + (i === currentIndex ? ' active' : '');
-        d.addEventListener('click', () => {
-          currentIndex = i;
-          renderCarousel();
-        });
-        dotsContainer.appendChild(d);
-      });
-    }
-
-    function openModalFromCard(card){
-      const name   = card.dataset.name || card.querySelector('.title').textContent;
-      const cat    = card.dataset.category || '';
-      const desc   = card.querySelector('.desc').textContent;
-      const detail = card.dataset.detail || '';
-      const price  = card.querySelector('.price') ? card.querySelector('.price').textContent : '';
-
-      currentImages = [card.dataset.img1, card.dataset.img2, card.dataset.img3].filter(Boolean);
-      currentIndex  = 0;
-      renderCarousel();
-
-      modalTitle.textContent  = name;
-      modalCat.textContent    = cat;
-      modalDesc.textContent   = desc;
-      modalDetail.textContent = detail;
-      modalPrice.textContent  = price;
-
-      modal.classList.add('open');
-      modal.setAttribute('aria-hidden','false');
-    }
-
-    // Abrir modal al hacer click en card (menos el botón +)
-    cards.forEach(card => {
-      card.addEventListener('click', (e) => {
-        if (e.target.closest('.add')) return; // el + no abre modal
-        openModalFromCard(card);
+      cards.forEach(card => {
+        const name   = (card.dataset.name || '').toLowerCase();
+        const descEl = card.querySelector('.desc');
+        const desc   = descEl ? descEl.textContent.toLowerCase() : '';
+        const match  = !q || name.includes(q) || desc.includes(q);
+        card.style.display = match ? '' : 'none';
       });
     });
+  }
 
-    // Función para cerrar modal
-    function closeModal(){
-      if (!modal) return;
-      modal.classList.remove('open');
-      modal.setAttribute('aria-hidden','true');
-    }
+  // =============================
+  // CATEGORÍAS (barra tipo La Birra)
+  // =============================
+  const catItems = document.querySelectorAll('.cat-item');
 
-    // CERRAR: con la X
-    if (modalClose) {
-      modalClose.addEventListener('click', (e)=>{
-        e.stopPropagation();
+  catItems.forEach(item => {
+    item.addEventListener('click', () => {
+      // estado activo visual
+      catItems.forEach(i => i.classList.remove('active'));
+      item.classList.add('active');
+
+      // mostrar solo la sección correspondiente
+      const id = item.dataset.target;
+      if (id) {
+        mostrarSeccion(id);
+      }
+
+      // volver arriba
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      // limpiar búsqueda y mostrar todas las cards
+      if (searchInput) {
+        searchInput.value = '';
+      }
+      cards.forEach(card => card.style.display = '');
+    });
+  });
+
+  // =============================
+  // MODAL + CARRUSEL
+  // =============================
+  const modal       = document.getElementById('modal');
+  const modalImg    = document.getElementById('modalImg');
+  const modalTitle  = document.getElementById('modalTitle');
+  const modalCat    = document.getElementById('modalCat');
+  const modalDesc   = document.getElementById('modalDesc');
+  const modalDetail = document.getElementById('modalDetail');
+  const modalPrice  = document.getElementById('modalPrice');
+  const modalClose  = document.getElementById('modalClose');
+  const carPrev     = document.getElementById('carPrev');
+  const carNext     = document.getElementById('carNext');
+  const dotsContainer = document.getElementById('dots');
+
+  let currentImages = [];
+  let currentIndex  = 0;
+
+  function renderCarousel(){
+    if (!currentImages.length || !modalImg) return;
+    modalImg.src = currentImages[currentIndex];
+
+    if (!dotsContainer) return;
+    dotsContainer.innerHTML = '';
+    currentImages.forEach((_, i) => {
+      const d = document.createElement('div');
+      d.className = 'dot' + (i === currentIndex ? ' active' : '');
+      d.addEventListener('click', () => {
+        currentIndex = i;
+        renderCarousel();
+      });
+      dotsContainer.appendChild(d);
+    });
+  }
+
+  function openModalFromCard(card){
+    if (!modal) return;
+
+    const name   = card.dataset.name || card.querySelector('.title')?.textContent || '';
+    const cat    = card.dataset.category || '';
+    const desc   = card.querySelector('.desc')?.textContent || '';
+    const detail = card.dataset.detail || '';
+    const price  = card.querySelector('.price')?.textContent || '';
+
+    currentImages = [card.dataset.img1, card.dataset.img2, card.dataset.img3].filter(Boolean);
+    currentIndex  = 0;
+    renderCarousel();
+
+    if (modalTitle)  modalTitle.textContent  = name;
+    if (modalCat)    modalCat.textContent    = cat;
+    if (modalDesc)   modalDesc.textContent   = desc;
+    if (modalDetail) modalDetail.textContent = detail;
+    if (modalPrice)  modalPrice.textContent  = price;
+
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden','false');
+  }
+
+  // Abrir modal al hacer click en una card (excepto botón +)
+  cards.forEach(card => {
+    card.addEventListener('click', (e) => {
+      if (e.target.closest('.add')) return; // el + no abre modal
+      openModalFromCard(card);
+    });
+  });
+
+  function closeModal(){
+    if (!modal) return;
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden','true');
+  }
+
+  // Cerrar con la X
+  if (modalClose) {
+    modalClose.addEventListener('click', (e)=>{
+      e.stopPropagation();
+      closeModal();
+    });
+  }
+
+  // Cerrar clic en fondo oscuro
+  if (modal) {
+    modal.addEventListener('click', (e) => {
+      if (e.target.classList && e.target.classList.contains('modal-backdrop')) {
         closeModal();
-      });
-    }
-
-    // CERRAR: clic en fondo oscuro
-    if (modal) {
-      modal.addEventListener('click', (e) => {
-        if (e.target.classList && e.target.classList.contains('modal-backdrop')) {
-          closeModal();
-        }
-      });
-    }
-
-    // CERRAR: tecla Escape
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeModal();
+      }
     });
+  }
 
-    // Flechas carrusel + swipe táctil
-    function goPrev(){
-      if (!currentImages.length) return;
-      currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
-      renderCarousel();
-    }
+  // Cerrar con Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal();
+  });
 
-    function goNext(){
-      if (!currentImages.length) return;
-      currentIndex = (currentIndex + 1) % currentImages.length;
-      renderCarousel();
-    }
+  // Carrusel: anterior / siguiente
+  function goPrev(){
+    if (!currentImages.length) return;
+    currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+    renderCarousel();
+  }
 
-    if (carPrev) {
-      carPrev.addEventListener('click', (e)=>{
-        e.stopPropagation();
-        goPrev();
-      });
-    }
+  function goNext(){
+    if (!currentImages.length) return;
+    currentIndex = (currentIndex + 1) % currentImages.length;
+    renderCarousel();
+  }
 
-    if (carNext) {
-      carNext.addEventListener('click', (e)=>{
-        e.stopPropagation();
-        goNext();
-      });
-    }
+  if (carPrev) {
+    carPrev.addEventListener('click', (e)=>{
+      e.stopPropagation();
+      goPrev();
+    });
+  }
 
-    // Swipe en celular (deslizar imagen)
-    let touchStartX = 0;
-    let touchEndX = 0;
+  if (carNext) {
+    carNext.addEventListener('click', (e)=>{
+      e.stopPropagation();
+      goNext();
+    });
+  }
 
-    if (modalImg) {
-      modalImg.addEventListener('touchstart', (e) => {
-        if (!e.touches || !e.touches.length) return;
-        touchStartX = e.touches[0].clientX;
-      }, { passive: true });
+  // Swipe en celular (deslizar imagen)
+  let touchStartX = 0;
+  let touchEndX   = 0;
 
-      modalImg.addEventListener('touchend', (e) => {
-        if (!e.changedTouches || !e.changedTouches.length) return;
-        touchEndX = e.changedTouches[0].clientX;
-        const diff = touchEndX - touchStartX;
+  if (modalImg) {
+    modalImg.addEventListener('touchstart', (e) => {
+      if (!e.touches || !e.touches.length) return;
+      touchStartX = e.touches[0].clientX;
+    }, { passive: true });
 
-        const threshold = 40;
-        if (Math.abs(diff) > threshold) {
-          if (diff < 0) {
-            goNext();
-          } else {
-            goPrev();
-          }
+    modalImg.addEventListener('touchend', (e) => {
+      if (!e.changedTouches || !e.changedTouches.length) return;
+      touchEndX = e.changedTouches[0].clientX;
+      const diff = touchEndX - touchStartX;
+
+      const threshold = 40;
+      if (Math.abs(diff) > threshold) {
+        if (diff < 0) {
+          goNext();   // swipe izquierda → siguiente
+        } else {
+          goPrev();   // swipe derecha → anterior
         }
-      }, { passive: true });
-    }
-  </script>
+      }
+    }, { passive: true });
+  }
+</script>
 
-  <footer style="border-top:1px solid #1b1b1b; background:#0a0a0a; margin-top:40px;">
-    <div style="max-width:1100px; margin:0 auto; padding:24px 20px; display:grid; gap:14px;">
-        
-        <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px;">
-            
-            <!-- Instagram -->
-            <a href="https://instagram.com/nikkei419" target="_blank" rel="noopener"
-               style="display:inline-flex; align-items:center; gap:10px; padding:10px 12px;
-                      border-radius:14px; border:1px solid #232323; background:#121212; color:#fff;">
-               📸 <strong>@nikkei419</strong>
-            </a>
-
-            <!-- Dirección -->
-            <div style="color:#d9d9d9; font-size:14px;">
-                <strong>Dirección:</strong>
-                <a href="https://maps.google.com/?q=San+Martín+421,+Viña+del+Mar"
-                   target="_blank" rel="noopener"
-                   style="color:#9f9f9f; text-decoration:underline;">
-                   San Martín 421, Viña del Mar, Chile
-                </a>
-            </div>
-
-        </div>
-
-        <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px;">
-            <span style="color:#9f9f9f; font-size:13px;">
-                © <span id="year"></span> NIKKEI 419. Todos los derechos reservados.
-            </span>
-
-            <span style="color:#9f9f9f; font-size:13px;">
-                Sitio minimalista con fondo negro.
-            </span>
-        </div>
-
-    </div>
-  </footer>
-
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
 
 </body>
 </html>
